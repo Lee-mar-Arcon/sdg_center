@@ -12,6 +12,10 @@ Route::get('/home', function () {
     return Inertia::render('SDG_Home');
 });
 
+Route::get('/page', function () {
+    return Inertia::render('SDG_Page');
+});
+
 Route::get('/mini', function () {
     return Inertia::render('SDG_mini');
 });

@@ -68,19 +68,20 @@ const getRandomIcons = () => {
     return shuffledImages.slice(0, numberOfIcons);
 };
 </script>
-
 <template>
     <Head title="Centered Layout" />
-    <div
-        class="min-h-screen flex flex-col md:flex-row justify-start items-start "
-    >
-        <div class="hidden md:block md:w-[20vw] m-4" style="position: fixed; top: 0; left: 0;">
+    <div class="flex min-h-screen">
+        <div
+            class="hidden md:block md:w-[20vw] m-4"
+            style="position: fixed; top: 0; left: 0"
+        >
             <Link href="/home">
-    <button class="bg-blue-500 hover:bg-blue-700 mb-5 text-white font-bold py-2 px-4 rounded-full">
-        SDG HOME
-    </button>
-</Link>
-
+                <button
+                    class="bg-blue-500 hover:bg-blue-700 mb-5 text-white font-bold py-2 px-4 rounded-full"
+                >
+                    SDG HOME
+                </button>
+            </Link>
             <div
                 class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-1 items-center"
             >
@@ -101,11 +102,10 @@ const getRandomIcons = () => {
                 </div>
             </div>
         </div>
-
         <div
-            class="w-full md:w-[75vw] h-[80vh] md:h-[100vh] bg-white p-16 rounded-lg flex-grow"
+            class="flex-grow mr-[-4vw] h-[80vh] md:h-[100vh]     p-16 rounded-lg "
         >
-            <div class="">
+            <div>
                 <div
                     v-for="(image, index) in paginatedItems"
                     :key="index"
@@ -117,11 +117,7 @@ const getRandomIcons = () => {
                         <div
                             class="w-full md:w-1/3 bg-white grid place-items-center"
                         >
-                            <img
-                                :src="`/sdg/${image}`"
-                                alt="SDG Image"
-                                class=""
-                            />
+                            <img :src="`/sdg/${image}`" alt="SDG Image" />
                         </div>
                         <div
                             class="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3"
@@ -146,10 +142,10 @@ const getRandomIcons = () => {
                                     <p
                                         class="text-gray-600 font-bold text-sm ml-1"
                                     >
-                                        4.96
-                                        <span class="text-gray-500 font-normal">
-                                            (76 reviews)
-                                        </span>
+                                        4.96<span
+                                            class="text-gray-500 font-normal"
+                                            >(76 reviews)</span
+                                        >
                                     </p>
                                 </div>
                             </div>
