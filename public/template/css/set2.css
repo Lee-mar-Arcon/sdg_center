@@ -69,7 +69,7 @@ cursor: pointer;
 	word-spacing: -0.15em;
 	font-weight: 300;
 	text-align: left;
-	color: $white;
+	color: white;
 }
 
 .grid figure h3 span {
@@ -96,7 +96,7 @@ figure.effect-bubba {
 }
 
 figure.effect-bubba {
-    background: $primary-color;
+    background: primary-color;
 }
 
 figure.effect-bubba img {

@@ -1,13 +1,17 @@
 <template>
-$END$
+    <div>
+        <slot></slot>
+        <sdg-home></sdg-home>
+    </div>
 </template>
 
 <script>
+// import SDGHome from './SDG_Home.vue';
+import SDGHome from './SDG_Home.vue';
+
 export default {
-name: "Wrapper"
-}
+    components: {
+        SDGHome,
+    },
+};
 </script>
-
-<style scoped>
-
-</style>

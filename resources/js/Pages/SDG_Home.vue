@@ -1,7 +1,8 @@
 <script setup>
 import { Head } from "@inertiajs/vue3";
+import Footer from './Footer.vue';
+import Header from './Header.vue';
 import { ref } from "vue";
-
 const images = ref([
     '01.png', '02.png', '03.png', '04.png', '05.png', '06.png',
     '07.png', '08.png', '09.png', '10.png', '11.png', '12.png',
@@ -31,8 +32,9 @@ const sdgDescriptions = ref([
 </script>
 
 <template>
-    <Head title="Centered Layout" />
-    <div class="min-h-screen flex justify-center items-center bg-gray-100">
+  <Header></Header>
+    <Head title="MinSU SDG Center" />
+    <div class="min-h-screen flex justify-center items-center bg-gray-100 pt-[150px]">
         <div class="hidden md:block w-[10vw]"></div>
         <div class="w-[80vw] bg-white p-4 rounded-lg shadow-lg">
             <a href="https://sdgs.un.org/" target="_blank">
@@ -63,7 +65,9 @@ const sdgDescriptions = ref([
         </div>
         <div class="hidden md:block w-[10vw]"></div>
     </div>
+    <Footer></Footer>
 </template>
+
 
 <style>
 @import url("https://fonts.googleapis.com/css?family=Oswald:400,700");
@@ -103,3 +107,4 @@ body {
     transform: rotateY(0.5turn);
 }
 </style>
+

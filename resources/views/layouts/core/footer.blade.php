@@ -74,9 +74,7 @@
         </div>
     </div>
 </footer>
-<!--//END FOOTER -->
 
-<!-- Add this CSS to your stylesheet -->
 <style>
     footer.about-style2 {
         padding: 10px 0;

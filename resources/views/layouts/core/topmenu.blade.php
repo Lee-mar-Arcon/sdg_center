@@ -1,10 +1,5 @@
 <header class="clearfix about about-style2" style="background-image: url('template/images/about-bg.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;position: fixed; top: 0; left: 0; right: 0; z-index: 1000;height: 180px; padding: 0;">
-{{--<header >--}}
-{{--    <div class="row">--}}
-{{--        <div class="col-md-12">--}}
-{{--            <a href="{{route('welcome')}}"><img src="{{asset('responsive-logo.png')}}" class="responsive-logo img-fluid" alt="responsive-logo"></a>--}}
-{{--        </div>--}}
-{{--    </div>--}}
+
     <div class="row">
         <div class="col-md-12">
             <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
@@ -93,8 +88,6 @@
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" target="_blank" href="https://library.minsu.edu.ph/">Library</a></li>
                                 <li><a class="dropdown-item" target="_blank" href="https://forms.office.com/pages/responsepage.aspx?id=VtLh9StUoUu28ySa5gp0xRaBkVopzRhMqCtc41uhx2pURTlITUZLMFpPVzJRRTlRWFBZT0k4WjNISS4u">Graduate Tracer</a></li>
-                                {{--                                <li><a class="dropdown-item" href="index-video.html">Medical and Dental</a></li>--}}
-                                {{--                                <li><a class="dropdown-item" href="index-video.html">Student Housing</a></li>--}}
                                 <li><a class="dropdown-item" target="_blank" href="https://outlook.office365.com/mail/inbox">Mailing</a></li>
                                 <li><a class="dropdown-item" target="_blank" href="https://minsu.edu.ph/services/mail-list">Email List</a></li>
                                 <li><a class="dropdown-item" target="_blank" href="https://minsu.edu.ph/services/jobvacants">Job Vacancy</a></li>
@@ -107,4 +100,6 @@
                 </div>
             </nav>
         </div>
+    </div>
+
 </header>

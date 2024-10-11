@@ -8,9 +8,12 @@ use App\Http\Controllers\Page\WelcomeController;
 
 Route::get('/', [WelcomeController::class,'index'])->name('welcome');
 
-//Route::get('/', function () {
-//    return Inertia::render('test');
-//});
+Route::get('/admin', function () {
+    return Inertia::render('Admin/Article');
+});
+Route::get('/footer', function () {
+    return view('layouts.core.footer');
+});
 
 Route::get('/home', function () {
     return Inertia::render('SDG_Home');
