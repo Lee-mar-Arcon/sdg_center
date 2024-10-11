@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Page\WelcomeController;
 
 
+
 //
 //Route::get('/', [WelcomeController::class,'index'])->name('welcome');
 
@@ -15,6 +16,10 @@ use App\Http\Controllers\Page\WelcomeController;
 //    return view('layouts.core.footer');
 //});
 
+Route::get('/news', function () {
+   return Inertia::render('SDG_News');
+});
+
 Route::get('/', function () {
     return Inertia::render('SDG_Home');
 });
@@ -23,4 +28,5 @@ Route::get('/mini', function () {
     return Inertia::render('SDG_mini');
 });
 
+//Route::get('/', [WelcomeController::class,'index'])->name('welcome');
 
