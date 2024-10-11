@@ -1,8 +1,7 @@
 <script setup>
 import { Head } from "@inertiajs/vue3";
 import { ref, onMounted } from "vue";
-import ColorThief from "colorthief"; // Import ColorThief
-
+import ColorThief from "colorthief";
 const images = ref([
     "01.png",
     "02.png",
@@ -106,19 +105,10 @@ onMounted(() => {
                 </div>
             </div>
             <p class="text-lg leading-relaxed text-justify">
-                <strong>The Sustainable Development Goals (SDGs)</strong>, also
-                known as the Global Goals, were adopted by the United Nations as
-                a universal call to action to end poverty, protect the planet,
-                and ensure that all people enjoy peace and prosperity. The 17
-                SDGs are integrated—they recognize that action in one area will
-                affect outcomes in others, and that development must balance
-                social, economic, and environmental sustainability. This is a
-                committed effort to prioritize progress so that
-                <em>no one is left behind</em>.
+                Welcome to the <strong>Mindoro State University Sustainable Development Goal (SDG) Center</strong>, a dedicated hub for promoting sustainable practices and initiatives within our academic community. It showcases a comprehensive collection of MinSU initiatives that align with the United Nations' Sustainable Development Goals.
+                This center embodies our commitment to ensure that no one is left behind, fostering collaborative efforts among students, faculty, staff, community and other stakeholders to pave the way for a sustainable and equitable future for all.
             </p>
-            <div
-                class="min-h-screen mr-6 flex flex-wrap justify-center items-center gap-9 p-4"
-            >
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-1 flex-wrap justify-center items-center">
                 <div
                     v-for="(image, index) in images"
                     :key="index"

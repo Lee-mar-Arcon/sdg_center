@@ -2,7 +2,7 @@
 import { Head } from "@inertiajs/vue3";
 import { onMounted } from "vue";
 onMounted(() => {
-    console.log(route());
+    console.log(route('welcome'));
 });
 </script>
 
