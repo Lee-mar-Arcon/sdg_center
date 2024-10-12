@@ -21,3 +21,8 @@ Route::get('/mini', function () {
 });
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+
+// route for viewing single article
+Route::get('/sdg/article/', function () {
+    return Inertia::render('SDG/view');
+});
