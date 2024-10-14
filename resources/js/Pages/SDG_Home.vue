@@ -2,7 +2,8 @@
 import { Head } from "@inertiajs/vue3";
 import Footer from './Footer.vue';
 import Header from './Header.vue';
-import { ref } from "vue";
+
+// import { ref } from "vue";
 
 import { ref, onMounted } from "vue";
 import ColorThief from "colorthief";

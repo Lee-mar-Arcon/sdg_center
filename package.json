@@ -18,7 +18,12 @@
     },
     "dependencies": {
         "@inertiajs/vue3": "^1.2.0",
+
         "vue": "^3.5.11",
         "colorthief": "^2.6.0"
+
+        "colorthief": "^2.6.0",
+        "vue": "^3.5.11"
+
     }
 }
