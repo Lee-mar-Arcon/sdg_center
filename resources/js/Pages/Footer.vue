@@ -1,12 +1,12 @@
 <template>
-    <footer class="bg-cover bg-center bg-no-repeat py-2" style="background-image: url('template/images/slides/slides_2.jpg'); background-size: cover; background-repeat: no-repeat;">
+    <footer class="bg-cover bg-center bg-no-repeat py-2" style="background-image: url('/template/images/slides/slides_2.jpg'); background-size: cover; background-repeat: no-repeat;">
         <div class="bg-black bg-opacity-50 py-4"> <!-- Added a black overlay with opacity -->
             <div class="container mx-auto">
                 <div class="flex flex-wrap items-center">
                     <!-- Logo and Copyright -->
                     <div class="w-full md:w-1/4 text-center">
                         <a href="https://minsu.edu.ph">
-                            <img src='template/images/logo.png' class="mx-auto h-48" alt="footer_logo">
+                            <img src='/template/images/logo.png' class="mx-auto h-48" alt="footer_logo">
                         </a>
                         <p class="text-white mt-2 text-lg"> <!-- Increased font size -->
                             2024 © Copyright
@@ -36,13 +36,13 @@
                         <!-- Governance Icons -->
                         <div class="flex justify-center mb-4 space-x-4">
                             <a href="https://www.foi.gov.ph/requests/?q=Mindoro+State+University" target="_blank">
-                                <img src="template/images/governance/foi.png" class="h-28 object-contain opacity-90 hover:opacity-100" alt="foi-img">
+                                <img src="/template/images/governance/foi.png" class="h-28 object-contain opacity-90 hover:opacity-100" alt="foi-img">
                             </a>
                             <a href="https://minsu.edu.ph/good-governance/philgeps">
-                                <img src="template/images/governance/philgeps.png" class="h-28 object-contain" alt="philgeps-img">
+                                <img src="/template/images/governance/philgeps.png" class="h-28 object-contain" alt="philgeps-img">
                             </a>
                             <a href="https://minsu.edu.ph/good-governance/transparency">
-                                <img src="template/images/governance/transparencyseal.png" class="h-28 object-contain" alt="transparency-img">
+                                <img src="/template/images/governance/transparencyseal.png" class="h-28 object-contain" alt="transparency-img">
                             </a>
                         </div>
                         <!-- Social Media Icons -->

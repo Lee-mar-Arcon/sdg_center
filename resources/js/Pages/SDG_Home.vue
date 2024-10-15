@@ -2,9 +2,6 @@
 import { Head } from "@inertiajs/vue3";
 import Footer from './Footer.vue';
 import Header from './Header.vue';
-
-// import { ref } from "vue";
-
 import { ref, onMounted } from "vue";
 import ColorThief from "colorthief";
 const images = ref([
@@ -82,10 +79,11 @@ onMounted(() => {
         };
     });
 });
+
 </script>
 
 <template>
-  <Header></Header>
+    <Header></Header>
     <Head title="MinSU SDG Center" />
     <div class="min-h-screen flex justify-center items-center bg-gray-100 pt-[150px]">
         <div class="hidden md:block w-[10vw]"></div>
@@ -144,13 +142,18 @@ onMounted(() => {
                             <h2 v-if="index < 17">SDG {{ index + 1 }}</h2>
                             <h2 v-else>Sustainable Development Goals (SDGs)</h2>
                             <p class="text-sm" v-if="index < 17">
+                                <a href="/sdg/article/">
                                 {{ sdgDescriptions[index] }}
+<!--                                <a href="/sdg/article/" class="text-blue-500 font-bold underline hover:text-blue-700 transition duration-300 ease-in-out">-->
+<!--                                    Click here for more info-->
+                                </a>
                             </p>
+
                             <p class="mt-2" v-else>
                                 <a
                                     href="https://sdgs.un.org/"
                                     class="text-white underline"
-                                    >Visit the SDG Website</a
+                                >Visit the SDG Website</a
                                 >
                             </p>
                         </div>
@@ -321,4 +324,3 @@ body {
     }
 }
 </style>
-
