@@ -49,20 +49,23 @@ const items = [
     {
         image: "https://picsum.photos/200/300?random=1",
         title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit",
+        category: "Administration",
         alt: "Image 1",
-        date: "October 12, 2024",
+        date: "October 21, 2024",
     },
     {
         image: "https://picsum.photos/200/300?random=2",
         title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit",
+        category: "Research",
         alt: "Image 2",
-        date: "October 25, 2024",
+        date: "August 01, 2024",
     },
     {
         image: "https://picsum.photos/200/300?random=3",
         title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit",
+        category: "Students",
         alt: "Image 3",
-        date: "November 12, 2024",
+        date: "July 12, 2024",
     },
 ];
 const cardBackColors = ref([]);
@@ -88,35 +91,30 @@ onMounted(() => {
     <div class="min-h-screen flex justify-center items-center bg-gray-100 pt-[150px]">
         <div class="hidden md:block w-[10vw]"></div>
         <div class="w-[80vw] bg-white p-4 rounded-lg shadow-lg">
-            <h1 class="gradient">Mindoro State University</h1>
+            <h1 class="gradient mb-[-5]"> <b>MINDORO STATE UNIVERSITY </b></h1>
             <a href="https://sdgs.un.org/" target="_blank">
                 <img
                     src="/sdg/mainLogo.png"
                     alt="Main Logo"
-                    class="mx-auto mb-4 h-[15vh]"
+                    class="mx-auto mb-0 h-[15vh]"
                 />
             </a>
-            <div class="wrapper ten">
-                <div>
-                    <h3 class="bounce">
-                        <span>C</span>
-                        <span>E</span>
-                        <span>N</span>
-                        <span>T</span>
-                        <span>E</span>
-                        <span>R</span>
+                    <h3 class="bounce mt-[-30]">
+                        Center
                     </h3>
-                </div>
+            <div class="flex items-start mt-[-20]">
+                <img src="/sdg/pakudos.png" alt="Pakudos" class="mr-4 h-32" /> <!-- Increased height -->
+                <p class="text-lg leading-relaxed text-justify mb-6" style="font-size: 20px">
+                    Welcome to the <strong>Mindoro State University Sustainable Development Goal (SDG) Center</strong>, a dedicated hub for promoting sustainable practices and initiatives within our academic community. It showcases a comprehensive collection of MinSU initiatives that align with the United Nations' Sustainable Development Goals.
+                <br>
+                    This center embodies our commitment to ensure that no one is left behind, fostering collaborative efforts among students, faculty, staff, community, and other stakeholders to pave the way for a sustainable and equitable future for all.
+                </p>
             </div>
-            <p class="text-lg leading-relaxed text-justify">
-                Welcome to the <strong>Mindoro State University Sustainable Development Goal (SDG) Center</strong>, a dedicated hub for promoting sustainable practices and initiatives within our academic community. It showcases a comprehensive collection of MinSU initiatives that align with the United Nations' Sustainable Development Goals.
-                This center embodies our commitment to ensure that no one is left behind, fostering collaborative efforts among students, faculty, staff, community and other stakeholders to pave the way for a sustainable and equitable future for all.
-            </p>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-1 flex-wrap justify-center items-center">
                 <div
                     v-for="(image, index) in images"
                     :key="index"
-                    class="card w-40 relative"
+                    class="card w-40 relative mb-10"
                 >
                     <div
                         class="card__content text-center relative p-24 transition-transform duration-1000 text-white font-bold"
@@ -139,9 +137,9 @@ onMounted(() => {
                                         : cardBackColors[index] || 'gray',
                             }"
                         >
-                            <h2 v-if="index < 17">SDG {{ index + 1 }}</h2>
-                            <h2 v-else>Sustainable Development Goals (SDGs)</h2>
-                            <p class="text-sm" v-if="index < 17">
+                            <h2  v-if="index < 17">SDG {{ index + 1 }}</h2>
+                            <h2 style="font-family: 'Century Gothic'"v-else>Sustainable Development Goals (SDGs)</h2>
+                            <p style="font-family: 'Century Gothic'; font-size: 12px" class="text-sm" v-if="index < 17">
                                 <a href="/sdg/article/">
                                 {{ sdgDescriptions[index] }}
 <!--                                <a href="/sdg/article/" class="text-blue-500 font-bold underline hover:text-blue-700 transition duration-300 ease-in-out">-->
@@ -150,7 +148,7 @@ onMounted(() => {
                             </p>
 
                             <p class="mt-2" v-else>
-                                <a
+                                <a style="font-family: 'Century Gothic'"
                                     href="https://sdgs.un.org/"
                                     class="text-white underline"
                                 >Visit the SDG Website</a
@@ -160,11 +158,12 @@ onMounted(() => {
                     </div>
                 </div>
             </div>
+            <h2 style="font-size: 25px"> <strong> Latest Articles </strong></h2>
             <div class="flex justify-around flex-wrap">
                 <div
                     v-for="(item, index) in items"
                     :key="index"
-                    class="max-w-[20vw] mt-8 rounded overflow-hidden shadow-lg"
+                    class="max-w-[20vw] mt-3 rounded overflow-hidden shadow-lg"
                 >
                     <img
                         class="w-full h-48 object-cover"
@@ -174,6 +173,20 @@ onMounted(() => {
                     <div class="px-6 py-4">
                         <div class="font-bold text-xl mb-2">
                             {{ item.title }}
+                        </div>
+                    </div>
+                    <div class="px-6 py-1 flex items-center justify-between">
+                        <div class="font-bold text-lg mb-2">
+                            {{ item.category }}
+                        </div>
+                        <div class="flex">
+                            <img
+                                v-for="sdg in [1, 3, 5, 9]"
+                                :key="sdg"
+                                :src="'/sdg/0' + sdg + '.png'"
+                                class="object-cover mx-1 max-h-[40px] aspect-square"
+                                alt="SDG Icon"
+                            />
                         </div>
                     </div>
                     <div class="px-6 pt-3 pb-5 flex items-center">
@@ -190,14 +203,14 @@ onMounted(() => {
                             />
                         </svg>
                         <span class="text-gray-700 font-semibold text-sm mr-2">
-                            Date: {{ item.date }}
-                        </span>
+                Date: {{ item.date }}
+            </span>
                     </div>
                 </div>
                 <div
                     class="max-w-[20vw] mt-8 rounded overflow-hidden bg-slate-200 shadow-lg flex items-center justify-center"
                 >
-                    <div class="px-6 py-4 text-center ">
+                    <div class="px-6 py-4 text-center">
                         <div class="font-bold text-xl mb-2">See More</div>
                         <p class="text-gray-700">
                             Discover more amazing content!
@@ -205,6 +218,7 @@ onMounted(() => {
                     </div>
                 </div>
             </div>
+
         </div>
         <div class="hidden md:block w-[10vw]"></div>
     </div>
@@ -252,12 +266,25 @@ body {
 
 @import url("https://fonts.googleapis.com/css2?family=Play&display=swap");
 
+@font-face {
+    font-family: 'Austein Script';
+    src: url('/fonts/Austein.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Roboto Bold';
+    src: url('/fonts/Roboto-Bold.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 .bounce {
-    font-size: 5rem;
+    font-size: 6rem;
     width: 100%;
+    font-family: "Austein Script";
     display: inline-flex;
     justify-content: center;
-    -webkit-box-reflect: below -20px linear-gradient(transparent, #211e1e2e);
+    /*-webkit-box-reflect: below -20px linear-gradient(transparent, #211e1e2e);*/
 }
 .bounce span {
     display: inline-flex;
@@ -297,20 +324,21 @@ body {
 @import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 
 .gradient {
-    background-image: linear-gradient(
-        90deg,
-        rgba(94, 114, 235, 1) 0%,
-        rgba(255, 145, 144, 1) 56%,
-        rgba(254, 193, 149, 1) 100%
-    );
-    color: transparent;
-    -webkit-background-clip: text;
-    animation: move 1s infinite;
+    /*background-image: linear-gradient(*/
+    /*    90deg,*/
+    /*    rgba(94, 114, 235, 1) 0%,*/
+    /*    rgba(255, 145, 144, 1) 56%,*/
+    /*    rgba(254, 193, 149, 1) 100%*/
+    /*);*/
+    color: #005c2b;
+    /*-webkit-background-clip: text;*/
+    /*animation: move 1s infinite;*/
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: "Pacifico", cursive;
-    font-size: 10vmin;
+    font-family: "Roboto Bold";
+    font-size: 4vmin;
+    line-height: 1;
 }
 
 @keyframes move {

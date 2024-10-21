@@ -1,6 +1,9 @@
 <script setup>
 import { Head, Link } from "@inertiajs/vue3";
-import { ref, computed } from "vue";
+import {ref, computed, onMounted} from "vue";
+import Footer from "@/Pages/Footer.vue";
+import Header from "@/Pages/Header.vue";
+import ColorThief from "colorthief";
 
 const images = ref([
     "01.png",
@@ -42,6 +45,44 @@ const sdgDescriptions = ref([
     "Partnerships for the Goals: Strengthen the means of implementation and revitalize the Global Partnership for Sustainable Development.",
     "Visit the SDG Website: Explore the Sustainable Development Goals at sdgs.un.org.",
 ]);
+
+const items = [
+    {
+        image: "https://picsum.photos/200/300?random=1",
+        title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit",
+        category: "Administration",
+        alt: "Image 1",
+        date: "October 21, 2024",
+    },
+    {
+        image: "https://picsum.photos/200/300?random=2",
+        title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit",
+        category: "Research",
+        alt: "Image 2",
+        date: "August 01, 2024",
+    },
+    {
+        image: "https://picsum.photos/200/300?random=3",
+        title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit",
+        category: "Students",
+        alt: "Image 3",
+        date: "July 12, 2024",
+    },
+];
+
+// State to track the selected image
+const selectedImage = ref(null);
+
+// Method to handle image selection
+const selectImage = (index) => {
+    selectedImage.value = index;
+};
+
+// Set default selected image to index 1 when component mounts
+onMounted(() => {
+    selectedImage.value = 0; // Set the default selected image to index 1
+});
+
 const currentPage = ref(1);
 const itemsPerPage = 5;
 const totalPages = computed(() =>
@@ -67,130 +108,122 @@ const getRandomIcons = () => {
     const numberOfIcons = Math.floor(Math.random() * 5) + 1;
     return shuffledImages.slice(0, numberOfIcons);
 };
+
 </script>
+
 <template>
-    <Head title="Centered Layout" />
-    <div class="flex min-h-screen">
-        <div
-            class="hidden md:block md:w-[20vw] m-4"
-            style="position: fixed; top: 0; left: 0"
-        >
+    <Header></Header>
+    <Head title="Per SDG" />
+    <div class="flex min-h-screen pt-[150px]">
+
+        <div class="hidden md:block md:w-[20vw] m-4" style="position: fixed; top: 0; left: 0">
             <Link href="/home">
-                <button
-                    class="bg-blue-500 hover:bg-blue-700 mb-5 text-white font-bold py-2 px-4 rounded-full"
-                >
+                <button class="bg-blue-500 hover:bg-blue-700 mb-5 text-white font-bold py-2 px-4 rounded-full pt-[150px]">
                     SDG HOME
                 </button>
             </Link>
-            <div
-                class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-1 items-center"
-            >
-                <div
-                    v-for="(image, index) in images"
-                    :key="index"
-                    class="card relative p-0"
-                >
-                    <div class="text-center text-white font-bold">
-                        <div class="flex items-center justify-center">
-                            <img
-                                :src="`/sdg/${image}`"
-                                :alt="`Image ${index + 1}`"
-                                class="max-w-[8vw] sm:max-w-[5vw] lg:max-w-[3.2vw] h-auto"
-                            />
-                        </div>
-                    </div>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-1 items-center ">
+                <div v-for="(image, index) in images" :key="index" class="relative p-0">
+                    <img
+                        :src="`/sdg/${image}`"
+                        :alt="`Image ${index + 1}`"
+                        class="max-w-[8vw] sm:max-w-[5vw] lg:max-w-[3.2vw] h-auto cursor-pointer"
+                        @click="selectImage(index)"
+                        :class="{ 'opacity-50': selectedImage === index }"
+                    />
                 </div>
             </div>
         </div>
-        <div
-            class="flex-grow mr-[-4vw] h-[80vh] md:h-[100vh]     p-16 rounded-lg "
-        >
-            <div>
-                <div
-                    v-for="(image, index) in paginatedItems"
-                    :key="index"
-                    class="flex flex-col justify-center"
+
+        <div class="flex-grow ml-20 p-16 rounded-lg">
+            <div class="flex items-center mb-10 pl-[180px]">
+                <img
+                    v-if="selectedImage !== null"
+                    :src="`/sdg/${images[selectedImage]}`"
+                    alt="Selected Image"
+                    class="w-60 h-60 object-cover mr-10"
+                />
+                <p v-if="selectedImage !== null" class="text-lg text-left w-1/2 max-w-md">
+                    {{ sdgDescriptions[selectedImage] }}
+                </p>
+            </div>
+            <h2 class="text-xl font-bold mb-4">Related Articles</h2>
+            <div class="flex items-center justify-between mb-4">
+                <button
+                    @click="prevPage"
+                    :disabled="currentPage === 1"
+                    class="bg-blue-500 text-white px-4 py-2 rounded disabled:bg-gray-300"
                 >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+
+                <div class="flex overflow-x-auto space-x-4 py-3">
                     <div
-                        class="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-gray-300"
+                        v-for="(item, index) in items"
+                        :key="index"
+                        class="max-w-[20vw] rounded overflow-hidden shadow-lg flex-none"
                     >
-                        <div
-                            class="w-full md:w-1/3 bg-white grid place-items-center"
-                        >
-                            <img :src="`/sdg/${image}`" alt="SDG Image" />
-                        </div>
-                        <div
-                            class="w-full md:w-2/3 bg-white flex flex-col space-y-2 p-3"
-                        >
-                            <div class="flex justify-between items-center">
-                                <p
-                                    class="text-gray-500 font-medium hidden md:block"
-                                >
-                                    SDG Goal
-                                </p>
-                                <div class="flex items-center">
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        class="h-5 w-5 text-yellow-500"
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor"
-                                    >
-                                        <path
-                                            d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                                        />
-                                    </svg>
-                                    <p
-                                        class="text-gray-600 font-bold text-sm ml-1"
-                                    >
-                                        4.96<span
-                                            class="text-gray-500 font-normal"
-                                            >(76 reviews)</span
-                                        >
-                                    </p>
-                                </div>
+                        <img
+                            class="w-full h-48 object-cover"
+                            :src="item.image"
+                            :alt="item.alt"
+                        />
+                        <div class="px-6 py-4">
+                            <div class="font-bold text-xl mb-2">
+                                {{ item.title }}
                             </div>
-                            <h3
-                                class="font-black text-gray-800 md:text-3xl text-xl"
-                            >
-                                SDG {{ index + 1 }}
-                            </h3>
-                            <p class="md:text-lg text-gray-500 text-base">
-                                {{ sdgDescriptions[index] }}
-                            </p>
-                            <div class="flex flex-wrap gap-2 mt-2">
+                        </div>
+                        <div class="px-6 py-1 flex items-center justify-between">
+                            <div class="font-bold text-lg mb-2">
+                                {{ item.category }}
+                            </div>
+                            <div class="flex">
                                 <img
-                                    v-for="(
-                                        icon, iconIndex
-                                    ) in getRandomIcons()"
-                                    :key="iconIndex"
-                                    :src="`/sdg/${icon}`"
+                                    v-for="sdg in [1, 3, 5, 9]"
+                                    :key="sdg"
+                                    :src="'/sdg/0' + sdg + '.png'"
+                                    class="object-cover mx-1 max-h-[40px] aspect-square"
                                     alt="SDG Icon"
-                                    class="w-8 h-8"
                                 />
                             </div>
                         </div>
+                        <div class="px-6 pt-3 pb-5 flex items-center">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                class="text-gray-700 mr-2"
+                            >
+                                <path
+                                    fill="currentColor"
+                                    d="M8 14q-.425 0-.712-.288T7 13t.288-.712T8 12t.713.288T9 13t-.288.713T8 14m4 0q-.425 0-.712-.288T11 13t.288-.712T12 12t.713.288T13 13t-.288.713T12 14m4 0q-.425 0-.712-.288T15 13t.288-.712T16 12t.713.288T17 13t-.288.713T16 14M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5z"
+                                />
+                            </svg>
+                            <span class="text-gray-700 font-semibold text-sm mr-2">
+                                Date: {{ item.date }}
+                            </span>
+                        </div>
                     </div>
                 </div>
-                <div class="mt-4 flex justify-center space-x-4">
-                    <button
-                        @click="prevPage"
-                        :disabled="currentPage === 1"
-                        class="bg-blue-500 text-white px-4 py-2 rounded disabled:bg-gray-300"
-                    >
-                        Previous
-                    </button>
-                    <button
-                        @click="nextPage"
-                        :disabled="currentPage === totalPages"
-                        class="bg-blue-500 text-white px-4 py-2 rounded disabled:bg-gray-300"
-                    >
-                        Next
-                    </button>
-                </div>
+
+                <button
+                    @click="nextPage"
+                    :disabled="currentPage === totalPages"
+                    class="bg-blue-500 text-white px-4 py-2 rounded disabled:bg-gray-300"
+                >
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
             </div>
         </div>
+
         <div class="hidden md:block w-[1vw]"></div>
     </div>
+    <Footer></Footer>
 </template>
 
 <style>
