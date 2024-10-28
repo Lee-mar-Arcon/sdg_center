@@ -8,6 +8,7 @@ import Footer from "@/Pages/Footer.vue";
     <Header></Header>
     <div class="min-h-screen flex justify-center items-center bg-gray-100 pt-[150px]">
         <div class="hidden md:block w-[10vw]"></div>
+        <div> Awit Lods</div>
 
         <div class="hidden md:block w-[10vw]"></div>
     </div>
