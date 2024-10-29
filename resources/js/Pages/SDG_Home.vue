@@ -67,6 +67,13 @@ const items = [
         alt: "Image 3",
         date: "July 12, 2024",
     },
+    {
+        image: "https://picsum.photos/200/300?random=3",
+        title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit",
+        category: "Students",
+        alt: "Image 3",
+        date: "July 12, 2024",
+    },
 ];
 const cardBackColors = ref([]);
 
@@ -102,19 +109,19 @@ onMounted(() => {
                     <h3 class="bounce mt-[-30]">
                         Center
                     </h3>
-            <div class="flex items-start mt-[-20]">
-                <img src="/sdg/pakudos.png" alt="Pakudos" class="mr-4 h-32" /> <!-- Increased height -->
-                <p class="text-lg leading-relaxed text-justify mb-6" style="font-size: 20px">
+            <div class="flex items-start mt-[-20] ml-[80px]">
+                <img src="/sdg/pakudos.png" alt="Pakudos" class="mr-5 h-48" />
+                <p class="text-lg leading-relaxed text-justify mb-6 mr-[100px]" style="font-size: 20px">
                     Welcome to the <strong>Mindoro State University Sustainable Development Goal (SDG) Center</strong>, a dedicated hub for promoting sustainable practices and initiatives within our academic community. It showcases a comprehensive collection of MinSU initiatives that align with the United Nations' Sustainable Development Goals.
                 <br>
                     This center embodies our commitment to ensure that no one is left behind, fostering collaborative efforts among students, faculty, staff, community, and other stakeholders to pave the way for a sustainable and equitable future for all.
                 </p>
             </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-1 flex-wrap justify-center items-center">
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6  flex-wrap justify-center items-center mt-5">
                 <div
                     v-for="(image, index) in images"
                     :key="index"
-                    class="card w-40 relative mb-10"
+                    class="card w-40  mb-12 ml-[30] "
                 >
                     <div
                         class="card__content text-center relative p-24 transition-transform duration-1000 text-white font-bold"
@@ -158,25 +165,25 @@ onMounted(() => {
                     </div>
                 </div>
             </div>
-            <h2 style="font-size: 25px"> <strong> Latest Articles </strong></h2>
-            <div class="flex justify-around flex-wrap">
+            <h2 class="ml-[120]" style="font-size: 20px"> <strong> Latest Articles </strong></h2>
+            <div class="ml-[120] flex justify-start items-start flex-wrap gap-2">
                 <div
                     v-for="(item, index) in items"
                     :key="index"
-                    class="max-w-[20vw] mt-3 rounded overflow-hidden shadow-lg"
+                    class="ml-1 mr-1 max-w-[13vw] mt-2 rounded overflow-hidden shadow-lg"
                 >
                     <img
-                        class="w-full h-48 object-cover"
+                        class="w-full h-36 object-cover"
                         :src="item.image"
                         :alt="item.alt"
                     />
-                    <div class="px-6 py-4">
-                        <div class="font-bold text-xl mb-2">
+                    <div class="px-2 py-2">
+                        <div class="font-bold text-l mb-1">
                             {{ item.title }}
                         </div>
                     </div>
-                    <div class="px-6 py-1 flex items-center justify-between">
-                        <div class="font-bold text-lg mb-2">
+                    <div class="px-2 py-1 flex items-center justify-between">
+                        <div class="font-bold text-s mb-1">
                             {{ item.category }}
                         </div>
                         <div class="flex">
@@ -184,31 +191,31 @@ onMounted(() => {
                                 v-for="sdg in [1, 3, 5, 9]"
                                 :key="sdg"
                                 :src="'/sdg/0' + sdg + '.png'"
-                                class="object-cover mx-1 max-h-[40px] aspect-square"
+                                class="object-cover mx-0.5 max-h-[20px] aspect-square"
                                 alt="SDG Icon"
                             />
                         </div>
                     </div>
-                    <div class="px-6 pt-3 pb-5 flex items-center">
+                    <div class="px-2 pt-2 pb-3 flex items-center">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
+                            width="20"
+                            height="20"
                             viewBox="0 0 24 24"
-                            class="text-gray-700 mr-2"
+                            class="text-gray-700 mr-1"
                         >
                             <path
                                 fill="currentColor"
                                 d="M8 14q-.425 0-.712-.288T7 13t.288-.712T8 12t.713.288T9 13t-.288.713T8 14m4 0q-.425 0-.712-.288T11 13t.288-.712T12 12t.713.288T13 13t-.288.713T12 14m4 0q-.425 0-.712-.288T15 13t.288-.712T16 12t.713.288T17 13t-.288.713T16 14M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5z"
                             />
                         </svg>
-                        <span class="text-gray-700 font-semibold text-sm mr-2">
-                Date: {{ item.date }}
-            </span>
+                        <span class="text-gray-700 font-semibold text-sm mr-1">
+       {{ item.date }}
+      </span>
                     </div>
                 </div>
                 <div
-                    class="max-w-[20vw] mt-8 rounded overflow-hidden bg-slate-200 shadow-lg flex items-center justify-center"
+                    class="max-w-[10vw] h-[340px] mt-2 rounded overflow-hidden bg-slate-200 shadow-lg flex items-center justify-center"
                 >
                     <div class="px-6 py-4 text-center">
                         <div class="font-bold text-xl mb-2">See More</div>
@@ -217,8 +224,8 @@ onMounted(() => {
                         </p>
                     </div>
                 </div>
-            </div>
 
+            </div>
         </div>
         <div class="hidden md:block w-[10vw]"></div>
     </div>
@@ -236,7 +243,7 @@ onMounted(() => {
     margin: 0;
 }
 
-body {
+.body_home {
     height: 100vh;
     display: grid;
     place-items: center;

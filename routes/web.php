@@ -10,6 +10,9 @@ use App\Http\Controllers\Page\WelcomeController;
 Route::get('/news', function () {
     return Inertia::render('SDG_News');
 
+});Route::get('/admin', function () {
+    return Inertia::render('Article');
+
 });
 
 Route::get('/', function () {
