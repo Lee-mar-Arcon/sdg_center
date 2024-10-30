@@ -229,7 +229,7 @@ const getRandomIcons = () => {
 <style>
 @import url("https://fonts.googleapis.com/css?family=Oswald:400,700");
 
-body {
+.body_news {
     font-family: "Oswald", sans-serif;
     height: 100vh;
 }

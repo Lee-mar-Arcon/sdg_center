@@ -236,7 +236,7 @@ const nextPage = () => {
 <style>
 @import url("https://fonts.googleapis.com/css?family=Oswald:400,700");
 
-body {
+.body_page {
     font-family: "Oswald", sans-serif;
     height: 100vh;
 }
