@@ -1,0 +1,23 @@
+{
+  "public/sdg/02.png": {
+    "file": "assets/02-BBloluBi.png",
+    "src": "public/sdg/02.png"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-CDfHilh_.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-DRjlbMW2.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "css": [
+      "assets/app-DABeZj5i.css"
+    ],
+    "assets": [
+      "assets/02-BBloluBi.png"
+    ]
+  }
+}
