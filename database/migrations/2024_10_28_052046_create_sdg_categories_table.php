@@ -17,7 +17,7 @@ return new class extends Migration
             $table->timestamps();
         });
 
-        Schema::create('article_has_sdg', function (Blueprint $table) {
+        Schema::create('article_has_sdgs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('article_id')->constrained('articles')->onDelete('cascade');
             $table->foreignId('sdg_category_id')->constrained('sdg_categories')->onDelete('cascade');
@@ -29,6 +29,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sdg_category');
+
+        Schema::dropIfExists('article_has_sdgs');
+        Schema::dropIfExists('sdg_categories');
+        Schema::dropIfExists('articles');
     }
 };
