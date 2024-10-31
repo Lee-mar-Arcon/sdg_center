@@ -23,7 +23,6 @@ const images = ref([
     "15.png",
     "16.png",
     "17.png",
-    "mainLogo.png",
 ]);
 const sdgDescriptions = ref([
     "No Poverty: End poverty in all its forms everywhere.",
@@ -48,25 +47,33 @@ const sdgDescriptions = ref([
 
 const items = [
     {
-        image: "https://picsum.photos/200/300?random=1",
-        title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit",
-        category: "Administration",
+        image: "/article/image1.jpg",
+        title: "Unity in Diversity: MinSU Unites for its Annual Culture and Arts Festival",
+        category: "Student",
         alt: "Image 1",
-        date: "October 21, 2024",
+        date: "October 29, 2024",
+
     },
     {
-        image: "https://picsum.photos/200/300?random=2",
-        title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit",
-        category: "Research",
+        image: "/article/image2.jpg",
+        title: "PSA MIMAROPA recognizes MinSU as Most Responsive Agency",
+        category: "Administration",
         alt: "Image 2",
-        date: "August 01, 2024",
+        date: "October 29, 2024",
     },
     {
-        image: "https://picsum.photos/200/300?random=3",
-        title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit",
+        image: "/article/image3.jpg",
+        title: "ABEL students win Best Paper and Abstract Awards at 2024 ASREI Conference",
+        category: "Academics",
+        alt: "Image 3",
+        date: "October 28, 2024",
+    },
+    {
+        image: "/article/image4.jpg",
+        title: "MinSU Clinches 9th Place at 2024 STRASUC Olympics",
         category: "Students",
         alt: "Image 3",
-        date: "July 12, 2024",
+        date: "October 26, 2024",
     },
 ];
 
@@ -108,6 +115,15 @@ const getRandomIcons = () => {
     const numberOfIcons = Math.floor(Math.random() * 5) + 1;
     return shuffledImages.slice(0, numberOfIcons);
 };
+import { defineProps } from 'vue';
+import { Inertia } from '@inertiajs/inertia';
+const props = defineProps({
+    items: Array,
+});
+
+const goToArticle = (articleId) => {
+    Inertia.visit(`/SDG/article${articleId}`);
+};
 
 </script>
 
@@ -116,13 +132,13 @@ const getRandomIcons = () => {
     <Head title="Per SDG" />
     <div class="flex min-h-screen pt-[150px]">
 
-        <div class="hidden md:block md:w-[20vw] m-4" style="position: fixed; top: 0; left: 0">
-            <Link href="/home">
-                <button class="bg-blue-500 hover:bg-blue-700 mb-5 text-white font-bold py-2 px-4 rounded-full pt-[150px]">
+        <div class="hidden md:block md:w-[20vw] m-4 ml-[100px]" style="position: fixed; top: 0; left: 0">
+            <Link href="/">
+                <button class="bg-blue-500 hover:bg-blue-700 mb-2 text-white font-bold py-2 px-4 pt-[150px]">
                     SDG HOME
                 </button>
             </Link>
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-1 items-center ">
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-1 items-center">
                 <div v-for="(image, index) in images" :key="index" class="relative p-0">
                     <img
                         :src="`/sdg/${image}`"
@@ -135,15 +151,15 @@ const getRandomIcons = () => {
             </div>
         </div>
 
-        <div class="flex-grow ml-20 p-16 rounded-lg">
-            <div class="flex items-center mb-10 pl-[180px]">
+        <div class="flex-grow  p-8 rounded-lg ml-[500px] mr-[200px]">
+            <div class="flex items-center mb-4 ">
                 <img
                     v-if="selectedImage !== null"
                     :src="`/sdg/${images[selectedImage]}`"
                     alt="Selected Image"
                     class="w-60 h-60 object-cover mr-10"
                 />
-                <p v-if="selectedImage !== null" class="text-lg text-left w-1/2 max-w-md">
+                <p v-if="selectedImage !== null" class="text-lg text-left w-auto max-w-md ">
                     {{ sdgDescriptions[selectedImage] }}
                 </p>
             </div>
@@ -152,31 +168,32 @@ const getRandomIcons = () => {
                 <button
                     @click="prevPage"
                     :disabled="currentPage === 1"
-                    class="bg-blue-500 text-white px-4 py-2 rounded disabled:bg-gray-300"
+                    class="bg-gray-500  text-white px-4 py-2 rounded disabled:bg-gray-300"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
 
-                <div class="flex overflow-x-auto space-x-4 py-3">
+                <div class="flex overflow-x-auto space-x-8 py-3">
                     <div
                         v-for="(item, index) in items"
                         :key="index"
-                        class="max-w-[20vw] rounded overflow-hidden shadow-lg flex-none"
+                        @click="goToArticle(index + 1)"
+                        class="max-w-[15vw] rounded overflow-hidden shadow-lg flex-none"
                     >
                         <img
-                            class="w-full h-48 object-cover"
+                            class="w-full h-36 object-cover"
                             :src="item.image"
                             :alt="item.alt"
                         />
                         <div class="px-6 py-4">
-                            <div class="font-bold text-xl mb-2">
+                            <div class="font-bold text-lg mb-2">
                                 {{ item.title }}
                             </div>
                         </div>
                         <div class="px-6 py-1 flex items-center justify-between">
-                            <div class="font-bold text-lg mb-2">
+                            <div class="font-bold text-sm mb-2">
                                 {{ item.category }}
                             </div>
                             <div class="flex">
@@ -184,7 +201,7 @@ const getRandomIcons = () => {
                                     v-for="sdg in [1, 3, 5, 9]"
                                     :key="sdg"
                                     :src="'/sdg/0' + sdg + '.png'"
-                                    class="object-cover mx-1 max-h-[40px] aspect-square"
+                                    class="object-cover mx-1 max-h-[20px] aspect-square"
                                     alt="SDG Icon"
                                 />
                             </div>
@@ -192,8 +209,8 @@ const getRandomIcons = () => {
                         <div class="px-6 pt-3 pb-5 flex items-center">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
+                                width="20"
+                                height="20"
                                 viewBox="0 0 24 24"
                                 class="text-gray-700 mr-2"
                             >
@@ -203,7 +220,7 @@ const getRandomIcons = () => {
                                 />
                             </svg>
                             <span class="text-gray-700 font-semibold text-sm mr-2">
-                                Date: {{ item.date }}
+                                 {{ item.date }}
                             </span>
                         </div>
                     </div>
@@ -212,9 +229,9 @@ const getRandomIcons = () => {
                 <button
                     @click="nextPage"
                     :disabled="currentPage === totalPages"
-                    class="bg-blue-500 text-white px-4 py-2 rounded disabled:bg-gray-300"
+                    class="bg-gray-500 text-white px-4 py-2 rounded disabled:bg-gray-300"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
                 </button>

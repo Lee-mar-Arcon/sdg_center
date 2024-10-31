@@ -4,7 +4,7 @@
         <div class="grid grid-cols-12 grid-flow-row">
             <div class="col-span-2 p-1 flex flex-col">
 
-                <img src="../../../../public/sdg/02.png" class="p-2 mb-5 aspect-square l  max-w-[200px] max-h-[200px] ml-[50px]" alt="">
+                <img src="../../../../public/sdg/04.png" class="p-2 mb-5 aspect-square l  max-w-[200px] max-h-[200px] ml-[50px]" alt="">
 <!--                <h1 class="mb-5">IMAGES</h1>-->
 <!--                <article v-for="i in [1,2,3,3,3]" :key="i" class="mb-5">-->
 <!--                    <img src="../../../../public/sdg/02.png" class="aspect-video object-cover w-full max-w-full" alt="">-->
@@ -40,7 +40,7 @@
                     </div>
                     <div class="flex">
                         <img
-                            v-for="sdg in [1, 3, 5, 9]"
+                            v-for="sdg in [4]"
                             :key="sdg"
                             :src="'/sdg/0' + sdg + '.png'"
                             class="object-cover mx-1 max-h-[40px] aspect-square"
@@ -48,25 +48,36 @@
                         />
                     </div>
                 </div>
-                <p class="italic pt-2">Jane Doe - July 26, 1999</p>
+                <p class="italic pt-2">{{item.date}}</p>
 
                 <article class="text-justify indent-10 pt-5">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
+                    Showcasing arrays of talents and shared passion for arts and culture, students from the three campuses of MinSU brought together in the much-anticipated annual Intercampus Culture and Arts Festival themed “"Buklod Sining: Tayo na sa Timog Katagalugan. Kultura at Sining ay Isulong," held at the MinSU Main Campus, Alcate, Victoria, Oriental Mindoro, October 29, 2024.
+                    Showcasing a vibrant array of talents and a shared passion for arts and culture, students from the three campuses of Mindoro State University (MinSU) came together for the much-anticipated annual Intercampus Culture and Arts Festival. Themed “Buklod Sining: Tayo na sa Timog Katagalugan. Kultura at Sining ay Isulong,” the festival was held at the MinSU Main Campus, October 29, 2024.
+                    The event featured a variety of contests, showcasing the diverse talents of MinSU students. Participants competed in various contests including on-the-spot poster making, pencil drawing, charcoal rendering, painting, and photography. The festival also highlighted performances, including instrumental solos featuring violin, classical guitar, and banduria, as well as vocal solos (both kundiman and pop), vocal duets, live band performances, contemporary and folk dances, street dance, short plays, and the highly coveted Festival King and Queen titles.
+                    In her inspiring opening remarks, Dr. Enya Marie D. Apostol, University President, emphasized the importance of heartfelt expression in each performance. “Culture is in the heart. If you love your performance and embody the culture that goes with it, it will show in your face,” she stated. Dr. Apostol also encouraged participants to pour their passion out into their performances, reminding them that the essence of competition lies not solely in winning or losing. “Sa competition laging may umuuuwing victorious, may umuuuwing luhaan, pero sa competition na ito, walang talo kasi you perform,” she expressed, highlighting that every participant contributes to the vibrant representation of MinSU.
+                    The festival culminated in the announcement of winners across various contests, as follows:
+                    •	On the Spot Poster Making – MinSU Main Campus
+                    •	Pencil Drawing – MinSU Calapan Campus
+                    •	Charcoal Rendering – MinSU Calapan Campus
+                    •	Painting – MinSU Calapan Campus
+                    •	Photography – MinSU Calapan Campus
+                    •	Piano – MinSU Calapan Campus
+                    •	Violin – MinSU Bongabong Campus
+                    •	Classical Guitar – MinSU Calapan Campus
+                    •	Banduria – MinSU Calapan Campus
+                    •	Short and Sweet Play – MinSU Calapan Campus
+                    •	Radio Drama – MinSU Main Campus
+                    •	Pop Solo – MinSU Bongabong Campus
+                    •	Vocal Duet – MinSU Main Campus
+                    •	Kundiman – MinSU Main Campus
+                    •	Contemporary Dance Competition – MinSU Calapan Campus
+                    •	Folkdance – MinSU Calapan Campus
+                    •	Street Dance Competition – MinSU Main Campus
+                    •	Live Band Competition – MinSU Calapan Campus
+                    •	CAF Queen – MinSU Main Campus
+                    •	CAF King – MinSU Calapan Campus
+                    Winners in the CAF contests will represent MinSU at the upcoming Southern Tagalog Regional Association of State Universities and Colleges (STRASUC) Culture and Arts Festival this November 2024.
+
                 </article>
                 <div class="pt-8 flex items-end gap-x-3">
                     <span class="pe-2">Share:</span>
@@ -80,7 +91,7 @@
             <div class="col-span-2 p-1 flex flex-col max-h-[500px] overflow-y-auto pt-[50px] ml-[-30px]">
                 <h1 class="mb-5 font-bold">OTHER STORIES</h1>
                 <article v-for="i in [1,2,3,3,3]" :key="i" class="flex pb-2">
-                    <img src="../../../../public/sdg/02.png" class="object-cover aspect-square max-h-[80px] max-w-full" alt="">
+                    <img src="../../../../public/sdg/04.png" class="object-cover aspect-square max-h-[80px] max-w-full" alt="">
                     <div class="ps-2">
                         <h4>Title</h4>
                         <p class="italic line-clamp-3 text-justify text-sm whitespace-normal">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates nisi illum provident alias doloremque enim accusantium culpa temporibus praesentium laborum! Itaque odit eaque quaerat totam placeat, dolor magnam minima sapiente?</p>
@@ -99,11 +110,11 @@ import { Head, Link } from "@inertiajs/vue3";
 
 const items = [
     {
-        image: "https://picsum.photos/200/300?random=1",
-        title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit",
-        category: "Administration",
+        image: "/article/image1.jpg",
+        title: "Unity in Diversity: MinSU Unites for its Annual Culture and Arts Festival",
+        category: "Student",
         alt: "Image 1",
-        date: "October 21, 2024",
+        date: "October 29, 2024",
     },
 
 ];

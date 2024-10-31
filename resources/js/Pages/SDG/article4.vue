@@ -40,7 +40,7 @@
                     </div>
                     <div class="flex">
                         <img
-                            v-for="sdg in [1, 3, 5, 9]"
+                            v-for="sdg in [4]"
                             :key="sdg"
                             :src="'/sdg/0' + sdg + '.png'"
                             class="object-cover mx-1 max-h-[40px] aspect-square"
@@ -48,25 +48,37 @@
                         />
                     </div>
                 </div>
-                <p class="italic pt-2">Jane Doe - July 26, 1999</p>
+                <p class="italic pt-2">{{ item.date }}</p>
 
                 <article class="text-justify indent-10 pt-5">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
+                    Puerto Princesa City, Palawan — Competing with determination, prowess and skills, Mindoro State University (MinSU) clinched 9th place in the overall ranking at the 2024 Southern Tagalog Regional Association of State Universities and Colleges (STRASUC) Olympics. Themed “Unity in Diversity: Celebrating Athletic Excellence,” this year’s event was hosted by Palawan State University (PSU) from October 21 to 25, 2024, in Puerto Princesa City, Palawan.
+                    MinSU athletes brought home 24 medals, including 7 gold, 6 silver, and 11 bronze, as follows:
+                    Gold Medalists:
+                    •	Borris Manalo - Long Jump, Triple Jump
+                    •	Mickee Monterey - 400-meter run (Women’s Division)
+                    •	Lawrence Dela Cruz - 10,000-meter run (Men’s Division)
+                    •	Basketball 3x3 Women’s Team - Cheska Calingasan, Kriezza Arellano, Jea Abetria, Merylle Cuasay
+                    •	Beach Volleyball Men’s Team - Allan Magadia, Nico Lusaya
+                    Silver Medalists:
+                    •	Kurt Luis Alibado - Shot-put (Men’s Division), Javelin Throw (Men’s Division)
+                    •	Zaira Baculo - Chess (Women’s Division)
+                    •	Borris Manalo - High Jump (Men’s Division)
+                    •	Angelica Alcuran - Middleweight Combative Arnis
+                    •	Sofia Claor - Cruiserweight Combative Arnis
+                    Bronze Medalists:
+                    •	Lawrence Dela Cruz - 5,000-meter run (Men’s Division)
+                    •	E-Sports Team - John Karl Ragonjan, Marc Andrei Albay Santos, Kier Paolo Pineda, Niño Monsanto, Jayllord Panaligan, Kirk Adison Tolentino
+                    •	Mickee Monterey - 100 M Dash (Women)
+                    •	Morales Jhanzen - Long Jump
+                    •	4x100 Mixed Relay Team - Mickee Monterey, Wen Gomez, Rendel Montero, Jhanzen Reil Morales
+                    •	Kcale Castillo - Shot-put (Men’s Division)
+                    •	Angelica Folloso - Badminton Singles (Women)
+                    •	Jenalyn Rios - Javelin Throw (Women)
+                    •	Eurie de Jesus - Heavyweight Combative Arnis
+                    •	Bryle Maamo - Lightweight Combative Arnis
+                    Palawan State University (PSU) emerged as the overall champion of the event, achieving a total of 123 gold, 91 silver, and 82 bronze medals, followed by Laguna State Polytechnic University with 76 gold, 54 silver, and 39 bronze medals.
+                    The annual STRASUC Olympics is a prestigious event among state universities and colleges in Southern Tagalog. It brings together the best athletes from various institutions to compete in various sports discipline, fostering athletic excellence and camaraderie among the participating universities.
+
                 </article>
                 <div class="pt-8 flex items-end gap-x-3">
                     <span class="pe-2">Share:</span>
@@ -80,7 +92,7 @@
             <div class="col-span-2 p-1 flex flex-col max-h-[500px] overflow-y-auto pt-[50px] ml-[-30px]">
                 <h1 class="mb-5 font-bold">OTHER STORIES</h1>
                 <article v-for="i in [1,2,3,3,3]" :key="i" class="flex pb-2">
-                    <img src="../../../../public/sdg/02.png" class="object-cover aspect-square max-h-[80px] max-w-full" alt="">
+                    <img src="../../../../public/sdg/04.png" class="object-cover aspect-square max-h-[80px] max-w-full" alt="">
                     <div class="ps-2">
                         <h4>Title</h4>
                         <p class="italic line-clamp-3 text-justify text-sm whitespace-normal">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates nisi illum provident alias doloremque enim accusantium culpa temporibus praesentium laborum! Itaque odit eaque quaerat totam placeat, dolor magnam minima sapiente?</p>
@@ -99,11 +111,11 @@ import { Head, Link } from "@inertiajs/vue3";
 
 const items = [
     {
-        image: "https://picsum.photos/200/300?random=1",
-        title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit",
-        category: "Administration",
-        alt: "Image 1",
-        date: "October 21, 2024",
+        image: "/article/image4.jpg",
+        title: "MinSU Clinches 9th Place at 2024 STRASUC Olympics",
+        category: "Students",
+        alt: "Image 4",
+        date: "October 26, 2024",
     },
 
 ];

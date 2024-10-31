@@ -1,5 +1,6 @@
 <script setup>
-import { Head } from "@inertiajs/vue3";
+import { Head, Link } from "@inertiajs/vue3";
+// import { Head } from "@inertiajs/vue3";
 import Footer from './Footer.vue';
 import Header from './Header.vue';
 import { ref, onMounted } from "vue";
@@ -47,32 +48,33 @@ const sdgDescriptions = ref([
 ]);
 const items = [
     {
-        image: "https://picsum.photos/200/300?random=1",
-        title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit",
-        category: "Administration",
+        image: "/article/image1.jpg",
+        title: "Unity in Diversity: MinSU Unites for its Annual Culture and Arts Festival",
+        category: "Student",
         alt: "Image 1",
-        date: "October 21, 2024",
+        date: "October 29, 2024",
+
     },
     {
-        image: "https://picsum.photos/200/300?random=2",
-        title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit",
-        category: "Research",
+        image: "/article/image2.jpg",
+        title: "PSA MIMAROPA recognizes MinSU as Most Responsive Agency",
+        category: "Administration",
         alt: "Image 2",
-        date: "August 01, 2024",
+        date: "October 29, 2024",
     },
     {
-        image: "https://picsum.photos/200/300?random=3",
-        title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit",
-        category: "Students",
+        image: "/article/image3.jpg",
+        title: "ABEL students win Best Paper and Abstract Awards at 2024 ASREI Conference",
+        category: "Academics",
         alt: "Image 3",
-        date: "July 12, 2024",
+        date: "October 28, 2024",
     },
     {
-        image: "https://picsum.photos/200/300?random=3",
-        title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit",
+        image: "/article/image4.jpg",
+        title: "MinSU Clinches 9th Place at 2024 STRASUC Olympics",
         category: "Students",
         alt: "Image 3",
-        date: "July 12, 2024",
+        date: "October 26, 2024",
     },
 ];
 const cardBackColors = ref([]);
@@ -89,6 +91,15 @@ onMounted(() => {
         };
     });
 });
+import { defineProps } from 'vue';
+import { Inertia } from '@inertiajs/inertia';
+const props = defineProps({
+    items: Array,
+});
+
+const goToArticle = (articleId) => {
+    Inertia.visit(`/SDG/article${articleId}`);
+};
 
 </script>
 
@@ -117,11 +128,11 @@ onMounted(() => {
                     This center embodies our commitment to ensure that no one is left behind, fostering collaborative efforts among students, faculty, staff, community, and other stakeholders to pave the way for a sustainable and equitable future for all.
                 </p>
             </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6  flex-wrap justify-center items-center mt-5">
+            <div class="mr-[100px] ml-[100px] grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6  flex-wrap justify-center items-center mt-5">
                 <div
                     v-for="(image, index) in images"
                     :key="index"
-                    class="card w-40  mb-12 ml-[30] "
+                    class="card w-40  mb-6 ml-2 "
                 >
                     <div
                         class="card__content text-center relative p-24 transition-transform duration-1000 text-white font-bold"
@@ -144,10 +155,10 @@ onMounted(() => {
                                         : cardBackColors[index] || 'gray',
                             }"
                         >
-                            <h2  v-if="index < 17">SDG {{ index + 1 }}</h2>
+                            <h2 class="mb-2"  v-if="index < 17">SDG {{ index + 1 }}</h2>
                             <h2 style="font-family: 'Century Gothic'"v-else>Sustainable Development Goals (SDGs)</h2>
-                            <p style="font-family: 'Century Gothic'; font-size: 12px" class="text-sm" v-if="index < 17">
-                                <a href="/sdg/article/">
+                            <p  style="font-family: 'Century Gothic'; font-size: 12px; line-height: 1.2; text-align: left;" class="text-sm ml-1 mr-1" v-if="index < 17">
+                                <a href="/news" style="font-weight: normal;">
                                 {{ sdgDescriptions[index] }}
 <!--                                <a href="/sdg/article/" class="text-blue-500 font-bold underline hover:text-blue-700 transition duration-300 ease-in-out">-->
 <!--                                    Click here for more info-->
@@ -170,6 +181,7 @@ onMounted(() => {
                 <div
                     v-for="(item, index) in items"
                     :key="index"
+                    @click="goToArticle(index + 1)"
                     class="ml-1 mr-1 max-w-[13vw] mt-2 rounded overflow-hidden shadow-lg"
                 >
                     <img
@@ -218,10 +230,13 @@ onMounted(() => {
                     class="max-w-[10vw] h-[340px] mt-2 rounded overflow-hidden bg-slate-200 shadow-lg flex items-center justify-center"
                 >
                     <div class="px-6 py-4 text-center">
-                        <div class="font-bold text-xl mb-2">See More</div>
-                        <p class="text-gray-700">
-                            Discover more amazing content!
-                        </p>
+                        <Link href="/news">
+                            <div class="font-bold text-xl mb-2">See More</div>
+                            <p class="text-gray-700">
+                                Discover more amazing content!
+                            </p>
+                        </Link>
+
                     </div>
                 </div>
 
