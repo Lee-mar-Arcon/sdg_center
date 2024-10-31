@@ -4,7 +4,7 @@
         <div class="grid grid-cols-12 grid-flow-row">
             <div class="col-span-2 p-1 flex flex-col">
 
-                <img src="../../../../public/sdg/02.png" class="p-2 mb-5 aspect-square l  max-w-[200px] max-h-[200px] ml-[50px]" alt="">
+                <img src="../../../../public/sdg/17.png" class="p-2 mb-5 aspect-square l  max-w-[200px] max-h-[200px] ml-[50px]" alt="">
 <!--                <h1 class="mb-5">IMAGES</h1>-->
 <!--                <article v-for="i in [1,2,3,3,3]" :key="i" class="mb-5">-->
 <!--                    <img src="../../../../public/sdg/02.png" class="aspect-video object-cover w-full max-w-full" alt="">-->
@@ -40,7 +40,7 @@
                     </div>
                     <div class="flex">
                         <img
-                            v-for="sdg in [1, 3, 5, 9]"
+                            v-for="sdg in [17]"
                             :key="sdg"
                             :src="'/sdg/0' + sdg + '.png'"
                             class="object-cover mx-1 max-h-[40px] aspect-square"
@@ -48,25 +48,12 @@
                         />
                     </div>
                 </div>
-                <p class="italic pt-2">Jane Doe - July 26, 1999</p>
+                <p class="italic pt-2">{{item.date}}</p>
 
                 <article class="text-justify indent-10 pt-5">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
+                    In line with the 35th National Statistics Month, themed “Advancing Data and Statistics through Digital Transformation: A Road to an Empowered Nation,” Mindoro State University (MinSU) participated in the closing ceremonies and awarding program of the month-long celebration. The event organized by the Philippine Statistics Authority-MIMAROPA was held yesterday, October 28, 2024 at the Gabaldon Hall, Oriental Mindoro National High School, Calapan City.
+                    During the ceremonies, MinSU was awarded as one of the Most Responsive Agencies for its outstanding commitment and responsiveness to statistics and data-driven initiatives. University President Dr. Enya Marie D. Apostol proudly accepted the award.
+                    This recognition highlights MinSU’s dedication in using data and digital innovations to support national development. As a recognized agency, MinSU remains committed to promoting data-driven initiatives that empower the community and contribute to a digitally advanced Philippines.
                 </article>
                 <div class="pt-8 flex items-end gap-x-3">
                     <span class="pe-2">Share:</span>
@@ -80,7 +67,7 @@
             <div class="col-span-2 p-1 flex flex-col max-h-[500px] overflow-y-auto pt-[50px] ml-[-30px]">
                 <h1 class="mb-5 font-bold">OTHER STORIES</h1>
                 <article v-for="i in [1,2,3,3,3]" :key="i" class="flex pb-2">
-                    <img src="../../../../public/sdg/02.png" class="object-cover aspect-square max-h-[80px] max-w-full" alt="">
+                    <img src="../../../../public/sdg/17.png" class="object-cover aspect-square max-h-[80px] max-w-full" alt="">
                     <div class="ps-2">
                         <h4>Title</h4>
                         <p class="italic line-clamp-3 text-justify text-sm whitespace-normal">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates nisi illum provident alias doloremque enim accusantium culpa temporibus praesentium laborum! Itaque odit eaque quaerat totam placeat, dolor magnam minima sapiente?</p>
@@ -99,12 +86,34 @@ import { Head, Link } from "@inertiajs/vue3";
 
 const items = [
     {
-        image: "https://picsum.photos/200/300?random=1",
-        title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit",
+        image: "/article/image2.jpg",
+        title: "PSA MIMAROPA recognizes MinSU as Most Responsive Agency",
         category: "Administration",
-        alt: "Image 1",
-        date: "October 21, 2024",
+        alt: "Image 2",
+        date: "October 29, 2024",
     },
 
 ];
+
+import { ref, onMounted } from "vue";
+const images = ref([
+    "01.png",
+    "02.png",
+    "03.png",
+    "04.png",
+    "05.png",
+    "06.png",
+    "07.png",
+    "08.png",
+    "09.png",
+    "10.png",
+    "11.png",
+    "12.png",
+    "13.png",
+    "14.png",
+    "15.png",
+    "16.png",
+    "17.png",
+    "mainLogo.png",
+]);
 </script>

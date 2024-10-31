@@ -40,7 +40,7 @@
                     </div>
                     <div class="flex">
                         <img
-                            v-for="sdg in [1, 3, 5, 9]"
+                            v-for="sdg in [4, 9]"
                             :key="sdg"
                             :src="'/sdg/0' + sdg + '.png'"
                             class="object-cover mx-1 max-h-[40px] aspect-square"
@@ -48,25 +48,14 @@
                         />
                     </div>
                 </div>
-                <p class="italic pt-2">Jane Doe - July 26, 1999</p>
+                <p class="italic pt-2">{{ item.date }}</p>
 
                 <article class="text-justify indent-10 pt-5">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod animi esse illum assumenda consequuntur modi perferendis eum adipisci, distinctio aspernatur mollitia voluptate eius voluptates! Deserunt alias doloremque fugit eius recusandae.
+                    At the recent Asian Society of Researchers, Educators, and Inventors, Inc. (ASREI) conference, held from October 25-27, 2024, Mindoro State University’s (MinSU) Bachelor of Arts in English Language (ABEL) students demonstrated academic excellence, securing awards and showcasing their innovative research for Student Category. The conference, themed "Enhancing Research Excellence through Advanced Techniques and Practices: Insights on Writing Research," provided a platform for academic contributions across various disciplines.
+                    Pearl Princess Natividad was awarded Best Research Paper in the Student Category for her study titled "Decoding Public Safety: A Semiotic Analysis of Select Infoposters from the Municipal Disaster Risk Reduction and Management Office (MDRRMO)." Natividad’s work delves into how visual communication can effectively convey public safety information to the community.
+                    Moreover, Haichelle Oriendo received the Best Abstract Award for her study, "Leech and Short's Stylistics Model, Halliday's Transitivity, Eggins' Thematic Progression, and Halliday and Hasan's Cohesion Theories in the Stylistic Analysis of Human-Generated and AI-Generated Summaries," contributing new perspectives on language and technology.
+                    Other MinSU ABEL students also presented their research at the conference. Alma M. Nisperos, Jomark D. Mendoza, and Ana Lie I. Vallende shared their study entitled "The Structure of Disfluency: Are Filled Pauses Predictors of Sentence Complexity?". Additionally, Ms. Xylla Jane Reponte presented her research, "Macrostructural Moves in Select AB English Language Students' Thesis Introductions: Swales' CARS Analysis."
+                    As MinSU continues to support its students’ academic endeavors, the university remains committed to fostering a culture of innovation and research that prepares them to make meaningful contributions to society.
                 </article>
                 <div class="pt-8 flex items-end gap-x-3">
                     <span class="pe-2">Share:</span>
@@ -80,7 +69,7 @@
             <div class="col-span-2 p-1 flex flex-col max-h-[500px] overflow-y-auto pt-[50px] ml-[-30px]">
                 <h1 class="mb-5 font-bold">OTHER STORIES</h1>
                 <article v-for="i in [1,2,3,3,3]" :key="i" class="flex pb-2">
-                    <img src="../../../../public/sdg/02.png" class="object-cover aspect-square max-h-[80px] max-w-full" alt="">
+                    <img src="../../../../public/sdg/04.png" class="object-cover aspect-square max-h-[80px] max-w-full" alt="">
                     <div class="ps-2">
                         <h4>Title</h4>
                         <p class="italic line-clamp-3 text-justify text-sm whitespace-normal">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates nisi illum provident alias doloremque enim accusantium culpa temporibus praesentium laborum! Itaque odit eaque quaerat totam placeat, dolor magnam minima sapiente?</p>
@@ -99,11 +88,11 @@ import { Head, Link } from "@inertiajs/vue3";
 
 const items = [
     {
-        image: "https://picsum.photos/200/300?random=1",
-        title: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit",
-        category: "Administration",
-        alt: "Image 1",
-        date: "October 21, 2024",
+        image: "/article/image3.jpg",
+        title: "ABEL students win Best Paper and Abstract Awards at 2024 ASREI Conference",
+        category: "Academics",
+        alt: "Image 3",
+        date: "October 28, 2024",
     },
 
 ];

@@ -35,6 +35,11 @@ Route::get('/sdg/article/', function () {
     return Inertia::render('SDG/view');
 });
 
+//REAN
+
+Route::get('/SDG/article{articleId}', function ($articleId) {
+    return Inertia::render('SDG/index', ['articleId' => $articleId]);
+});
 
 
 // LEE-MAR
