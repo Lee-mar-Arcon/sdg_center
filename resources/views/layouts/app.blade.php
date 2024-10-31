@@ -49,6 +49,7 @@
     chatbox.setAttribute("attribution", "biz_inbox");
 </script>
 
+<<<<<<< HEAD
 <!-- Your SDK code -->
 <script>
     window.fbAsyncInit = function () {
@@ -67,6 +68,8 @@
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 </script>
+=======
+>>>>>>> origin/Rean
 
 
 @yield('content')

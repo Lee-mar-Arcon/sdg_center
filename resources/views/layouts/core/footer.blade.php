@@ -74,9 +74,13 @@
         </div>
     </div>
 </footer>
+<<<<<<< HEAD
 <!--//END FOOTER -->
 
 <!-- Add this CSS to your stylesheet -->
+=======
+
+>>>>>>> origin/Rean
 <style>
     footer.about-style2 {
         padding: 10px 0;

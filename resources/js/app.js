@@ -1,6 +1,9 @@
 import { createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
-import '../css/app.css'
+import ElementPlus from 'element-plus';
+import 'element-plus/dist/index.css';
+import * as ElementPlusIconsVue from '@element-plus/icons-vue';
+import '../css/app.css';
 
 createInertiaApp({
     resolve: (name) => {
@@ -8,8 +11,16 @@ createInertiaApp({
         return pages[`./Pages/${name}.vue`];
     },
     setup({ el, App, props, plugin }) {
-        createApp({ render: () => h(App, props) })
-            .use(plugin)
-            .mount(el);
+        const app = createApp({ render: () => h(App, props) });
+
+        // Use Element Plus
+        app.use(ElementPlus);
+
+        // Register Element Plus Icons
+        for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
+            app.component(key, component);
+        }
+
+        app.use(plugin).mount(el);
     },
 });
