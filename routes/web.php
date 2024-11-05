@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\SdgController;
-use App\Http\Controllers\ArticleController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\Admin\SdgController;
+use App\Http\Controllers\Admin\MetricController;
 use App\Http\Controllers\Page\WelcomeController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\DashboardController;
 
 Route::get('/news', function () {
     return Inertia::render('SDG_News');
@@ -44,13 +45,19 @@ Route::get('/SDG/article{articleId}', function ($articleId) {
 
 // LEE-MAR
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::resource('sdg', SdgController::class)->only(['index', 'store', 'destroy', 'update'])->names([
+    Route::resource('sdg', SdgController::class)->only(['index', 'store', 'destroy'])->names([
         'index' => 'sdg.index',
         'store' => 'sdg.store',
         'destroy' => 'sdg.destroy',
-        'update' => 'sdg.update',
     ]);
     Route::post('/sdg/{sdg}', [SdgController::class, 'update'])->name('sdg.update');
+    
+    Route::resource('metric', MetricController::class)->only(['index', 'store', 'destroy', 'update'])->names([
+        'index' => 'metric.index',
+        'store' => 'metric.store',
+        'destroy' => 'metric.destroy',
+        'update' => 'metric.update',
+    ]);
 });
 
 //Jee

@@ -21,8 +21,6 @@ const form = useForm({
     icon: null,
     bg_color: null,
     sdg_no: null,
-    image: null,
-    content_no: null
 });
 
 const deleteForm = useForm({id: null})
@@ -35,7 +33,6 @@ function toggleCanvas(isAdding, sdg = null) {
     if (!isAdding){
         form.name = sdg.name
         form.sdg_no = sdg.sdg_no
-        form.content_no = sdg.content_no
         form.bg_color = sdg.bg_color
         form.id = sdg.id
         form.description = sdg.description

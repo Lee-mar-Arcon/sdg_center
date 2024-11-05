@@ -9,6 +9,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Metric extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'sub_category',
+        'sdg_id'
+    ];
 
     public function indicators(): HasMany
     {
