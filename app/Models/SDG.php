@@ -24,6 +24,6 @@ class SDG extends Model
 
     public function metrics(): HasMany
     {
-        return $this->hasMany(Metric::class);
+        return $this->hasMany(Metric::class, 'sdg_id');
     }
 }

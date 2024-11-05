@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\MetricController;
 use App\Http\Controllers\Page\WelcomeController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\IndicatorController;
 
 Route::get('/news', function () {
     return Inertia::render('SDG_News');
@@ -45,13 +46,23 @@ Route::get('/SDG/article{articleId}', function ($articleId) {
 
 // LEE-MAR
 Route::prefix('admin')->name('admin.')->group(function () {
+    // sdg
     Route::resource('sdg', SdgController::class)->only(['index', 'store', 'destroy'])->names([
         'index' => 'sdg.index',
         'store' => 'sdg.store',
         'destroy' => 'sdg.destroy',
     ]);
     Route::post('/sdg/{sdg}', [SdgController::class, 'update'])->name('sdg.update');
+
+    // indicator
+    Route::resource('indicator', IndicatorController::class)->only(['index', 'store', 'destroy'])->names([
+        'index' => 'indicator.index',
+        'store' => 'indicator.store',
+        'destroy' => 'indicator.destroy',
+    ]);
+    Route::post('/indicator/{indicator}', [IndicatorController::class, 'update'])->name('indicator.update');
     
+    // metric
     Route::resource('metric', MetricController::class)->only(['index', 'store', 'destroy', 'update'])->names([
         'index' => 'metric.index',
         'store' => 'metric.store',
