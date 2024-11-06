@@ -1,22 +1,37 @@
 {
+  "public/sdg/017.png": {
+    "file": "assets/017-DhnIRWmJ.png",
+    "src": "public/sdg/017.png"
+  },
   "public/sdg/02.png": {
     "file": "assets/02-BBloluBi.png",
     "src": "public/sdg/02.png"
   },
+  "public/sdg/04.png": {
+    "file": "assets/04-CLpmEH_u.png",
+    "src": "public/sdg/04.png"
+  },
+  "public/sdg/09.png": {
+    "file": "assets/09-CnH43Fhv.png",
+    "src": "public/sdg/09.png"
+  },
   "resources/css/app.css": {
-    "file": "assets/app-CDfHilh_.css",
+    "file": "assets/app-Coj_ysLZ.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-DRjlbMW2.js",
+    "file": "assets/app-pS2FnhBx.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "css": [
-      "assets/app-DABeZj5i.css"
+      "assets/app-zQ_21quM.css"
     ],
     "assets": [
+      "assets/04-CLpmEH_u.png",
+      "assets/017-DhnIRWmJ.png",
+      "assets/09-CnH43Fhv.png",
       "assets/02-BBloluBi.png"
     ]
   }

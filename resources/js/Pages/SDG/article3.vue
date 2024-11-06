@@ -4,7 +4,8 @@
         <div class="grid grid-cols-12 grid-flow-row">
             <div class="col-span-2 p-1 flex flex-col">
 
-                <img src="../../../../public/sdg/02.png" class="p-2 mb-5 aspect-square l  max-w-[200px] max-h-[200px] ml-[50px]" alt="">
+                <img src="../../../../public/sdg/04.png" class="p-2 mb-5 aspect-square l  max-w-[200px] max-h-[200px] ml-[50px]" alt="">
+                <img src="../../../../public/sdg/09.png" class="p-2 mb-5 aspect-square l  max-w-[200px] max-h-[200px] ml-[50px]" alt="">
 <!--                <h1 class="mb-5">IMAGES</h1>-->
 <!--                <article v-for="i in [1,2,3,3,3]" :key="i" class="mb-5">-->
 <!--                    <img src="../../../../public/sdg/02.png" class="aspect-video object-cover w-full max-w-full" alt="">-->
@@ -40,7 +41,7 @@
                     </div>
                     <div class="flex">
                         <img
-                            v-for="sdg in [4, 9]"
+                            v-for="sdg in item.sdgNumbers"
                             :key="sdg"
                             :src="'/sdg/0' + sdg + '.png'"
                             class="object-cover mx-1 max-h-[40px] aspect-square"
@@ -93,6 +94,7 @@ const items = [
         category: "Academics",
         alt: "Image 3",
         date: "October 28, 2024",
+        sdgNumbers:[4,9]
     },
 
 ];

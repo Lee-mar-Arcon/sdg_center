@@ -15,14 +15,14 @@ const images = ref([
     "07.png",
     "08.png",
     "09.png",
-    "10.png",
-    "11.png",
-    "12.png",
-    "13.png",
-    "14.png",
-    "15.png",
-    "16.png",
-    "17.png",
+    "010.png",
+    "011.png",
+    "012.png",
+    "013.png",
+    "014.png",
+    "015.png",
+    "016.png",
+    "017.png",
 ]);
 const sdgDescriptions = ref([
     "No Poverty: End poverty in all its forms everywhere.",
@@ -46,36 +46,12 @@ const sdgDescriptions = ref([
 ]);
 
 const items = [
-    {
-        image: "/article/image1.jpg",
-        title: "Unity in Diversity: MinSU Unites for its Annual Culture and Arts Festival",
-        category: "Student",
-        alt: "Image 1",
-        date: "October 29, 2024",
-
-    },
-    {
-        image: "/article/image2.jpg",
-        title: "PSA MIMAROPA recognizes MinSU as Most Responsive Agency",
-        category: "Administration",
-        alt: "Image 2",
-        date: "October 29, 2024",
-    },
-    {
-        image: "/article/image3.jpg",
-        title: "ABEL students win Best Paper and Abstract Awards at 2024 ASREI Conference",
-        category: "Academics",
-        alt: "Image 3",
-        date: "October 28, 2024",
-    },
-    {
-        image: "/article/image4.jpg",
-        title: "MinSU Clinches 9th Place at 2024 STRASUC Olympics",
-        category: "Students",
-        alt: "Image 3",
-        date: "October 26, 2024",
-    },
+    { id: 1, image: "/article/image1.jpg", title: "Unity in Diversity: MinSU Unites for its Annual Culture and Arts Festival", category: "Student", alt: "Image 1", date: "October 29, 2024", sdgNumbers: [4] },
+    { id: 2, image: "/article/image2.jpg", title: "PSA MIMAROPA recognizes MinSU as Most Responsive Agency", category: "Administration", alt: "Image 2", date: "October 29, 2024", sdgNumbers: [17] },
+    { id: 3, image: "/article/image3.jpg", title: "ABEL students win Best Paper and Abstract Awards at 2024 ASREI Conference", category: "Academics", alt: "Image 3", date: "October 28, 2024", sdgNumbers: [4, 9] },
+    { id: 4, image: "/article/image4.jpg", title: "MinSU Clinches 9th Place at 2024 STRASUC Olympics", category: "Students", alt: "Image 4", date: "October 26, 2024", sdgNumbers: [4] },
 ];
+
 
 // State to track the selected image
 const selectedImage = ref(null);
@@ -91,10 +67,8 @@ onMounted(() => {
 });
 
 const currentPage = ref(1);
-const itemsPerPage = 5;
-const totalPages = computed(() =>
-    Math.ceil(images.value.length / itemsPerPage)
-);
+const itemsPerPage = 3;
+const totalPages = computed(() => Math.ceil(images.value.length / itemsPerPage));
 const paginatedItems = computed(() => {
     const start = (currentPage.value - 1) * itemsPerPage;
     return images.value.slice(start, start + itemsPerPage);
@@ -110,6 +84,14 @@ const prevPage = () => {
         currentPage.value--;
     }
 };
+
+// Computed property to filter articles by selected SDG number
+const filteredArticles = computed(() => {
+    if (selectedImage.value === null) return items;
+    const sdgNumber = selectedImage.value + 1; // Match SDG number (1-based index)
+    return items.filter(item => item.sdgNumbers.includes(sdgNumber));
+});
+
 const getRandomIcons = () => {
     const shuffledImages = [...images.value].sort(() => 0.5 - Math.random());
     const numberOfIcons = Math.floor(Math.random() * 5) + 1;
@@ -164,6 +146,9 @@ const goToArticle = (articleId) => {
                 </p>
             </div>
             <h2 class="text-xl font-bold mb-4">Related Articles</h2>
+            <div v-if="filteredArticles.length === 0" class="text-gray-500 text-center my-4">
+                No related articles
+            </div>
             <div class="flex items-center justify-between mb-4">
                 <button
                     @click="prevPage"
@@ -177,9 +162,9 @@ const goToArticle = (articleId) => {
 
                 <div class="flex overflow-x-auto space-x-8 py-3">
                     <div
-                        v-for="(item, index) in items"
-                        :key="index"
-                        @click="goToArticle(index + 1)"
+                        v-for="(item, index) in filteredArticles"
+                        :key="item.id"
+                        @click="goToArticle(item.id)"
                         class="max-w-[15vw] rounded overflow-hidden shadow-lg flex-none"
                     >
                         <img
@@ -198,9 +183,8 @@ const goToArticle = (articleId) => {
                             </div>
                             <div class="flex">
                                 <img
-                                    v-for="sdg in [1, 3, 5, 9]"
-                                    :key="sdg"
-                                    :src="'/sdg/0' + sdg + '.png'"
+                                    v-if="selectedImage !== null"
+                                    :src="`/sdg/${images[selectedImage]}`"
                                     class="object-cover mx-1 max-h-[20px] aspect-square"
                                     alt="SDG Icon"
                                 />

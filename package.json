@@ -20,10 +20,13 @@
         "webpack": "^5.95.0"
     },
     "dependencies": {
+        "@ckeditor/ckeditor5-build-classic": "^43.3.0",
+        "@ckeditor/ckeditor5-vue": "^7.2.0",
         "@element-plus/icons-vue": "^2.3.1",
         "@inertiajs/inertia": "^0.11.1",
         "@inertiajs/vue3": "^1.2.0",
         "colorthief": "^2.6.0",
+        "cropperjs": "^1.6.2",
         "element-plus": "^2.8.6",
         "perfect-scrollbar": "^1.5.5",
         "vue": "^3.5.11",

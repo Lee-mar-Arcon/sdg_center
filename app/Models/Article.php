@@ -28,7 +28,7 @@ class Article extends Model
         return $this->hasMany(ArticleAttachment::class);
     }
 
-    public function sdgCategories()
+    public function sdgs()
     {
         return $this->belongsToMany(SdgCategory::class, 'article_has_sdg');
     }
