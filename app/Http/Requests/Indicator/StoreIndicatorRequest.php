@@ -11,7 +11,7 @@ class StoreIndicatorRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class StoreIndicatorRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'metric_id' => 'required|numeric|exists:metrics,id',
+            'indicator' => 'required|string|max:1000',
+            'applied' => 'required|string|unique:indicators,indicator',
+            'evidence_1' => 'required|mimes:pdf',
+            'evidence_2' => 'nullable|mimes:pdf',
         ];
     }
 }

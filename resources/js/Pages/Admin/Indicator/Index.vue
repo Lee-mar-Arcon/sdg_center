@@ -27,11 +27,12 @@ const isOpen = ref(false);
 const addingIndicator = ref(false);
 const form = useForm({
     id: null,
-    sdg_id: null,
+    sdg_id:  route().params.sdg_id ?  route().params.sdg_id : null,
     metric_id: null,
     evidence_1: null,
     evidence_2: null,
     indicator: null,
+    applied: "Yes"
 });
 
 const deleteForm = useForm({id: null})
@@ -49,27 +50,27 @@ function toggleCanvas(isAdding, indicator = null) {
 }
 
 function handleSubmit() {
-    // if(addingIndicator.value)
-    //     form.post(route('admin.metric.store'), {
-    //         onSuccess: () => {
-    //             toggleCanvas(false);
-    //             form.reset();
-    //         },
-    //         preserveScroll: true
-    //     });
-    // else {
-    //     form.put(route('admin.metric.update', {metric: form.id}), {
-    //         _method: 'put',
-    //         onSuccess: () => {
-    //             toggleCanvas(false);
-    //             form.reset();
-    //         },
-    //         preserveScroll: true
-    //     });
-    // }
+    if(addingIndicator.value)
+        form.post(route('admin.indicator.store'), {
+            onSuccess: () => {
+                toggleCanvas(false);
+                form.reset();
+            },
+            preserveScroll: true
+        });
+    else {
+        form.put(route('admin.indicator.update', {indicator: form.id}), {
+            _method: 'put',
+            onSuccess: () => {
+                toggleCanvas(false);
+                form.reset();
+            },
+            preserveScroll: true
+        });
+    }
 }
 function handleDelete(id) {
-    deleteForm.delete(route('admin.metric.destroy', {metric: id}), {
+    deleteForm.delete(route('admin.indicator.destroy', {indicator: id}), {
         onSuccess: () => {
             deleteForm.reset();
             confirmationIsOpen.value = false
@@ -82,18 +83,16 @@ function handleCancel() {
     toggleCanvas(false);
 }
 
-onMounted(()=> {
-    Object.keys(route().params).forEach(key => form[key] = route().params[key])
-    console.log(form)
-})
-
 function updateMetrics() {
+    console.log(form);
+    
     router.visit(route(route().current(), {sdg_id: form.sdg_id}), {
         only: ['metrics'],
         preserveState: true,
         preserveScroll: true,
         onSuccess: () => {
             form.metric_id = null
+            console.log(form);
         }
     })
 }
@@ -152,9 +151,17 @@ function updateMetrics() {
                     </thead>
                     <tbody>
                         <tr v-for="indicator in props.indicators" :key="indicator.id" class="hover:bg-slate-50">
-                            {{ indicator }}
                             <td class="p-4 border-b border-slate-200 py-5 min-w-[17vw]">
-                                <p class="block font-semibold text-sm text-slate-800">{{ indicator.sub_category }}</p>
+                                <p class="block font-semibold text-sm text-slate-800">{{ indicator.indicator }}</p>
+                            </td>
+                            <td class="p-4 border-b border-slate-200 py-5 min-w-[17vw]">
+                                <p class="block font-semibold text-sm text-slate-800">{{ indicator.applied }}</p>
+                            </td>
+                            <td class="p-4 border-b border-slate-200 py-5 min-w-[17vw]">
+                                <p class="block font-semibold text-sm text-slate-800">{{ indicator.evidence_1_name }}</p>
+                            </td>
+                            <td class="p-4 border-b border-slate-200 py-5 min-w-[17vw]">
+                                <p class="block font-semibold text-sm text-slate-800">{{ indicator.evidence_2_name ? indicator.evidence_2_name : "N/A" }}</p>
                             </td>
                             <td class="p-4 border-b border-slate-200 py-5">
                                 <div class="flex justify-center gap-x-2">

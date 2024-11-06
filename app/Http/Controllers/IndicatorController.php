@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Indicator\StoreIndicatorRequest;
 use App\Models\SDG;
 use Inertia\Inertia;
 use App\Models\Metric;
@@ -37,9 +38,20 @@ class IndicatorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreIndicatorRequest $request)
     {
-        //
+        $data = $request->validated();
+        $evidencePath = $request->file('evidence_1')->store('documents', 'public');
+        $data['evidence_1'] = $evidencePath;
+        $data['evidence_1_name'] = $request->file('evidence_1')->getClientOriginalName();
+            // evidence_1_name
+        if ($data['evidence_2']) {
+            $evidencePath = $request->file('evidence_2')->store('documents', 'public');
+            $data['evidence_2'] = $evidencePath;
+            $data['evidence_2_name'] = $request->file('evidence_2')->getClientOriginalName();
+        } else unset($data['evidence_2']);
+        // dd($data);
+        Indicator::create($data);
     }
 
     /**

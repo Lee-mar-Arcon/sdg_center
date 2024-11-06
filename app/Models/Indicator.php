@@ -12,6 +12,8 @@ class Indicator extends Model
         'applied',
         'indicator',
         'evidence_1',
+        'evidence_1_name',
+        'evidence_2_name',
         'evidence_2',
     ];
     

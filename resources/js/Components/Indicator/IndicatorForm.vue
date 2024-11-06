@@ -26,6 +26,10 @@ const props = defineProps({
 
 const emit = defineEmits(["submit", "cancel", "updateMetrics"]);
 
+function handleFileInput(event, input) {
+    const file = event.target.files[0];
+    props.form[input] = file;
+}
 </script>
 
 <template>
@@ -41,20 +45,44 @@ const emit = defineEmits(["submit", "cancel", "updateMetrics"]);
                 <input type="text" class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow" v-model="props.form.indicator" placeholder="Sub Category" />
                 <p class="text-red-500 text-sm" v-if="props.form.errors.indicator">{{ props.form.errors.indicator }}</p>
             </div>
+            <!-- applied -->
+            <div class="w-full">
+                <p class="text-sm font-extrabold text-slate-800 ps-1 pb-1">Applied:</p>
+                <input type="text" class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow" v-model="props.form.applied" placeholder="Sub Category" />
+                <p class="text-red-500 text-sm" v-if="props.form.errors.applied">{{ props.form.errors.applied }}</p>
+            </div>
             <!-- sdg -->
             <div class="w-full">
                 <p class="text-sm font-extrabold text-slate-800 ps-1 pb-1">SDG:</p>
-                <select @input="emit('updateMetrics')" class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer" v-model="props.form.sdg_id">
-                    <option v-for="sdg in props.sdgs" :key="sdg.id" :value="sdg.id">{{ sdg.name }}</option>
+                <select @change="emit('updateMetrics')" class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer" v-model="props.form.sdg_id">
+                    <option v-for="sdg in sdgs" :key="sdg.id" :value="sdg.id">{{ sdg.name }}</option>
                 </select>
             </div>
             <!-- metric -->
             <div class="w-full">
                 <p class="text-sm font-extrabold text-slate-800 ps-1 pb-1">Metric:</p>
                 <select :disabled="!form.sdg_id" class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer" v-model="props.form.metric_id">
-                    <option v-for="metric in props.metrics" :key="metric.id" :value="metric.id">{{ metric.sub_category }}</option>
+                    <option v-for="metric in metrics" :key="metric.id" :value="metric.id">{{ metric.sub_category }}</option>
                 </select>
                 <p class="text-red-500 text-sm" v-if="props.form.errors.metric_id">{{ props.form.errors.metric_id }}</p>
+            </div>
+            <div class="w-full grid grid-cols-2 gap-2">
+            <!-- Evidence 1 Input -->
+            <div class="w-full col-span-1">
+                <p class="text-sm font-extrabold text-slate-800 ps-1 pb-1">Supporting Document 1:</p>
+                <div class="w-full">
+                    <input accept=".pdf" class="block w-full p-3 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500" type="file" @change="(event) => handleFileInput(event, 'evidence_1')" />
+                    <p class="text-red-500 text-sm" v-if="form.errors.evidence_1">{{ form.errors.evidence_1 }}</p>
+                </div>
+            </div>
+            <!-- Evidence 2 Input -->
+            <div class="w-full col-span-1">
+                <p class="text-sm font-extrabold text-slate-800 ps-1 pb-1">Supporting Document 1:</p>
+                <div class="w-full">
+                    <input accept=".pdf" class="block w-full p-3 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500" type="file" @change="(event) => handleFileInput(event, 'evidence_2')" />
+                    <p class="text-red-500 text-sm" v-if="form.errors.evidence_2">{{ form.errors.evidence_2 }}</p>
+                </div>
+            </div>
             </div>
             <!-- Submit Button -->
             <button :disabled="props.form.processing" class="bg-blue-500 h-14 text-white py-2 rounded-md" type="submit">Submit</button>
