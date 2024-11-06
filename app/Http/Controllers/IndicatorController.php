@@ -8,6 +8,7 @@ use App\Models\Metric;
 use App\Models\Indicator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Contracts\Database\Query\Builder;
 use App\Http\Requests\Indicator\StoreIndicatorRequest;
 use App\Http\Requests\Indicator\UpdateIndicatorRequest;
 
@@ -18,10 +19,13 @@ class IndicatorController extends Controller
      */
     public function index(Request $request)
     {
-        $sdgs = SDG::all();
+        $sdgs = SDG::orderBy('sdg_no')->get();
         $indicators = Indicator::select(['indicators.*', 'sdgs.id as sdg_id'])
-            ->leftJoin('metrics', 'indicators.metric_id', '=', 'metrics.id')  // Use 'indicators' table instead of 'indicator'
-            ->leftJoin('sdgs', 'metrics.sdg_id', '=', 'sdgs.id')  // Join sdgs via metrics
+            ->leftJoin('metrics', 'indicators.metric_id', '=', 'metrics.id')
+            ->leftJoin('sdgs', 'metrics.sdg_id', '=', 'sdgs.id')->where(function (Builder $query) use ($request, $sdgs) {
+                $sdg = $request->sdg_indicator ? $request->sdg_indicator : $sdgs[0]->sdg_no;
+                $query->where('sdgs.id', $sdg);
+            })
             ->get();
 
         return Inertia::render('Admin/Indicator/Index', [
@@ -56,7 +60,6 @@ class IndicatorController extends Controller
             $data['evidence_2'] = $evidencePath;
             $data['evidence_2_name'] = $request->file('evidence_2')->getClientOriginalName();
         } else unset($data['evidence_2']);
-        // dd($data);
         Indicator::create($data);
     }
 

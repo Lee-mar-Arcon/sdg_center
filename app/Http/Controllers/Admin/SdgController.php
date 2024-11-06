@@ -70,7 +70,6 @@ class SdgController extends Controller
         $data['name'] = $request->all()['name'];
         $data['description'] = $request->all()['description'];
         $data['sdg_no'] = $request->all()['sdg_no'];
-        $data['content_no'] = $request->all()['content_no'];
         $data['bg_color'] = $request->all()['bg_color'];
         $sdg->update($data);
     }

@@ -35,6 +35,7 @@ const form = useForm({
     applied: "Yes"
 });
 
+const indicatorSDGID = ref(route().params.sdg_indicator ? route().params.sdg_indicator : props.sdgs[0].id)
 const deleteForm = useForm({id: null})
 
 function toggleCanvas(isAdding, indicator = null) {
@@ -42,7 +43,7 @@ function toggleCanvas(isAdding, indicator = null) {
     addingIndicator.value = isAdding;
     form.reset();
     form.clearErrors();
-    if (!isAdding){
+    if (indicator){
         form.indicator = indicator.indicator
         form.applied = indicator.applied
         form.sdg_id = indicator.sdg_id
@@ -97,9 +98,17 @@ function updateMetrics() {
     })
 }
 
-function editForm() {
-
+function updateIndicatorsList(e) {
+    router.visit(route(route().current(), {sdg_indicator: e.target.value}), {
+        only: ['indicators'],
+        preserveState: true,
+        preserveScroll: true,
+        onSuccess: () => {
+            if(addingIndicator.value) form.metric_id = null
+        }
+    })
 }
+
 </script>
 
 <template>
@@ -125,6 +134,8 @@ function editForm() {
                 <div class="flex gap-x-3">
                     <div class="relative min-w-[200px]">
                         <select
+                        v-model="indicatorSDGID"
+                            @change="e => updateIndicatorsList(e)"
                             class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-1.5 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer">
                             <option v-for="sdg in props.sdgs" :key="sdg.id" :value="sdg.id">{{ sdg.name }}</option>
                         </select>

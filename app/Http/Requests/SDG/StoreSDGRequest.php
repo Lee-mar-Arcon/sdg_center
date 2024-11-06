@@ -34,8 +34,6 @@ class StoreSDGRequest extends FormRequest
         return [
             'bg_color.required' => 'required',
             'bg_color.string' => 'invalid data',
-            'content_no.required' => 'required',
-            'content_no.string' => 'invalid data',
             'sdg_no.required' => 'required',
             'sdg_no.numeric' => 'must be a number',
             'sdg_no.unique' => 'already exists',
