@@ -1,6 +1,7 @@
 <script setup>
-import { defineEmits, watch, ref } from "vue";
+import { defineEmits, ref, watchEffect } from "vue";
 
+const evidenceInputKey = ref(1)
 const props = defineProps({
     isOpen: {
         type: Boolean,
@@ -20,7 +21,7 @@ const props = defineProps({
     },
     metrics: {
         type: Object,
-        required: true
+        required: false
     }
 });
 
@@ -31,7 +32,15 @@ function handleFileInput(event, input) {
     props.form[input] = file;
 }
 
+watchEffect(() => {
+    if (props.isOpen || !props.isOpen) clearFileInputs()
+});
 
+function clearFileInputs() {
+    evidenceInputKey.value = evidenceInputKey.value + 1
+    props.form.evidence_1 = null
+    props.form.evidence_2 = null
+}
 </script>
 
 <template>
@@ -73,15 +82,15 @@ function handleFileInput(event, input) {
             <div class="w-full col-span-1">
                 <p class="text-sm font-extrabold text-slate-800 ps-1 pb-1">Supporting Document 1:</p>
                 <div class="w-full">
-                    <input accept=".pdf" class="block w-full p-3 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500" type="file" @change="(event) => handleFileInput(event, 'evidence_1')" />
+                    <input :key="evidenceInputKey" accept=".pdf" class="block w-full p-3 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500" type="file" @change="(event) => handleFileInput(event, 'evidence_1')" />
                     <p class="text-red-500 text-sm" v-if="form.errors.evidence_1">{{ form.errors.evidence_1 }}</p>
                 </div>
             </div>
             <!-- Evidence 2 Input -->
             <div class="w-full col-span-1">
-                <p class="text-sm font-extrabold text-slate-800 ps-1 pb-1">Supporting Document 1:</p>
+                <p class="text-sm font-extrabold text-slate-800 ps-1 pb-1">Supporting Document 2:</p>
                 <div class="w-full">
-                    <input accept=".pdf" class="block w-full p-3 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500" type="file" @change="(event) => handleFileInput(event, 'evidence_2')" />
+                    <input :key="evidenceInputKey" accept=".pdf" class="block w-full p-3 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500" type="file" @change="(event) => handleFileInput(event, 'evidence_2')" />
                     <p class="text-red-500 text-sm" v-if="form.errors.evidence_2">{{ form.errors.evidence_2 }}</p>
                 </div>
             </div>
