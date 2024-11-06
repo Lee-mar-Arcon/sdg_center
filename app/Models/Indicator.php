@@ -18,4 +18,8 @@ class Indicator extends Model
     ];
     
     use HasFactory;
+    public function metrics()
+    {
+        return $this->belongsTo(Metric::class);
+    }
 }

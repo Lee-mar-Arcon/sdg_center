@@ -23,8 +23,8 @@ class StoreIndicatorRequest extends FormRequest
     {
         return [
             'metric_id' => 'required|numeric|exists:metrics,id',
-            'indicator' => 'required|string|max:1000',
-            'applied' => 'required|string|unique:indicators,indicator',
+            'indicator' => 'required|string|unique:indicators,indicator|max:1000',
+            'applied' => 'required|string|',
             'evidence_1' => 'required|mimes:pdf',
             'evidence_2' => 'nullable|mimes:pdf',
         ];

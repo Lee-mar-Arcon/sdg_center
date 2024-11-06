@@ -43,9 +43,12 @@ function toggleCanvas(isAdding, indicator = null) {
     form.reset();
     form.clearErrors();
     if (!isAdding){
-        form.sub_category = indicator.sub_category
+        form.indicator = indicator.indicator
+        form.applied = indicator.applied
         form.sdg_id = indicator.sdg_id
+        form.metric_id = indicator.metric_id
         form.id = indicator.id
+        updateMetrics()
     }
 }
 
@@ -59,7 +62,7 @@ function handleSubmit() {
             preserveScroll: true
         });
     else {
-        form.put(route('admin.indicator.update', {indicator: form.id}), {
+        form.post(route('admin.indicator.update', {indicator: form.id}), {
             _method: 'put',
             onSuccess: () => {
                 toggleCanvas(false);
@@ -84,17 +87,18 @@ function handleCancel() {
 }
 
 function updateMetrics() {
-    console.log(form);
-    
     router.visit(route(route().current(), {sdg_id: form.sdg_id}), {
         only: ['metrics'],
         preserveState: true,
         preserveScroll: true,
         onSuccess: () => {
-            form.metric_id = null
-            console.log(form);
+            if(addingIndicator.value) form.metric_id = null
         }
     })
+}
+
+function editForm() {
+
 }
 </script>
 

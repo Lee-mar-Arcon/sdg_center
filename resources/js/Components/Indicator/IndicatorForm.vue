@@ -1,5 +1,5 @@
 <script setup>
-import { defineEmits, ref, watch } from "vue";
+import { defineEmits, watch, ref } from "vue";
 
 const props = defineProps({
     isOpen: {
@@ -30,6 +30,8 @@ function handleFileInput(event, input) {
     const file = event.target.files[0];
     props.form[input] = file;
 }
+
+
 </script>
 
 <template>
