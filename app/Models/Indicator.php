@@ -7,5 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Indicator extends Model
 {
+    protected $fillable = [
+        'metric_id',
+        'applied',
+        'indicator',
+        'evidence_1',
+        'evidence_2',
+    ];
+    
     use HasFactory;
 }

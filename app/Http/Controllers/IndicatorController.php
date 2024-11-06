@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\SDG;
 use Inertia\Inertia;
+use App\Models\Metric;
+use App\Models\Indicator;
 use Illuminate\Http\Request;
 
 class IndicatorController extends Controller
@@ -11,11 +13,16 @@ class IndicatorController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $subCategories =  SDG::with('metrics')->get();
-        return Inertia::render('Admin/Indicator/Index',[
-            'subCategories' => $subCategories
+        $sdgs = SDG::all();
+        // dd($request);
+        return Inertia::render('Admin/Indicator/Index', [
+            'metrics' => Inertia::lazy(
+                fn() => Metric::where('sdg_id', $request->sdg_id)->get()
+            ),
+            'sdgs' => $sdgs,
+            'indicators' => Indicator::all()
         ]);
     }
 
