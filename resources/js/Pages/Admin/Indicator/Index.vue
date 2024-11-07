@@ -5,6 +5,7 @@
 import { onMounted, ref, watch } from "vue";
 import { useForm } from '@inertiajs/vue3';
 import IndicatorForm from "../../../Components/Indicator/IndicatorForm.vue";
+import pdfComponent from "../../../Components/pdfComponent.vue";
 import { Head, router } from '@inertiajs/vue3'
 
 const props = defineProps({
@@ -109,6 +110,19 @@ function updateIndicatorsList(e) {
     })
 }
 
+const pdfLink = ref("")
+const viewingPDF = ref(false)
+
+function displayPDF(link) {
+    viewingPDF.value = true
+    console.log(route().t.url);
+    
+    pdfLink.value = `${route().t.url}/storage/${link}`
+}
+
+function hidePDF() {
+    viewingPDF.value = false
+}
 </script>
 
 <template>
@@ -128,6 +142,8 @@ function updateIndicatorsList(e) {
         </div>
     </div>
     <div class="w-screen p-4">
+        <pdfComponent @hide="hidePDF" :viewingPDF="viewingPDF" :link='pdfLink'></pdfComponent>
+        
         <Head title="SDGs" />
         <div class="mx-auto w-full">
             <div class="w-full flex justify-between items-center mb-3 mt-12 pl-3">
@@ -173,10 +189,11 @@ function updateIndicatorsList(e) {
                                 <p class="block font-semibold text-sm text-slate-800">{{ indicator.applied }}</p>
                             </td>
                             <td class="p-4 border-b border-slate-200 py-5 min-w-[17vw]">
-                                <p class="block font-semibold text-sm text-slate-800">{{ indicator.evidence_1_name }}</p>
+                                <button @click="e => displayPDF(indicator.evidence_1)" class="text-blue-600">{{ indicator.evidence_1_name }}</button>
                             </td>
                             <td class="p-4 border-b border-slate-200 py-5 min-w-[17vw]">
-                                <p class="block font-semibold text-sm text-slate-800">{{ indicator.evidence_2_name ? indicator.evidence_2_name : "N/A" }}</p>
+                                <button v-if="indicator.evidence_2" @click="e => displayPDF(indicator.evidence_2)" class="text-blue-600">{{ indicator.evidence_2_name }}</button>
+                                <p v-else>N/A</p>
                             </td>
                             <td class="p-4 border-b border-slate-200 py-5">
                                 <div class="flex justify-center gap-x-2">
