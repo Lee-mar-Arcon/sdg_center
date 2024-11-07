@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\sdgCategory;
-use Illuminate\Http\Request;
+use App\Models\SDG;
 use Inertia\Inertia;
+use App\Models\sdgCategory;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\SDG\StoreSDGRequest;
+use App\Http\Requests\SDG\UpdateSDGRequest;
 
 class SdgController extends Controller
 {
@@ -14,9 +17,9 @@ class SdgController extends Controller
      */
     public function index()
     {
-        $sdgs = SdgCategory::all(); // Fetch all SDG categories
-        return Inertia::render('Admin/sdgCategory/Index', [
-            'sdgCategories' => $sdgs
+        $sdgs = SDG::all(); // Fetch all SDG categories
+        return Inertia::render('Admin/Sdg/Index', [
+            'sdgs' => $sdgs
         ]);
     }
 
@@ -28,17 +31,12 @@ class SdgController extends Controller
         return Inertia::render('Admin/sdgCategory/Create');
     }
 
-    public function store(Request $request)
+    public function store(StoreSDGRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
-
-        SdgCategory::create([
-            'name' => $request->name,
-        ]);
-
-        return redirect()->route('sdgCategory.index')->with('success', 'SDG Category added successfully!');
+        $iconPath = $request->file('icon')->store('images/sdgs', 'public');
+        $data = $request->all();
+        $data['icon'] = $iconPath;
+        SDG::create($data);
     }
 
     /**
@@ -59,23 +57,26 @@ class SdgController extends Controller
         ]);
     }
 
-    public function update(Request $request, SdgCategory $sdgCategory)
+    public function update(UpdateSDGRequest $request, SDG $sdg)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
+        $data = [];
 
-        $sdgCategory->update([
-            'name' => $request->name,
-        ]);
+        if ($request->all()['icon'] !== null) {
+            Storage::disk('public')->delete($sdg->icon);
+            $iconPath = $request->file('icon')->store('images/sdgs', 'public');
+            $data['icon'] = $iconPath;
+        }
 
-        return redirect()->route('sdgCategory.index')->with('success', 'SDG Category updated successfully!');
+        $data['name'] = $request->all()['name'];
+        $data['description'] = $request->all()['description'];
+        $data['sdg_no'] = $request->all()['sdg_no'];
+        $data['bg_color'] = $request->all()['bg_color'];
+        $sdg->update($data);
     }
 
-    public function destroy(SdgCategory $sdgCategory)
+    public function destroy(SDG $sdg)
     {
-        $sdgCategory->delete();
-
-        return redirect()->route('sdgCategory.index')->with('success', 'SDG Category deleted successfully!');
+        Storage::disk('public')->delete($sdg->icon);
+        $sdg->delete();
     }
 }

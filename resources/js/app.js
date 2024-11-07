@@ -24,3 +24,4 @@ createInertiaApp({
         app.use(plugin).mount(el);
     },
 });
+

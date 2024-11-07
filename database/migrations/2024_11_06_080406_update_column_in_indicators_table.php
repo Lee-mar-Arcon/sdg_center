@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('article_attachments', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('article_id')->constrained('articles')->onDelete('cascade');
-            $table->string('name');
-            $table->binary('photo'); // Store photo data as blob
+        Schema::table('indicators', function (Blueprint $table) {
+            $table->string('evidence_2', 500)->nullable()->change();
+            $table->string('evidence_2_name', 500)->nullable()->change();
         });
     }
 
@@ -24,6 +22,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('article_attachments');
+        Schema::table('indicator', function (Blueprint $table) {
+            //
+        });
     }
 };

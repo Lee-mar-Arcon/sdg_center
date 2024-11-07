@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('article_attachments', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('article_id')->constrained('articles')->onDelete('cascade');
-            $table->string('name');
-            $table->binary('photo'); // Store photo data as blob
+        Schema::table('indicators', function (Blueprint $table) {
+            $table->boolean('applied');
+            $table->string('indicator', 1000);
+            $table->string('evidence_1', 500);
+            $table->string('evidence_2', 500);
         });
     }
 
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('article_attachments');
+        Schema::dropIfExists('indicators');
     }
 };

@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('article_attachments', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('article_id')->constrained('articles')->onDelete('cascade');
-            $table->string('name');
-            $table->binary('photo'); // Store photo data as blob
+        Schema::table('metrics', function (Blueprint $table) {
+            $table->string('sub_category', 500);
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('article_attachments');
+        Schema::table('metrics', function (Blueprint $table) {
+            //
+        });
     }
 };
