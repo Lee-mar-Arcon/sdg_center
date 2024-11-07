@@ -6,9 +6,9 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
-                'resources/js/app.js',
+                "resources/js/app.js",
                 // 'resources/css/app.scss', // Use this if you're using Sass
-                'resources/css/app.css', // Uncomment this if you are using CSS instead of SCSS
+                "resources/css/app.css", // Uncomment this if you are using CSS instead of SCSS
             ],
             refresh: true, // Automatically refresh the browser on changes
         }),
@@ -21,4 +21,9 @@ export default defineConfig({
             },
         }),
     ],
+    resolve: {
+        alias: {
+            "@Components": './resources/js/Components',
+        },
+    },
 });

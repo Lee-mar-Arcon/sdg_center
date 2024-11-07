@@ -9,7 +9,6 @@ class Article extends Model
 {
     use HasFactory;
 
-<<<<<<< HEAD
     protected $fillable = [
         'title',
         'category_id',
@@ -38,16 +37,5 @@ class Article extends Model
     {
         return $this->hasMany(Log::class);
     }
-=======
-    protected $table = 'articles';
-    protected $primaryKey = 'article_id';
 
-    protected $fillable = [
-        'article_title',
-        'author',
-        'short_description',
-        'content',
-        'event_date',
-    ];
->>>>>>> origin/Rean
 }
