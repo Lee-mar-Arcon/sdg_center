@@ -4,7 +4,7 @@
         <div class="grid grid-cols-12 grid-flow-row">
             <div class="col-span-2 p-1 flex flex-col">
 
-                <img src="../../../../public/sdg/17.png" class="p-2 mb-5 aspect-square l  max-w-[200px] max-h-[200px] ml-[50px]" alt="">
+                <img src="../../../../public/sdg/017.png" class="p-2 mb-5 aspect-square l  max-w-[200px] max-h-[200px] ml-[50px]" alt="">
 <!--                <h1 class="mb-5">IMAGES</h1>-->
 <!--                <article v-for="i in [1,2,3,3,3]" :key="i" class="mb-5">-->
 <!--                    <img src="../../../../public/sdg/02.png" class="aspect-video object-cover w-full max-w-full" alt="">-->
@@ -40,7 +40,7 @@
                     </div>
                     <div class="flex">
                         <img
-                            v-for="sdg in [17]"
+                            v-for="sdg in [item.sdgNumber]"
                             :key="sdg"
                             :src="'/sdg/0' + sdg + '.png'"
                             class="object-cover mx-1 max-h-[40px] aspect-square"
@@ -67,7 +67,7 @@
             <div class="col-span-2 p-1 flex flex-col max-h-[500px] overflow-y-auto pt-[50px] ml-[-30px]">
                 <h1 class="mb-5 font-bold">OTHER STORIES</h1>
                 <article v-for="i in [1,2,3,3,3]" :key="i" class="flex pb-2">
-                    <img src="../../../../public/sdg/17.png" class="object-cover aspect-square max-h-[80px] max-w-full" alt="">
+                    <img src="../../../../public/sdg/017.png" class="object-cover aspect-square max-h-[80px] max-w-full" alt="">
                     <div class="ps-2">
                         <h4>Title</h4>
                         <p class="italic line-clamp-3 text-justify text-sm whitespace-normal">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptates nisi illum provident alias doloremque enim accusantium culpa temporibus praesentium laborum! Itaque odit eaque quaerat totam placeat, dolor magnam minima sapiente?</p>
@@ -91,29 +91,9 @@ const items = [
         category: "Administration",
         alt: "Image 2",
         date: "October 29, 2024",
+        sdgNumber:'17'
     },
 
 ];
 
-import { ref, onMounted } from "vue";
-const images = ref([
-    "01.png",
-    "02.png",
-    "03.png",
-    "04.png",
-    "05.png",
-    "06.png",
-    "07.png",
-    "08.png",
-    "09.png",
-    "10.png",
-    "11.png",
-    "12.png",
-    "13.png",
-    "14.png",
-    "15.png",
-    "16.png",
-    "17.png",
-    "mainLogo.png",
-]);
 </script>
