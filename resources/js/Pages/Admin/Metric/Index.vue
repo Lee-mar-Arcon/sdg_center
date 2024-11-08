@@ -3,7 +3,7 @@ import AdminLayout from "@/Components/AdminLayout.vue";
 import { ref } from "vue";
 import { useForm } from '@inertiajs/vue3';
 import MetricForm from "../../../Components/Metric/MetricForm.vue";
-import { Head } from '@inertiajs/vue3'
+import { Head, router } from '@inertiajs/vue3'
 
 const props = defineProps({
     sdgs: {
@@ -74,6 +74,14 @@ function handleCancel() {
     toggleCanvas(false);
 }
 
+const SDGId = ref(route().params.sdg ? route().params.sdg : 'All')
+function updateIndicatorsList(e) {
+    router.visit(route(route().current(), {sdg: e.target.value}), {
+        only: ['metrics'],
+        preserveState: true,
+        preserveScroll: true,
+    })
+}
 </script>
 
 <template>
@@ -95,7 +103,19 @@ function handleCancel() {
             <Head title="SDGs" />
             <div class="mx-auto w-full">
                 <div class="w-full flex justify-between items-center mb-3 mt-12 pl-3">
-                    <div>
+                    <div class="flex gap-x-3 items-center">
+                        <div class="relative min-w-[200px]">
+                            <select
+                            v-model="SDGId"
+                                @change="e => updateIndicatorsList(e)"
+                                class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-1.5 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer">
+                                <option value="All">All</option>
+                                <option v-for="sdg in props.sdgs" :key="sdg.id" :value="sdg.id">{{ sdg.name }}</option>
+                            </select>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.2" stroke="currentColor" class="h-5 w-5 ml-1 absolute top-2 right-2.5 text-slate-700">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                            </svg>
+                        </div>
                         <h3 class="text-lg font-semibold text-slate-800">Sustainable Development Goal Metrics</h3>
                     </div>
                     <div class="relative">
@@ -109,6 +129,7 @@ function handleCancel() {
                         <thead>
                             <tr class="border-b border-slate-300 bg-slate-50">
                                 <th class="p-4 text-sm font-normal leading-none text-slate-500">Sub Category</th>
+                                <th class="p-4 text-sm font-normal leading-none text-slate-500">SDG</th>
                                 <th class="p-4 text-sm font-normal text-center w-48 leading-none text-slate-500">Action</th>
                             </tr>
                         </thead>
@@ -116,6 +137,9 @@ function handleCancel() {
                             <tr v-for="metric in props.metrics" :key="metric.id" class="hover:bg-slate-50">
                                 <td class="p-4 border-b border-slate-200 py-5 min-w-[17vw]">
                                     <p class="block font-semibold text-sm text-slate-800">{{ metric.sub_category }}</p>
+                                </td>
+                                <td class="p-4 border-b border-slate-200 py-5 min-w-[17vw]">
+                                    <p class="block font-semibold text-sm text-slate-800">{{ metric.sdg_name }}</p>
                                 </td>
                                 <td class="p-4 border-b border-slate-200 py-5">
                                     <div class="flex justify-center gap-x-2">

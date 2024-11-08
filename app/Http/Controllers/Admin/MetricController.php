@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use App\Models\Metric;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Builder;
 use App\Http\Requests\Metric\StoreMetricRequest;
 use App\Http\Requests\Metric\UpdateMetricRequest;
 
@@ -15,12 +16,19 @@ class MetricController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $sdgs = SDG::select(['id', 'name'])->get();
         return Inertia::render('Admin/Metric/Index', [
             'sdgs' => $sdgs,
-            'metrics' => Metric::orderBy('sub_category')->get()
+            'metrics' => Metric::select(['metrics.*', 'sdgs.name as sdg_name'])
+                ->orderBy('sub_category')
+                ->join('sdgs', 'sdg_id', '=', 'sdgs.id')
+                ->where(function (Builder $q) use ($request) {
+                    if ($request->sdg != 'All' && $request->sdg) {
+                        $q->where('sdg_id', $request->sdg);
+                    }
+                })->get()
         ]);
     }
 

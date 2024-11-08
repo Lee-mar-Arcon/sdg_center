@@ -127,6 +127,7 @@ function hidePDF() {
 </script>
 
 <template>
+    <pdfComponent @hide="hidePDF" :viewingPDF="viewingPDF" :link='pdfLink'></pdfComponent>
     <AdminLayout>
         <div class="w-full p-4">
             <Head title="SDGs" />
@@ -144,7 +145,6 @@ function hidePDF() {
             </div>
         </div>
         <div class="w-full p-4">
-            <pdfComponent @hide="hidePDF" :viewingPDF="viewingPDF" :link='pdfLink'></pdfComponent>
             
             <Head title="SDGs" />
             <div class="mx-auto w-full">
