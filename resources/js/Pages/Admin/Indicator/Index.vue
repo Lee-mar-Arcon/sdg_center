@@ -28,7 +28,7 @@ const isOpen = ref(false);
 const addingIndicator = ref(false);
 const form = useForm({
     id: null,
-    sdg_id:  route().params.sdg_id ?  route().params.sdg_id : null,
+    sdg_id:  route().params.sdg_id ? route().params.sdg_id : null,
     metric_id: null,
     evidence_1: null,
     evidence_2: null,
