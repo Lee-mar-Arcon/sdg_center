@@ -45,7 +45,7 @@ Route::get('/SDG/article{articleId}', function ($articleId) {
 
 
 // LEE-MAR
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['role:Admin', 'verified', 'auth:sanctum'])->prefix('admin')->name('admin.')->group(function () {
     // sdg
     Route::resource('sdg', SdgController::class)->only(['index', 'store', 'destroy'])->names([
         'index' => 'sdg.index',
@@ -53,7 +53,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         'destroy' => 'sdg.destroy',
     ]);
     Route::post('/sdg/{sdg}', [SdgController::class, 'update'])->name('sdg.update');
-
     // indicator
     Route::resource('indicator', IndicatorController::class)->only(['index', 'store', 'destroy'])->names([
         'index' => 'indicator.index',
@@ -61,7 +60,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         'destroy' => 'indicator.destroy',
     ]);
     Route::post('/indicator/{indicator}', [IndicatorController::class, 'update'])->name('indicator.update');
-    
     // metric
     Route::resource('metric', MetricController::class)->only(['index', 'store', 'destroy', 'update'])->names([
         'index' => 'metric.index',
@@ -79,14 +77,6 @@ Route::post('/articles', [ArticleController::class, 'store'])->name('articles.st
 Route::get('/articles/{id}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
 Route::put('/articles/{id}', [ArticleController::class, 'update'])->name('articles.update');
 Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('articles.destroy');
-
-
-// Route::get('/admin/sdg/index', [SdgController::class, 'index'])->name('sdgCategory.index');
-// Route::get('/admin/sdg/create', [SdgController::class, 'create'])->name('sdgCategory.create');
-// Route::post('/admin/sdg', [SdgController::class, 'store'])->name('sdgCategory.store');
-// Route::get('/admin/sdg/{sdgCategory}/edit', [SdgController::class, 'edit'])->name('sdgCategory.edit');
-// Route::put('/admin/sdg/{sdgCategory}', [SdgController::class, 'update'])->name('sdgCategory.update');
-// Route::delete('/admin/sdg/{sdgCategory}', [SdgController::class, 'destroy'])->name('sdgCategory.destroy');
 
 Route::get('/admin/category/index', [CategoryController::class, 'index'])->name('Category.index');
 Route::get('/admin/category/create', [CategoryController::class, 'create'])->name('Category.create');
