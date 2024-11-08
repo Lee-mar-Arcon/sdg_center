@@ -21,8 +21,8 @@ class DatabaseSeeder extends Seeder
         //        ]);
 
         $this->call([
-            ArticleCategorySeeder::class,
-            SDGCategorySeeder::class,
+            CategorySeeder::class,
+            SDGSeeder::class,
             MetricSeeder::class,
             RolePermissionSeeder::class,
             UserSeeder::class
