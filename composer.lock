@@ -5,6 +5,7 @@
         "This file is @generated automatically"
     ],
     "content-hash": "08450cd7a31d331a64ff5f813677e64b",
+    "content-hash": "eeb22e84549ca3f41e967aacccd0ae6d",
     "packages": [
         {
             "name": "bacon/bacon-qr-code",
@@ -7461,6 +7462,16 @@
         },
         {
             "name": "sebastian/comparator",
+            "version": "6.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sebastianbergmann/comparator.git",
+                "reference": "df95a6e827808debe3dbe190022dd0f643d5d909"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/df95a6e827808debe3dbe190022dd0f643d5d909",
+                "reference": "df95a6e827808debe3dbe190022dd0f643d5d909",
             "version": "6.2.1",
             "source": {
                 "type": "git",
@@ -7526,15 +7537,8 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/comparator/issues",
                 "security": "https://github.com/sebastianbergmann/comparator/security/policy",
+                "source": "https://github.com/sebastianbergmann/comparator/tree/6.2.0"
                 "source": "https://github.com/sebastianbergmann/comparator/tree/6.2.1"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/sebastianbergmann",
-                    "type": "github"
-                }
-            ],
-            "time": "2024-10-31T05:30:08+00:00"
         },
         {
             "name": "sebastian/complexity",

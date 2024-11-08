@@ -69,7 +69,11 @@ cursor: pointer;
 	word-spacing: -0.15em;
 	font-weight: 300;
 	text-align: left;
+<<<<<<< HEAD
+	color: $white;
+=======
 	color: white;
+>>>>>>> origin/Rean
 }
 
 .grid figure h3 span {
@@ -96,7 +100,11 @@ figure.effect-bubba {
 }
 
 figure.effect-bubba {
+<<<<<<< HEAD
+    background: $primary-color;
+=======
     background: primary-color;
+>>>>>>> origin/Rean
 }
 
 figure.effect-bubba img {
