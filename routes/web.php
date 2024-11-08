@@ -6,16 +6,15 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\Admin\SdgController;
 use App\Http\Controllers\Admin\MetricController;
 use App\Http\Controllers\Page\WelcomeController;
-<<<<<<< HEAD
 
 
 
-Route::get('/', [WelcomeController::class,'index'])->name('welcome');
-=======
+
+
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\IndicatorController;
->>>>>>> b7cd1ae1fd91f2827ad34dd804c2f83c22ca953d
+
 
 Route::get('/news', function () {
     return Inertia::render('SDG_News');
@@ -50,8 +49,8 @@ Route::get('/SDG/article{articleId}', function ($articleId) {
 });
 
 
-<<<<<<< HEAD
-=======
+
+
 // LEE-MAR
 Route::prefix('admin')->name('admin.')->group(function () {
     // sdg
@@ -69,7 +68,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         'destroy' => 'indicator.destroy',
     ]);
     Route::post('/indicator/{indicator}', [IndicatorController::class, 'update'])->name('indicator.update');
-    
+
     // metric
     Route::resource('metric', MetricController::class)->only(['index', 'store', 'destroy', 'update'])->names([
         'index' => 'metric.index',
@@ -104,4 +103,4 @@ Route::put('/admin/category/{Category}', [CategoryController::class, 'update'])-
 Route::delete('/admin/category/{Category}', [CategoryController::class, 'destroy'])->name('Category.destroy');
 
 Route::get('/admin/article/create', [DashboardController::class, 'store']);
->>>>>>> b7cd1ae1fd91f2827ad34dd804c2f83c22ca953d
+

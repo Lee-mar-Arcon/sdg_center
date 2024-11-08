@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ArticleCategorySeeder::class,
             SDGCategorySeeder::class,
-            ArticleSeeder::class,
+            MetricSeeder::class,
+
         ]);
     }
 }

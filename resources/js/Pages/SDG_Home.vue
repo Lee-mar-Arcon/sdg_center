@@ -189,8 +189,8 @@ const goToArticle = (articleId) => {
                         :src="item.image"
                         :alt="item.alt"
                     />
-                    <div class="px-2 py-2">
-                        <div class="font-bold text-l mb-1">
+                    <div class="px-2 py-2 h-[60px]">
+                        <div class="font-bold text-l mb-1 h-full overflow-hidden text-ellipsis">
                             {{ item.title }}
                         </div>
                     </div>
@@ -222,12 +222,12 @@ const goToArticle = (articleId) => {
                             />
                         </svg>
                         <span class="text-gray-700 font-semibold text-sm mr-1">
-       {{ item.date }}
-      </span>
+                {{ item.date }}
+            </span>
                     </div>
                 </div>
                 <div
-                    class="max-w-[10vw] h-[340px] mt-2 rounded overflow-hidden bg-slate-200 shadow-lg flex items-center justify-center"
+                    class="max-w-[10vw] h-[280px] mt-2 rounded overflow-hidden bg-slate-200 shadow-lg flex items-center justify-center"
                 >
                     <div class="px-6 py-4 text-center">
                         <Link href="/news">
@@ -236,11 +236,74 @@ const goToArticle = (articleId) => {
                                 Discover more amazing content!
                             </p>
                         </Link>
-
                     </div>
                 </div>
-
             </div>
+
+<!--            <div class="ml-[120] flex justify-start items-start flex-wrap gap-2">-->
+<!--                <div-->
+<!--                    v-for="(item, index) in items"-->
+<!--                    :key="index"-->
+<!--                    @click="goToArticle(index + 1)"-->
+<!--                    class="ml-1 mr-1 max-w-[13vw] mt-2 rounded overflow-hidden shadow-lg"-->
+<!--                >-->
+<!--                    <img-->
+<!--                        class="w-full h-36 object-cover"-->
+<!--                        :src="item.image"-->
+<!--                        :alt="item.alt"-->
+<!--                    />-->
+<!--                    <div class="px-2 py-2">-->
+<!--                        <div class="font-bold text-l mb-1">-->
+<!--                            {{ item.title }}-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="px-2 py-1 flex items-center justify-between">-->
+<!--                        <div class="font-bold text-s mb-1">-->
+<!--                            {{ item.category }}-->
+<!--                        </div>-->
+<!--                        <div class="flex">-->
+<!--                            <img-->
+<!--                                v-for="sdg in [1, 3, 5, 9]"-->
+<!--                                :key="sdg"-->
+<!--                                :src="'/sdg/0' + sdg + '.png'"-->
+<!--                                class="object-cover mx-0.5 max-h-[20px] aspect-square"-->
+<!--                                alt="SDG Icon"-->
+<!--                            />-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="px-2 pt-2 pb-3 flex items-center">-->
+<!--                        <svg-->
+<!--                            xmlns="http://www.w3.org/2000/svg"-->
+<!--                            width="20"-->
+<!--                            height="20"-->
+<!--                            viewBox="0 0 24 24"-->
+<!--                            class="text-gray-700 mr-1"-->
+<!--                        >-->
+<!--                            <path-->
+<!--                                fill="currentColor"-->
+<!--                                d="M8 14q-.425 0-.712-.288T7 13t.288-.712T8 12t.713.288T9 13t-.288.713T8 14m4 0q-.425 0-.712-.288T11 13t.288-.712T12 12t.713.288T13 13t-.288.713T12 14m4 0q-.425 0-.712-.288T15 13t.288-.712T16 12t.713.288T17 13t-.288.713T16 14M5 22q-.825 0-1.412-.587T3 20V6q0-.825.588-1.412T5 4h1V2h2v2h8V2h2v2h1q.825 0 1.413.588T21 6v14q0 .825-.587 1.413T19 22zm0-2h14V10H5z"-->
+<!--                            />-->
+<!--                        </svg>-->
+<!--                        <span class="text-gray-700 font-semibold text-sm mr-1">-->
+<!--       {{ item.date }}-->
+<!--      </span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div-->
+<!--                    class="max-w-[10vw] h-[340px] mt-2 rounded overflow-hidden bg-slate-200 shadow-lg flex items-center justify-center"-->
+<!--                >-->
+<!--                    <div class="px-6 py-4 text-center">-->
+<!--                        <Link href="/news">-->
+<!--                            <div class="font-bold text-xl mb-2">See More</div>-->
+<!--                            <p class="text-gray-700">-->
+<!--                                Discover more amazing content!-->
+<!--                            </p>-->
+<!--                        </Link>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--            </div>-->
         </div>
         <div class="hidden md:block w-[10vw]"></div>
     </div>
@@ -250,43 +313,8 @@ const goToArticle = (articleId) => {
 
 <style>
 @import url("https://fonts.googleapis.com/css?family=Oswald:400,700");
-
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0;
-}
-
-.body_home {
-    height: 100vh;
-    display: grid;
-    place-items: center;
-    font-family: "Oswald", sans-serif;
-}
-
-.card {
-    perspective: 800px;
-}
-
-.card__content {
-    transform-style: preserve-3d;
-}
-
-.card:hover .card__content {
-    transform: rotateY(0.5turn);
-}
-
-.card__front,
-.card__back {
-    backface-visibility: hidden;
-}
-
-.card__back {
-    transform: rotateY(0.5turn);
-}
-
 @import url("https://fonts.googleapis.com/css2?family=Play&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
 
 @font-face {
     font-family: 'Austein Script';
@@ -300,77 +328,180 @@ const goToArticle = (articleId) => {
     font-weight: normal;
     font-style: normal;
 }
+
+/* General Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Responsive Container for main content */
+.min-h-screen {
+    padding: 20px;
+}
+
+.body_home {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: "Oswald", sans-serif;
+}
+
+/* Ensure card flip is dynamic and adapts to various screen sizes */
+.card {
+    perspective: 1000px;
+    width: 100%;
+    max-width: 180px; /* Controls the maximum size of the card */
+    margin: 10px;
+    transition: transform 0.6s ease-in-out;
+}
+
+.card__content {
+    transform-style: preserve-3d;
+    transition: transform 0.6s;
+}
+
+.card:hover .card__content {
+    transform: rotateY(180deg);
+}
+
+/* Responsive styling for card content */
+.card__front,
+.card__back {
+    backface-visibility: hidden;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+/* Card back content with responsive text */
+.card__back {
+    background-color: transparent;
+    transform: rotateY(180deg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    font-size: 0.875rem; /* Default font size for mobile */
+}
+
+.card__front img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Larger screens adjust for readability */
+@media (min-width: 768px) {
+    .card {
+        max-width: 200px;
+    }
+    .card__back {
+        font-size: 1rem;
+    }
+}
+
+/* Extra large screens */
+@media (min-width: 1024px) {
+    .card {
+        max-width: 220px;
+    }
+    .card__back {
+        font-size: 1.125rem;
+    }
+}
+
+.gradient {
+    color: #005c2b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Roboto Bold";
+    font-size: 3vw;
+    text-align: center;
+    line-height: 1;
+}
+
 .bounce {
-    font-size: 6rem;
+    font-size: 5vw;
     width: 100%;
     font-family: "Austein Script";
     display: inline-flex;
     justify-content: center;
-    /*-webkit-box-reflect: below -20px linear-gradient(transparent, #211e1e2e);*/
 }
+
 .bounce span {
     display: inline-flex;
     color: #63e422;
     font-family: "Play", sans-serif;
     animation: bounce 1s infinite;
 }
+
 @keyframes bounce {
-    0%,
-    50%,
-    100% {
-        transform: translateY(0);
+    0%, 50%, 100% { transform: translateY(0); }
+    25% { transform: translateY(-20px); }
+}
+
+/* Card layout for responsive grid */
+.grid {
+    display: grid;
+    gap: 10px;
+}
+
+.grid-cols-6, .grid-cols-4 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+@media (min-width: 768px) {
+    .grid-cols-4 {
+        grid-template-columns: repeat(4, 1fr);
     }
-    25% {
-        transform: translateY(-20px);
+    .grid-cols-6 {
+        grid-template-columns: repeat(6, 1fr);
     }
 }
-.ten span:nth-of-type(1) {
-    animation-delay: 0.1s;
-}
-.ten span:nth-of-type(2) {
-    animation-delay: 0.2s;
-}
-.ten span:nth-of-type(3) {
-    animation-delay: 0.3s;
-}
-.ten span:nth-of-type(4) {
-    animation-delay: 0.4s;
-}
-.ten span:nth-of-type(5) {
-    animation-delay: 0.5s;
-}
-.ten span:nth-of-type(6) {
-    animation-delay: 0.6s;
+
+/* Responsive typography */
+.text-lg {
+    font-size: 1rem;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
-
-.gradient {
-    /*background-image: linear-gradient(*/
-    /*    90deg,*/
-    /*    rgba(94, 114, 235, 1) 0%,*/
-    /*    rgba(255, 145, 144, 1) 56%,*/
-    /*    rgba(254, 193, 149, 1) 100%*/
-    /*);*/
-    color: #005c2b;
-    /*-webkit-background-clip: text;*/
-    /*animation: move 1s infinite;*/
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Roboto Bold";
-    font-size: 4vmin;
-    line-height: 1;
+@media (min-width: 1024px) {
+    .text-lg {
+        font-size: 1.25rem;
+    }
 }
 
-@keyframes move {
-    50% {
-        background-image: linear-gradient(
-            262deg,
-            rgba(94, 114, 235, 1) 0%,
-            rgba(255, 145, 144, 1) 56%,
-            rgba(254, 193, 149, 1) 100%
-        );
+/* Article Card Adjustments */
+.card {
+    max-width: 100%;
+    margin: auto;
+}
+
+.card__front img {
+    width: 100%;
+    height: auto;
+}
+
+@media (min-width: 768px) {
+    .max-w-[13vw] {
+    max-width: 20%;
+}
+    .ml-1, .mr-1 {
+        margin-left: 1%;
+        margin-right: 1%;
     }
 }
 </style>
+

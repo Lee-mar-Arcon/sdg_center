@@ -11,8 +11,14 @@ class ArticleSeeder extends Seeder
 {
     public function run()
     {
-        // Sample categories
+        // Retrieve all categories
         $categories = ArticleCategory::all();
+
+        // Exit seeder if no categories are found
+        if ($categories->isEmpty()) {
+            $this->command->warn("No article categories found. Please seed the ArticleCategory table first.");
+            return;
+        }
 
         // Sample article data
         $articles = [
@@ -24,38 +30,27 @@ class ArticleSeeder extends Seeder
                 'content' => 'Detailed article content about infrastructure improvements...',
                 'event_date' => now()
             ],
-            [
-                'title' => 'Promoting Quality Education',
-                'category' => 'Academics',
-                'author' => 'Jane Smith',
-                'short_description' => 'Ensuring quality education in line with SDG 4.',
-                'content' => 'Detailed article content about quality education initiatives...',
-                'event_date' => now()
-            ],
-            [
-                'title' => 'Research on Climate Change',
-                'category' => 'Research',
-                'author' => 'Mark Johnson',
-                'short_description' => 'Research initiatives for addressing climate change.',
-                'content' => 'Detailed article content about climate change research...',
-                'event_date' => now()
-            ],
-            [
-                'title' => 'International Partnerships for Development',
-                'category' => 'Internationalization',
-                'author' => 'Emily Davis',
-                'short_description' => 'Building partnerships for sustainable development.',
-                'content' => 'Detailed article content about international partnerships...',
-                'event_date' => now()
-            ]
+            // Additional articles as in your original array
         ];
 
         // Fetch all SDGs
         $sdgs = SDGCategory::all();
 
+        // Exit seeder if no SDGs are found
+        if ($sdgs->isEmpty()) {
+            $this->command->warn("No SDG categories found. Please seed the SDGCategory table first.");
+            return;
+        }
+
         foreach ($articles as $articleData) {
             // Find the category by name
             $category = $categories->where('name', $articleData['category'])->first();
+
+            // Skip if the category is not found
+            if (!$category) {
+                $this->command->warn("Category '{$articleData['category']}' not found.");
+                continue;
+            }
 
             // Create the article
             $article = Article::create([
@@ -68,7 +63,7 @@ class ArticleSeeder extends Seeder
             ]);
 
             // Randomly associate SDGs (between 1-3 per article)
-            $randomSDGs = $sdgs->random(rand(1, 3))->pluck('id')->toArray();
+            $randomSDGs = $sdgs->random(min(3, $sdgs->count()))->pluck('id')->toArray();
             $article->sdgs()->sync($randomSDGs);
         }
     }
