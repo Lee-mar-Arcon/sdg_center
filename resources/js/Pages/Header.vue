@@ -1,5 +1,5 @@
 <template>
-    <header style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-image: url('/template/images/slides/slides_1.jpg'); background-size: cover; background-repeat: no-repeat;">
+    <header style="position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background-image: url('/slider/slides_1.jpg'); background-size: cover; background-repeat: no-repeat;">
         <div class="flex flex-wrap">
             <div class="w-full">
                 <nav class="flex items-center justify-center bg-gray-900 bg-opacity-75 p-4 relative">

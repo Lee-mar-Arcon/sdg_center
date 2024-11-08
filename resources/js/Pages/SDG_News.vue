@@ -7,7 +7,7 @@ import ColorThief from "colorthief";
 import {
     Menu as IconMenu,
 } from '@element-plus/icons-vue';
-import { ElTable, ElTableColumn, ElMenu, ElMenuItem } from 'element-plus';
+import { ElTable, ElTableColumn, ElMenu, ElMenuItem, ElPagination } from 'element-plus';
 import 'element-plus/es/components/table/style/css'; // Import necessary styles
 import 'element-plus/es/components/table-column/style/css';
 const handleOpen = (key, keyPath) => {
@@ -232,7 +232,7 @@ const scrollToSection = (id) => {
 
 
         <!-- Main Content -->
-        <div class="flex-grow p-4 md:p-8 rounded-lg">
+        <div class="flex-grow p-4 md:p-8 rounded-lg ml-[350px]">
             <div class="flex flex-col md:flex-row items-center mb-4">
                 <img
                     v-if="selectedImage !== null"
@@ -263,7 +263,7 @@ const scrollToSection = (id) => {
 <!--                    </svg>-->
 <!--                </button>-->
 
-                <div class="flex flex-wrap overflow-x-auto space-x-4 py-3 w-full justify-center">
+                <div class="flex flex-wrap overflow-x-auto space-x-5 py-3 w-full justify-center">
                     <div
                         v-for="(item, index) in filteredArticles"
                         :key="item.id"
@@ -306,9 +306,16 @@ const scrollToSection = (id) => {
                             </div>
                         </div>
                     </div>
+                    <div class="w-full flex justify-center mt-5">
+                        <el-pagination background layout="prev, pager, next" :total="100" />
+                    </div>
+
                 </div>
 
-<!--                <button-->
+
+
+
+                <!--                <button-->
 <!--                    @click="nextPage"-->
 <!--                    :disabled="currentPage === totalPages"-->
 <!--                    class="bg-gray-500 text-white px-4 py-2 rounded disabled:bg-gray-300"-->

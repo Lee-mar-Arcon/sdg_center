@@ -1,6 +1,6 @@
 <template>
     <footer class="bg-cover bg-center bg-no-repeat py-2"
-            style="background-image: url('/template/images/slides/slides_2.jpg'); background-size: cover; width: 100%; margin: 0; background-repeat: no-repeat;position:; bottom: 0; left: 0; right: 0; ;">
+            style="background-image: url('/slider/slides_2.jpg'); background-size: cover; width: 100%; margin: 0; background-repeat: no-repeat;position:; bottom: 0; left: 0; right: 0; ;">
         <div class="bg-black bg-opacity-50 py-4"> <!-- Added a black overlay with opacity -->
             <div class="mx-auto"> <!-- Remove container class to eliminate extra margins -->
                 <div class="flex flex-wrap items-center">
