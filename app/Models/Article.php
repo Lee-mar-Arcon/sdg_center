@@ -15,17 +15,17 @@ class Article extends Model
         'author',
         'short_description',
         'content',
-        'event_date'
+        'event_date',
+        'images',
+    ];
+
+    protected $casts = [
+        'images' => 'array',
     ];
 
     public function category()
     {
-        return $this->belongsTo(ArticleCategory::class);
-    }
-
-    public function attachments()
-    {
-        return $this->hasMany(ArticleAttachment::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function sdgs()

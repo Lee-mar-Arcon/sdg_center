@@ -1,162 +1,152 @@
 <template>
     <AdminLayout>
-        <div class="flex flex-col items-center">
-            <form @submit.prevent="createArticle">
-                <div class="space-y-12">
-                    <h2 class="text-xl/7 font-semibold text-gray-900">Add New Article</h2>
-
-                    <!-- Featured Photo Upload -->
-                    <div class="col-span-full mt-2">
-                        <label class="block text-gray-900">Featured Photo</label>
-                        <div class="mt-2 flex justify-center rounded-lg border border-dashed border-gray-900/25 px-6 py-10">
-                            <input type="file" id="file-upload" @change="handleFileUpload" class="sr-only" />
-                            <label for="file-upload" class="cursor-pointer text-indigo-600 hover:text-indigo-500">
-                                <span>Upload image</span>
-                            </label>
-                        </div>
-                        <p class="text-xs text-gray-600">PNG, JPG, GIF up to 10MB</p>
-                    </div>
-
-                    <!-- Title -->
+        <div class="w-full py-10">
+            <h1 class="text-2xl font-semibold">CREATE NEW ARTICLE</h1>
+            <form @submit.prevent="submitForm">
+                <!-- TITLE -->
+                <div class="w-full min-w-[200px] pt-3">
+                    <p class="pb-1 text-lg ps-1 font-semibold">Title</p>
+                    <input v-model="form.title" class="w-full placeholder:text-slate-500 text-slate-700 text-lg border-2 border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 bg-white hover:border-slate-300 shadow-sm focus:shadow" placeholder="Title">
+                    <p class="text-red-500 text-sm" v-if="form.errors.title">{{ form.errors.title }}</p>
+                </div>
+                <div class="w-full grid grid-cols-1 lg:grid-cols-2">
                     <div>
-                        <label for="title" class="block text-gray-900">Title</label>
-                        <input type="text" v-model="article.title" class="block w-full py-1.5" placeholder="Enter new title" />
-                    </div>
-
-                    <!-- Description -->
-                    <div>
-                        <label for="short_description" class="block text-gray-900">Description</label>
-                        <input type="text" v-model="article.short_description" class="block w-full py-1.5" placeholder="Enter short description" />
-                    </div>
-
-                    <!-- Category Dropdown -->
-                    <div>
-                        <label for="category" class="block text-gray-900">Category</label>
-                        <select v-model="article.category_id" class="block w-full py-1.5">
-                            <option v-for="category in articleCategories" :key="category.id" :value="category.id">{{ category.name }}</option>
-                        </select>
-                    </div>
-
-                    <!-- SDG Category Checkboxes -->
-                    <div>
-                        <label class="font-semibold text-gray-900">SDG Category</label>
-                        <div class="mt-6 grid gap-4">
-                            <div v-for="goal in sdgCategories" :key="goal.id" class="flex items-center">
-                                <input type="checkbox" :value="goal.id" v-model="selectedSDGs" class="h-4 w-4" />
-                                <label class="ml-2 text-gray-900">{{ goal.name }}</label>
-                            </div>
+                        <!-- AUTHOR -->
+                        <div class="w-full min-w-[200px] pt-3">
+                            <p class="pb-1 text-lg ps-1 font-semibold">Author</p>
+                            <input v-model="form.author" class="w-full placeholder:text-slate-500 text-slate-700 text-lg border-2 border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 bg-white hover:border-slate-300 shadow-sm focus:shadow" placeholder="Author">
+                            <p class="text-red-500 text-sm" v-if="form.errors.author">{{ form.errors.author }}</p>
                         </div>
                     </div>
-
-                    <!-- Content -->
                     <div>
-                        <label for="content" class="block text-gray-900">Content</label>
-                        <textarea v-model="article.content" rows="3" class="block w-full py-1.5" placeholder="Enter content"></textarea>
-                    </div>
-
-                    <!-- Event Date -->
-                    <div>
-                        <label>Event Date</label>
-                        <el-date-picker v-model="article.event_date" type="datetime" placeholder="Select date and time" :default-time="defaultTime" />
-                    </div>
-
-                    <!-- Author -->
-                    <div>
-                        <label for="author" class="block text-gray-900">Author</label>
-                        <input type="text" v-model="article.author" class="block w-full py-1.5" placeholder="Enter author" />
-                    </div>
-
-                    <!-- Submit Button -->
-                    <div class="mt-6 flex items-center justify-end gap-x-6">
-                        <button type="button" @click="cancel" class="font-semibold text-gray-900">Cancel</button>
-                        <button type="submit" class="bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500">
-                            Save
-                        </button>
+                        <!-- EVENT DATE -->
+                        <div class="w-full min-w-[200px] pt-3">
+                            <p class="pb-1 text-lg ps-1 font-semibold">Event Date</p>
+                            <input type="date" v-model="form.event_date" class="w-full placeholder:text-slate-500 text-slate-700 text-lg border-2 border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 bg-white hover:border-slate-300 shadow-sm focus:shadow" placeholder="Title">
+                            <p class="text-red-500 text-sm" v-if="form.errors.event_date">{{ form.errors.event_date }}</p>
+                        </div>
                     </div>
                 </div>
+                <!-- CATEGORIES  -->
+                <div class="w-full min-w-[200px] pt-3">
+                    <p class="pb-1 text-lg ps-1 font-semibold">Categories</p>
+                    <VueSelect
+                    v-model="form.categories"
+                    :is-multi="true"
+                    :options="props.categories"
+                    placeholder="Select Categories"
+                    />
+                    <p class="text-red-500 text-sm" v-if="form.errors.categories">{{ form.errors.categories }}</p>
+                </div>
+                <!-- SDGS  -->
+                <div class="w-full min-w-[200px] pt-3 text-2xl">
+                    <p class="pb-1 text-lg ps-1 font-semibold">SDGs:</p>
+                    <VueSelect
+                    v-model="form.sdgs"
+                    :is-multi="true"
+                    :options="props.sdgs"
+                    placeholder="Select SDGs"
+                    />
+                    <p class="text-red-500 text-sm" v-if="form.errors.sdgs">{{ form.errors.sdgs }}</p>
+                </div>
+                <!-- IMAGES  -->
+                <div class="w-full min-w-[200px] pt-3 text-2xl">
+                    <p class="pb-1 text-lg ps-1 font-semibold">Images:</p>
+                    <file-pond ref="filePondRef" v-bind:files="form.images" allow-multiple="true" max-files="10"/>
+                    <p class="text-red-500 text-sm" v-if="form.errors.images">{{ form.errors.images }}</p>
+                </div>
+                <!-- CONTENT  -->
+                <div class="w-full min-w-[200px] pt-3 text-lg pb-4">
+                    <p class="pb-1 text-lg ps-1 font-semibold">Content:</p>
+                    <trumbowyg v-if="isMounted" v-model="form.content" :config="trumbowygConfig" class="form-control" name="content"></trumbowyg>
+                    <p class="text-red-500 text-sm" v-if="form.errors.content">{{ form.errors.content }}</p>
+                </div>
+                <button class="float-right rounded-md bg-blue-600 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-blue-700 focus:shadow-none active:bg-blue-700 hover:bg-blue-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2" type="submit">
+                    Submit
+                </button>
             </form>
         </div>
     </AdminLayout>
 </template>
 
 <script setup>
+import vueFilePond from 'vue-filepond';
+import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.esm.js';
+import FilePondPluginImagePreview from 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.esm.js';
+import 'filepond/dist/filepond.min.css';
+import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
+const FilePond = vueFilePond(FilePondPluginFileValidateType, FilePondPluginImagePreview);
 import AdminLayout from "@/Components/AdminLayout.vue";
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
-import { useRouter } from 'vue-router';
+import { useForm } from "@inertiajs/vue3";
+import { onMounted, ref, markRaw } from 'vue';
+import VueSelect from "vue3-select-component";
+import 'trumbowyg/dist/ui/trumbowyg.css';
 
-const router = useRouter();
-const article = ref({
-    title: '',
-    category_id: '',
-    short_description: '',
+const isMounted = ref(false);
+const Trumbowyg = ref(null);
+const trumbowygConfig = ref(null);
+const filePondRef = ref()
+const props = defineProps({
+    categories: {
+        type: Object,
+        required: true
+    },
+    sdgs: {
+        type: Object,
+        required: true
+    }
+});
+
+const form = useForm({
+    id: null,
+    categories: [],
+    sdgs: [],
+    title: null,
+    author: null,
+    event_date: null,
     content: '',
-    author: '',
-    event_date: ''
+    images: []
 });
-const selectedSDGs = ref([]);
-const articleCategories = ref([]);
-const sdgCategories = ref([]);
-const file = ref(null);
-const defaultTime = new Date(2000, 1, 1, 12, 0, 0);
 
-// Load categories on component mount
+function submitForm() {
+    const files = filePondRef.value.getFiles();
+    const imageFiles = files.map(file => file.file);
+    form.images = imageFiles;
+
+    form.clearErrors()
+    
+    form.post(route('admin.article.store'), {
+        onError: e => console.log(e)
+    })
+}
+
 onMounted(async () => {
-    try {
-        const [articleCategoryResponse, sdgCategoryResponse] = await Promise.all([
-            axios.get('/api/article-categories'),
-            axios.get('/api/sdg-categories')
-        ]);
-        articleCategories.value = articleCategoryResponse.data;
-        sdgCategories.value = sdgCategoryResponse.data;
-    } catch (error) {
-        console.error("Error loading categories:", error);
-    }
+    Trumbowyg.value = markRaw((await import('vue-trumbowyg')).default);
+    const { default: indentPlugin } = await import('trumbowyg/plugins/indent/trumbowyg.indent.js');
+    const { default: colorsPlugin } = await import('trumbowyg/plugins/colors/trumbowyg.colors.js');
+    const { default: emojiPlugin } = await import('trumbowyg/plugins/emoji/trumbowyg.emoji.js');
+    const { default: fontsizePlugin } = await import('trumbowyg/plugins/fontsize/trumbowyg.fontsize.js');
+    const { default: fontfamilyPlugin } = await import('trumbowyg/plugins/fontfamily/trumbowyg.fontfamily.js');
+    trumbowygConfig.value = {
+        btns: [
+            ['undo', 'redo'], 
+            ['superscript', 'subscript'], 
+            ['formatting'], 
+            ['bold', 'italic', 'underline', 'em', 'fontsize', 'fontfamily'],
+            ['emoji'],
+            ['link'],
+            ['foreColor', 'backColor'], 
+            ['indent', 'outdent'],
+            ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull']
+        ],
+        plugins: {
+            indent: indentPlugin,
+            colors: colorsPlugin,
+            emoji: emojiPlugin,
+            fontsize: fontsizePlugin,
+            fontfamily: fontfamilyPlugin
+        }
+    };
+    isMounted.value = true;
 });
-
-// Handle file selection
-const handleFileUpload = (event) => {
-    file.value = event.target.files[0];
-};
-
-// Cancel action
-const cancel = () => {
-    router.push('/articles');
-};
-
-// Submit the article form
-const createArticle = async () => {
-    const formData = new FormData();
-    formData.append('title', article.value.title);
-    formData.append('category_id', article.value.category_id);
-    formData.append('short_description', article.value.short_description);
-    formData.append('content', article.value.content);
-    formData.append('author', article.value.author);
-    formData.append('event_date', article.value.event_date);
-
-    // Attach selected SDG categories
-    selectedSDGs.value.forEach((sdgId, index) => {
-        formData.append(`sdg_categories[${index}]`, sdgId);
-    });
-
-    // Attach the photo file, if available
-    if (file.value) {
-        formData.append('photo', file.value);
-    }
-
-    try {
-        await axios.post('/api/articles', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        });
-        router.push('/articles');
-    } catch (error) {
-        console.error("Error creating article:", error);
-    }
-};
 </script>
-
-<style scoped>
-/* Add any scoped styles here */
-</style>

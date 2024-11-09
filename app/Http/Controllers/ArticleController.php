@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\SDG;
 use Inertia\Inertia;
 use App\Models\Article;
-use App\Models\ArticleAttachment;
-use App\Models\sdgCategory;
-use Illuminate\Support\Facades\Storage;
+use App\Models\Category;
+use App\Models\ArticleSDG;
+use Illuminate\Http\Request;
+use App\Models\ArticleCategory;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\StoreArticleRequest;
+use App\Http\Requests\UpdateArticleRequest;
 
 class ArticleController extends Controller
 {
@@ -22,93 +26,124 @@ class ArticleController extends Controller
 
     public function create()
     {
-        return Inertia::render('Admin/Article/Create');
+        $categories = Category::all()->map(function ($item, $key) {
+            return [
+                'label' => $item->category,
+                'value' => $item->id,
+            ];
+        });
+
+        $sdgs = SDG::all()->map(function ($item, $key) {
+            return [
+                'label' => "SDG " . $item->sdg_no . " " . $item->name,
+                'value' => $item->id,
+            ];
+        });
+
+        return Inertia::render('Admin/Article/Create', [
+            'categories' => $categories,
+            'sdgs' => $sdgs,
+        ]);
     }
 
-    public function edit($id)
+    public function edit(Article $article)
     {
-        $article = Article::findOrFail($id);
+        $categories = Category::all()->map(function ($item, $key) {
+            return [
+                'label' => $item->category,
+                'value' => $item->id,
+            ];
+        });
+
+        $sdgs = SDG::all()->map(function ($item, $key) {
+            return [
+                'label' => "SDG " . $item->sdg_no . " " . $item->name,
+                'value' => $item->id,
+            ];
+        });
+        $articleSDGs = ArticleSDG::where('article_id', $article->id)->get()->map(function ($item) {
+            return $item->sdg_id;
+        });
+        $articleCategories = ArticleCategory::where('article_id', $article->id)->get()->map(function ($item) {
+            return $item->category_id;
+        });
         return Inertia::render('Admin/Article/Edit', [
-            'article' => $article
+            'categories' => $categories,
+            'sdgs' => $sdgs,
+            'article' => $article,
+            'articleSDGs' => $articleSDGs,
+            'articleCategories' => $articleCategories
         ]);
     }
-    public function store(Request $request)
+
+    public function store(StoreArticleRequest $request)
     {
-        // Validate request data
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'category_id' => 'required|exists:article_categories,id',
-            'short_description' => 'nullable|string',
-            'content' => 'nullable|string',
-            'author' => 'nullable|string|max:255',
-            'event_date' => 'nullable|date',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:10240', // max 10MB
-            'sdg_categories' => 'nullable|array',
-            'sdg_categories.*' => 'exists:sdg_categories,id'
-        ]);
+        $data = $request->validated();
+        $data['images'] = $this->storeImages($request);
+        $article = Article::create($data);
+        $this->storeArticleCategories($data['categories'], $article->id);
+        $this->storeArticleSDGs($data['sdgs'], $article->id);
+    }
 
-        // Start a database transaction
-        DB::beginTransaction();
+    public function update(UpdateArticleRequest $request, Article $article)
+    {
+        $data = $request->validated();
+        if (!empty($data['images'])) {
+            $this->deleteImages($article->images);
+            $data['images'] = $this->storeImages($request);
+        } else unset($data['images']);
 
-        try {
-            // Step 1: Create the Article
-            $article = Article::create([
-                'title' => $validated['title'],
-                'category_id' => $validated['category_id'],
-                'short_description' => $validated['short_description'] ?? null,
-                'content' => $validated['content'] ?? null,
-                'author' => $validated['author'] ?? null,
-                'event_date' => $validated['event_date'] ?? null,
+        $this->deleteRelatedRows('article_category', $article->id);
+        $this->deleteRelatedRows('article_sdg', $article->id);
+        $this->storeArticleCategories($data['categories'], $article->id);
+        $this->storeArticleSDGs($data['sdgs'], $article->id);
+        $article->update($data);
+    }
+
+    public function destroy(Article $article) {
+        $this->deleteImages($article->images);
+        $article->delete();
+    }
+
+    private function storeImages($request)
+    {
+        $imagePaths = [];
+        foreach ($request->file('images') as $image) {
+            $path = $image->store('images', 'public');
+            array_push($imagePaths, $path);
+        }
+        return $imagePaths;
+    }
+
+    private function storeArticleCategories($list, $article_id)
+    {
+        foreach ($list as $category) {
+            ArticleCategory::create([
+                'category_id' => $category,
+                'article_id' => $article_id,
             ]);
-
-            // Step 2: Save the photo to `article_attachment` table if provided
-            if ($request->hasFile('photo')) {
-                $path = $request->file('photo')->store('public/articles');
-                ArticleAttachment::create([
-                    'article_id' => $article->id,
-                    'file_path' => $path,
-                ]);
-            }
-
-            // Step 3: Attach selected SDG categories
-            if (!empty($validated['sdg_categories'])) {
-                $article->sdgCategories()->sync($validated['sdg_categories']);
-            }
-
-            // Commit the transaction
-            DB::commit();
-
-            return response()->json(['message' => 'Article created successfully', 'article' => $article], 201);
-        } catch (\Exception $e) {
-            // Rollback transaction on error
-            DB::rollBack();
-            return response()->json(['message' => 'Error creating article', 'error' => $e->getMessage()], 500);
         }
     }
-    public function update(Request $request, $id)
+
+    private function storeArticleSDGs($list, $article_id)
     {
-        $article = Article::findOrFail($id);
-
-        $validated = $request->validate([
-            'title' => 'required',
-            'category_id' => 'required',
-            'short_description' => 'nullable|string',
-            'content' => 'required',
-            'author' => 'required',
-            'event_date' => 'nullable|date',
-        ]);
-
-        $article->update($validated);
-        return response()->json($article);
+        foreach ($list as $sdg) {
+            ArticleSDG::create([
+                'sdg_id' => $sdg,
+                'article_id' => $article_id,
+            ]);
+        }
     }
 
-    public function destroy($id)
+    private function deleteImages($imagePaths)
     {
-        $article = Article::findOrFail($id);
-        $article->delete();
-
-        return response()->json(['message' => 'Article deleted successfully']);
+        foreach ($imagePaths as $image) {
+            Storage::disk('public')->delete($image);
+        }
     }
 
-
+    private function deleteRelatedRows($table, $id)
+    {
+        DB::table($table)->where('article_id', $id)->delete();
+    }
 }
