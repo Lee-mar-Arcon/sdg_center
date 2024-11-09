@@ -54,7 +54,7 @@ class IndicatorController extends Controller
         $evidencePath = $request->file('evidence_1')->store('documents', 'public');
         $data['evidence_1'] = $evidencePath;
         $data['evidence_1_name'] = $request->file('evidence_1')->getClientOriginalName();
-        // evidence_1_name
+        // evidence_2_name
         if ($data['evidence_2']) {
             $evidencePath = $request->file('evidence_2')->store('documents', 'public');
             $data['evidence_2'] = $evidencePath;

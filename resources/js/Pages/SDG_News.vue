@@ -330,7 +330,7 @@ const scrollToSection = (id) => {
                 <div v-for="(category, index) in metrics[0].category" :key="index" :id="category" class="justify-content-center mb-4 pt-[200px]">
 
                     <h5 class="mb-3 font-bold">{{ category }}</h5>
-                    <el-table :data="questions" border style="width: 100%">
+                    <el-table :data="questions" border style="width: 100%" header-row-style="color:black; font-family:'Arial' ;" row-style="color:black; font-family:'Arial'">
                         <el-table-column prop="question" label="Metric/Indicator" width="500" />
                         <el-table-column prop="answer" label="Answer" width="100" />
                         <el-table-column label="Proof1">

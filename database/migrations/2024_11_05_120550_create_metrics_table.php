@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('metrics', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('sdg_id');
-            $table->foreign('sdg_id')->references('id')->on('sdgs');
+            $table->foreign('sdg_id')->references('id')->on('sdgs')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }

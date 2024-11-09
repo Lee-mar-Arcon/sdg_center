@@ -19,19 +19,22 @@
                     </svg>
                     <span class="ml-3">Article</span>
                 </Link >
-                <Link href="/admin/sdg/index" class="mt-2 flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white">
+                <Link href="/admin/sdg" class="mt-2 flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white">
                     <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
                         <path d="M12 8c.69 0 1.23-.56 1.23-1.23s-.56-1.23-1.23-1.23S10.77 6.08 10.77 6.77 11.31 8 12 8zm0 0v1.23a2.46 2.46 0 00-.77 1.23c0 .69.31 1.46.77 2.31.46-.85.77-1.62.77-2.31 0-.69-.31-1.46-.77-2.31zm0 2.77V18m0 0c-.7 0-1.23.56-1.23 1.23 0 .69.53 1.23 1.23 1.23.7 0 1.23-.54 1.23-1.23C13.23 18.56 12.7 18 12 18z"></path>
                     </svg>
                     <span class="ml-3">SDGs</span>
                 </Link>
-                <Link href="/admin/category/index" class="mt-2 flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white">
+                <Link href="/admin/metric/" class="mt-2 flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white">
                     <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
                         <path d="M12 8c.69 0 1.23-.56 1.23-1.23s-.56-1.23-1.23-1.23S10.77 6.08 10.77 6.77 11.31 8 12 8zm0 0v1.23a2.46 2.46 0 00-.77 1.23c0 .69.31 1.46.77 2.31.46-.85.77-1.62.77-2.31 0-.69-.31-1.46-.77-2.31zm0 2.77V18m0 0c-.7 0-1.23.56-1.23 1.23 0 .69.53 1.23 1.23 1.23.7 0 1.23-.54 1.23-1.23C13.23 18.56 12.7 18 12 18z"></path>
                     </svg>
-                    <span class="ml-3">Category</span>
+                    <span class="ml-3">Metrics</span>
                 </Link>
-
+                <Link href="/admin/indicator/" class="mt-2 flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="currentColor" d="M13 20.27L12.942 18H11.5q-3.127 0-5.313-2.186T4 10.5t2.187-5.313T11.5 3q1.564 0 2.928.586q1.364.585 2.383 1.604t1.604 2.382Q19 8.937 19 10.5q0 1.529-.449 2.937t-1.242 2.661t-1.9 2.31T13 20.269m-1.467-4.698q.31 0 .523-.213t.213-.524t-.213-.523t-.523-.213t-.523.213q-.214.214-.214.523t.213.524q.214.213.524.213m-.437-2.925h.885q.038-.615.236-.973t.94-1.1q.432-.43.684-.879q.251-.448.251-1.029q0-1.082-.747-1.7q-.747-.619-1.807-.619q-.927 0-1.57.507q-.645.506-.945 1.208l.823.32q.202-.445.59-.809q.389-.364 1.102-.364q.848 0 1.253.461q.405.462.405 1.008q0 .502-.26.849q-.259.347-.667.755q-.721.634-.947 1.14q-.226.504-.226 1.225"/></svg>  
+                    <span class="ml-3">Indicators</span>
+                </Link>
             </nav>
             <div class="mt-auto p-4">
                 <a href="#" class="flex items-center text-gray-300 hover:text-white">
@@ -52,9 +55,9 @@
                 </div>
                 <div class="flex items-center">
                     <div class="relative">
-                        <button class="flex items-center text-sm focus:outline-none">
+                        <button @click="logout" class="flex items-center text-sm focus:outline-none">
 <!--                            <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixid=MnwzNjUyOXwwfDF8c2VhcmNofDF8fHVzZXIlMjBhdiVDMyVBQXRhcnxlbnwwfHx8fDE2MTg1ODUyNDc&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Avatar">-->
-                            <span class="ml-2">Administrator</span>
+                            <span class="ml-2">Logout</span>
                         </button>
                     </div>
                 </div>
@@ -62,7 +65,6 @@
 
             <main class="flex-1 p-6 bg-gray-50 overflow-y-auto">
                 <div>
-
                     <slot/>
                 </div>
             </main>
@@ -76,7 +78,14 @@
 import { ref } from 'vue'
 import { Menu as IconMenu, Message, Setting } from '@element-plus/icons-vue'
 import Header from "./Header.vue";
-import { Link} from "@inertiajs/vue3";
+import { Link } from "@inertiajs/vue3";
+import { useForm } from '@inertiajs/vue3';
+
+const logoutForm = useForm({})
+
+function logout() {
+    logoutForm.post('/logout')
+}
 
 const item = {
     date: '2016-05-02',

@@ -24,6 +24,7 @@ export default defineConfig({
     resolve: {
         alias: {
             "@Components": './resources/js/Components',
+            'quill': 'quill/dist/quill.js',
         },
     },
 });

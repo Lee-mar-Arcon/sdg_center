@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
             ArticleCategorySeeder::class,
             SDGCategorySeeder::class,
             MetricSeeder::class,
+            RolePermissionSeeder::class,
+            UserSeeder::class
 
         ]);
     }
