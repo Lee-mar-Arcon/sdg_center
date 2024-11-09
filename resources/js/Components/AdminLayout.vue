@@ -1,5 +1,5 @@
 <template>
-    <div class="h-screen w-screen flex bg-gray-100">
+    <div class="h-screen w-screen flex bg-white">
         <!-- Sidebar -->
         <div class="flex flex-col w-64 bg-gray-900">
             <div class="h-16 flex items-center justify-center">
@@ -13,12 +13,16 @@
                     </svg>
                     <span class="ml-3">Dashboard</span>
                 </a>
-                <Link href="/admin/article/index" class="mt-2 flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white">
+                <Link href="/admin/article/" class="mt-2 flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white">
                     <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24">
                         <path d="M7 3h10M7 3v18M7 21h10M17 21V3M7 3v18M12 7h4M12 11h4M12 15h4"></path>
                     </svg>
                     <span class="ml-3">Article</span>
                 </Link >
+                <Link href="/admin/category" class="mt-2 flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="currentColor" d="M10 3H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1M9 9H5V5h4zm11 4h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1m-1 6h-4v-4h4zM17 3c-2.206 0-4 1.794-4 4s1.794 4 4 4s4-1.794 4-4s-1.794-4-4-4m0 6c-1.103 0-2-.897-2-2s.897-2 2-2s2 .897 2 2s-.897 2-2 2M7 13c-2.206 0-4 1.794-4 4s1.794 4 4 4s4-1.794 4-4s-1.794-4-4-4m0 6c-1.103 0-2-.897-2-2s.897-2 2-2s2 .897 2 2s-.897 2-2 2"/></svg>
+                    <span class="ml-3">Categories</span>
+                </Link>
                 <Link href="/admin/sdg" class="mt-2 flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white">
                     <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
                         <path d="M12 8c.69 0 1.23-.56 1.23-1.23s-.56-1.23-1.23-1.23S10.77 6.08 10.77 6.77 11.31 8 12 8zm0 0v1.23a2.46 2.46 0 00-.77 1.23c0 .69.31 1.46.77 2.31.46-.85.77-1.62.77-2.31 0-.69-.31-1.46-.77-2.31zm0 2.77V18m0 0c-.7 0-1.23.56-1.23 1.23 0 .69.53 1.23 1.23 1.23.7 0 1.23-.54 1.23-1.23C13.23 18.56 12.7 18 12 18z"></path>
@@ -26,9 +30,7 @@
                     <span class="ml-3">SDGs</span>
                 </Link>
                 <Link href="/admin/metric/" class="mt-2 flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white">
-                    <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
-                        <path d="M12 8c.69 0 1.23-.56 1.23-1.23s-.56-1.23-1.23-1.23S10.77 6.08 10.77 6.77 11.31 8 12 8zm0 0v1.23a2.46 2.46 0 00-.77 1.23c0 .69.31 1.46.77 2.31.46-.85.77-1.62.77-2.31 0-.69-.31-1.46-.77-2.31zm0 2.77V18m0 0c-.7 0-1.23.56-1.23 1.23 0 .69.53 1.23 1.23 1.23.7 0 1.23-.54 1.23-1.23C13.23 18.56 12.7 18 12 18z"></path>
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 32 32"><path fill="currentColor" d="M30 19.092v12.88H2v-5.386l6.747-6.747l.708.708q.354.354.733.68L4 27.414v2.558h24v-8.91q.28-.25.546-.516zm-20.85-3.19A10.96 10.96 0 0 1 8 11C8 4.925 12.925 0 19 0s11 4.925 11 11c0 1.76-.414 3.425-1.15 4.9l-1.51-1.51A9 9 0 0 0 28 11a9 9 0 1 0-17.34 3.391z"/><path fill="currentColor" d="M19 20a8.96 8.96 0 0 0 5.618-1.968l-4.202-4.204a2 2 0 0 0-2.828 0l-4.205 4.205A8.96 8.96 0 0 0 19 20m-2.826-7.586a4 4 0 0 1 5.656 0l5.656 5.657l-.707.707A10.97 10.97 0 0 1 19 22a10.97 10.97 0 0 1-7.778-3.221l-.707-.707z" class="ouiIcon__fillSecondary"/></svg>
                     <span class="ml-3">Metrics</span>
                 </Link>
                 <Link href="/admin/indicator/" class="mt-2 flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white">
@@ -63,7 +65,7 @@
                 </div>
             </header>
 
-            <main class="flex-1 p-6 bg-gray-50 overflow-y-auto">
+            <main class="flex-1 p-6 bg-white overflow-y-auto">
                 <div>
                     <slot/>
                 </div>

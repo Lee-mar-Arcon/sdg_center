@@ -1,4 +1,14 @@
 {
+  "node_modules/pdf-vue3/dist/pdf.min-f72cfa08.js": {
+    "file": "assets/pdf.min-f72cfa08-DT_3N-Xo.js",
+    "name": "pdf.min-f72cfa08",
+    "src": "node_modules/pdf-vue3/dist/pdf.min-f72cfa08.js",
+    "isDynamicEntry": true
+  },
+  "node_modules/trumbowyg/dist/ui/icons.svg": {
+    "file": "assets/icons-RHKppekq.svg",
+    "src": "node_modules/trumbowyg/dist/ui/icons.svg"
+  },
   "public/sdg/017.png": {
     "file": "assets/017-DhnIRWmJ.png",
     "src": "public/sdg/017.png"
@@ -16,19 +26,23 @@
     "src": "public/sdg/09.png"
   },
   "resources/css/app.css": {
-    "file": "assets/app-Coj_ysLZ.css",
+    "file": "assets/app-DEyv0ngO.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-pS2FnhBx.js",
+    "file": "assets/app-DLmRZ2Hv.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
+    "dynamicImports": [
+      "node_modules/pdf-vue3/dist/pdf.min-f72cfa08.js"
+    ],
     "css": [
-      "assets/app-zQ_21quM.css"
+      "assets/app-Cdj2SnGm.css"
     ],
     "assets": [
+      "assets/icons-RHKppekq.svg",
       "assets/04-CLpmEH_u.png",
       "assets/017-DhnIRWmJ.png",
       "assets/09-CnH43Fhv.png",

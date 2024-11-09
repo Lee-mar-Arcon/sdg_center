@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ArticleCategory extends Model
+class ArticleSDG extends Model
 {
-    protected $table = 'article_category';
+    protected $table = 'article_sdg';
     
     protected $fillable = [
         'article_id',
-        'category_id'
+        'sdg_id'
     ];
 }

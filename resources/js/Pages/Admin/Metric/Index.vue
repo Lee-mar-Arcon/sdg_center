@@ -106,7 +106,7 @@ function updateIndicatorsList(e) {
                     <div class="flex gap-x-3 items-center">
                         <div class="relative min-w-[200px]">
                             <select
-                            v-model="SDGId"
+                                v-model="SDGId"
                                 @change="e => updateIndicatorsList(e)"
                                 class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded pl-3 pr-8 py-1.5 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md appearance-none cursor-pointer">
                                 <option value="All">All</option>
