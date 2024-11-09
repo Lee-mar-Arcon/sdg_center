@@ -203,6 +203,7 @@ const scrollToSection = (id) => {
                 </div>
             </div>
 
+<!--   Metrics-->
             <div class="px-4 md:px-8">
                 <el-row class="tac pt-12 md:pt-16">
                     <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">

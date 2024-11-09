@@ -9,3 +9,6 @@ Route::post('articles', [ArticleController::class, 'store']);
 Route::put('articles/{id}', [ArticleController::class, 'update']);
 Route::delete('articles/{id}', [ArticleController::class, 'destroy']);
 
+
+// routes/api.php
+Route::get('/sdgs', [\App\Http\Controllers\Controller::class, 'index']);  // Fetch all SDGs with their icons
