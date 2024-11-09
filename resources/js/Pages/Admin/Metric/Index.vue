@@ -40,7 +40,7 @@ function toggleCanvas(isAdding, metric = null) {
 }
 
 function handleSubmit() {
-   
+
     if(addingMetric.value)
         form.post(route('admin.metric.store'), {
             onSuccess: () => {
@@ -89,13 +89,13 @@ function updateIndicatorsList(e) {
         <div class="w-full p-4">
             <Head title="SDGs" />
             <div class="mx-auto w-full">
-                <MetricForm 
-                    :isOpen="isOpen" 
+                <MetricForm
+                    :isOpen="isOpen"
                     :sdgs="props.sdgs"
-                    :form="form" 
-                    :addingMetric="addingMetric" 
-                    @submit="handleSubmit" 
-                    @cancel="handleCancel" 
+                    :form="form"
+                    :addingMetric="addingMetric"
+                    @submit="handleSubmit"
+                    @cancel="handleCancel"
                 />
             </div>
         </div>
@@ -121,7 +121,7 @@ function updateIndicatorsList(e) {
                     <div class="relative">
                         <button @click="toggleCanvas(true)" class="bg-blue-500 h-min text-white px-4 py-2 rounded mb-4">
                             Add new Metric/Sub Category
-                        </button>  
+                        </button>
                     </div>
                 </div>
                 <div class="relative flex flex-col w-full h-full overflow-y-auto text-gray-700 bg-white shadow-md rounded-lg bg-clip-border">

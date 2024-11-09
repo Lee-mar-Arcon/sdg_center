@@ -41,7 +41,7 @@ function toggleCanvas(isAdding, sdg = null) {
 }
 
 function handleSubmit() {
-   
+
     if(addingSDG.value)
         form.post(route('admin.sdg.store'), {
             onSuccess: () => {
@@ -83,12 +83,12 @@ function handleCancel() {
         <div class="w-full p-4">
             <Head title="SDGs" />
             <div class="mx-auto w-full">
-                <SDGForm 
-                    :isOpen="isOpen" 
-                    :form="form" 
-                    :addingSDG="addingSDG" 
-                    @submit="handleSubmit" 
-                    @cancel="handleCancel" 
+                <SDGForm
+                    :isOpen="isOpen"
+                    :form="form"
+                    :addingSDG="addingSDG"
+                    @submit="handleSubmit"
+                    @cancel="handleCancel"
                 />
             </div>
         </div>
@@ -102,7 +102,7 @@ function handleCancel() {
                     <div class="relative">
                         <button @click="toggleCanvas(true)" class="bg-blue-500 h-min text-white px-4 py-2 rounded mb-4">
                             Add new SDG
-                        </button>  
+                        </button>
                     </div>
                 </div>
                 <div class="relative flex flex-col w-full h-full overflow-y-auto text-gray-700 bg-white shadow-md rounded-lg bg-clip-border">

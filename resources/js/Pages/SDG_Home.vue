@@ -109,7 +109,7 @@ const goToArticle = (articleId) => {
     <div class="min-h-screen flex justify-center items-center bg-gray-100 pt-[150px]">
         <div class="hidden md:block w-[10vw]"></div>
         <div class="w-[80vw] bg-white p-4 rounded-lg shadow-lg">
-            <h1 class="gradient mb-[-5]"> <b>MINDORO STATE UNIVERSITY </b></h1>
+            <h2 class="gradient mb-[-5]"> <b>MINDORO STATE UNIVERSITY </b></h2>
             <a href="https://sdgs.un.org/" target="_blank">
                 <img
                     src="/sdg/mainLogo.png"
@@ -182,7 +182,7 @@ const goToArticle = (articleId) => {
                     v-for="(item, index) in items"
                     :key="index"
                     @click="goToArticle(index + 1)"
-                    class="ml-1 mr-1 max-w-[13vw] mt-2 rounded overflow-hidden shadow-lg"
+                    class="ml-1 mr-1 max-w-[13vw] mt-2 rounded overflow-hidden "
                 >
                     <img
                         class="w-full h-36 object-cover"
@@ -312,9 +312,7 @@ const goToArticle = (articleId) => {
 
 
 <style>
-@import url("https://fonts.googleapis.com/css?family=Oswald:400,700");
-@import url("https://fonts.googleapis.com/css2?family=Play&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+
 
 @font-face {
     font-family: 'Austein Script';
@@ -328,6 +326,16 @@ const goToArticle = (articleId) => {
     font-weight: normal;
     font-style: normal;
 }
+
+
+
+.card, .card__content, .card__front, .card__back {
+    box-shadow: none;
+    border-radius: 0;
+    border: none;
+    background-color: transparent;
+}
+
 
 /* General Reset */
 *,
@@ -358,11 +366,13 @@ const goToArticle = (articleId) => {
     max-width: 180px; /* Controls the maximum size of the card */
     margin: 10px;
     transition: transform 0.6s ease-in-out;
+    box-shadow: none;
 }
 
 .card__content {
     transform-style: preserve-3d;
     transition: transform 0.6s;
+    box-shadow: none;
 }
 
 .card:hover .card__content {
@@ -372,6 +382,8 @@ const goToArticle = (articleId) => {
 /* Responsive styling for card content */
 .card__front,
 .card__back {
+    box-shadow: none;
+    background-color: transparent;
     backface-visibility: hidden;
     width: 100%;
     height: 100%;

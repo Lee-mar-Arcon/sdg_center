@@ -47,7 +47,7 @@ Route::get('/SDG/article{articleId}', function ($articleId) {
 
 Route::middleware(['role:Admin', 'verified', 'auth:sanctum'])->prefix('admin')->name('admin.')->group(function () {
     // LEE-MAR
-    
+
     // SDG
     Route::resource('sdg', SdgController::class)->only(['index', 'store', 'destroy'])->names([
         'index' => 'sdg.index',
@@ -55,7 +55,7 @@ Route::middleware(['role:Admin', 'verified', 'auth:sanctum'])->prefix('admin')->
         'destroy' => 'sdg.destroy',
     ]);
     Route::post('/sdg/{sdg}', [SdgController::class, 'update'])->name('sdg.update');
-    
+
     // INDICATOR
     Route::resource('indicator', IndicatorController::class)->only(['index', 'store', 'destroy'])->names([
         'index' => 'indicator.index',
@@ -63,7 +63,7 @@ Route::middleware(['role:Admin', 'verified', 'auth:sanctum'])->prefix('admin')->
         'destroy' => 'indicator.destroy',
     ]);
     Route::post('/indicator/{indicator}', [IndicatorController::class, 'update'])->name('indicator.update');
-    
+
     // METRIC
     Route::resource('metric', MetricController::class)->only(['index', 'store', 'destroy', 'update'])->names([
         'index' => 'metric.index',
