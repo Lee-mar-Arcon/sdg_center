@@ -19,6 +19,10 @@
                     </svg>
                     <span class="ml-3">Article</span>
                 </Link >
+                <Link href="/admin/category" class="mt-2 flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24"><path fill="currentColor" d="M10 3H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1M9 9H5V5h4zm11 4h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1m-1 6h-4v-4h4zM17 3c-2.206 0-4 1.794-4 4s1.794 4 4 4s4-1.794 4-4s-1.794-4-4-4m0 6c-1.103 0-2-.897-2-2s.897-2 2-2s2 .897 2 2s-.897 2-2 2M7 13c-2.206 0-4 1.794-4 4s1.794 4 4 4s4-1.794 4-4s-1.794-4-4-4m0 6c-1.103 0-2-.897-2-2s.897-2 2-2s2 .897 2 2s-.897 2-2 2"/></svg>
+                    <span class="ml-3">Categories</span>
+                </Link>
                 <Link href="/admin/sdg" class="mt-2 flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white">
                     <svg class="h-6 w-6" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="currentColor" viewBox="0 0 24 24">
                         <path d="M12 8c.69 0 1.23-.56 1.23-1.23s-.56-1.23-1.23-1.23S10.77 6.08 10.77 6.77 11.31 8 12 8zm0 0v1.23a2.46 2.46 0 00-.77 1.23c0 .69.31 1.46.77 2.31.46-.85.77-1.62.77-2.31 0-.69-.31-1.46-.77-2.31zm0 2.77V18m0 0c-.7 0-1.23.56-1.23 1.23 0 .69.53 1.23 1.23 1.23.7 0 1.23-.54 1.23-1.23C13.23 18.56 12.7 18 12 18z"></path>

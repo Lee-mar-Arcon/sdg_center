@@ -5,7 +5,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\Admin\SdgController;
 use App\Http\Controllers\Admin\MetricController;
-use App\Http\Controllers\Page\WelcomeController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\IndicatorController;
@@ -72,6 +71,14 @@ Route::middleware(['role:Admin', 'verified', 'auth:sanctum'])->prefix('admin')->
         'update' => 'metric.update',
     ]);
 
+    // CATEGORY
+    Route::resource('category', CategoryController::class)->only(['index', 'store', 'destroy', 'update'])->names([
+        'index' => 'category.index',
+        'store' => 'category.store',
+        'destroy' => 'category.destroy',
+        'update' => 'category.update',
+    ]);
+
     //JEE
     Route::get('/admin/article/index', [ArticleController::class, 'index'])->name('articles.index');
     Route::get('/articles/create', [ArticleController::class, 'create'])->name('articles.create');
@@ -79,11 +86,11 @@ Route::middleware(['role:Admin', 'verified', 'auth:sanctum'])->prefix('admin')->
     Route::get('/articles/{id}/edit', [ArticleController::class, 'edit'])->name('articles.edit');
     Route::put('/articles/{id}', [ArticleController::class, 'update'])->name('articles.update');
     Route::delete('/articles/{id}', [ArticleController::class, 'destroy'])->name('articles.destroy');
-    Route::get('/admin/category/index', [CategoryController::class, 'index'])->name('Category.index');
-    Route::get('/admin/category/create', [CategoryController::class, 'create'])->name('Category.create');
-    Route::post('/admin/category', [CategoryController::class, 'store'])->name('Category.store');
-    Route::get('/admin/category/{Category}/edit', [CategoryController::class, 'edit'])->name('Category.edit');
-    Route::put('/admin/category/{Category}', [CategoryController::class, 'update'])->name('Category.update');
-    Route::delete('/admin/category/{Category}', [CategoryController::class, 'destroy'])->name('Category.destroy');
+    // Route::get('/admin/category/index', [CategoryController::class, 'index'])->name('Category.index');
+    // Route::get('/admin/category/create', [CategoryController::class, 'create'])->name('Category.create');
+    // Route::post('/admin/category', [CategoryController::class, 'store'])->name('Category.store');
+    // Route::get('/admin/category/{Category}/edit', [CategoryController::class, 'edit'])->name('Category.edit');
+    // Route::put('/admin/category/{Category}', [CategoryController::class, 'update'])->name('Category.update');
+    // Route::delete('/admin/category/{Category}', [CategoryController::class, 'destroy'])->name('Category.destroy');
     Route::get('/admin/article/create', [DashboardController::class, 'store']);
 });

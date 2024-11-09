@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\ArticleCategory;
-use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Category;
+use Illuminate\Http\Request;
+use App\Models\ArticleCategory;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Category\StoreCategoryRequest;
+use App\Http\Requests\Category\UpdateCategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -14,8 +17,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = ArticleCategory::all(); // Fetch all SDG categories
-        return Inertia::render('Admin/articleCategory/Index', [
+        $categories = Category::orderBy('category')->get();
+        return Inertia::render('Admin/Category/Index', [
             'categories' => $categories
         ]);
     }
@@ -25,20 +28,12 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Admin/articleCategory/Create');
+
     }
 
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
-
-        ArticleCategory::create([
-            'name' => $request->name,
-        ]);
-
-        return redirect()->route('Category.index')->with('success', 'SDG Category added successfully!');
+        Category::create($request->validated());
     }
 
     /**
@@ -52,30 +47,20 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ArticleCategory $Category)
+    public function edit(Category $Category)
     {
         return Inertia::render('Admin/articleCategory/Edit', [
             'Category' => $Category
         ]);
     }
 
-    public function update(Request $request, ArticleCategory $Category)
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
-
-        $Category->update([
-            'name' => $request->name,
-        ]);
-
-        return redirect()->route('Category.index')->with('success', 'Article Category updated successfully!');
+        $category->update($request->validated());
     }
 
-    public function destroy(ArticleCategory $Category)
+    public function destroy(Category $category)
     {
-        $Category->delete();
-
-        return redirect()->route('Category.index')->with('success', 'Article Category deleted successfully!');
+        $category->delete();
     }
 }
