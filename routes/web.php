@@ -11,27 +11,15 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\IndicatorController;
 
-
-
-
+//REAN
+// route for viewing SDG HOME
 Route::get('/', [GuestController::class, 'sdgHomePage']);
 
-Route::get('/page', function () {
-    return Inertia::render('SDG_Page');
-});
-
-Route::get('/test', function () {
-    return Inertia::render('test');
-});
-
 // route for viewing single article
-Route::get('/sdg/article/', function () {
-    return Inertia::render('SDG/view');
-});
-
-//REAN
-
 Route::get('/articles/{id}', [GuestController::class, 'singleArticle']);
+
+//route for viewing per SDG
+Route::get('/news', [GuestController::class, 'show']);
 
 
 Route::middleware(['role:Admin', 'verified', 'auth:sanctum'])->prefix('admin')->name('admin.')->group(function () {
@@ -81,7 +69,6 @@ Route::middleware(['role:Admin', 'verified', 'auth:sanctum'])->prefix('admin')->
     Route::post('/article/{article}', [ArticleController::class, 'update'])->name('article.update');
 });
 
-//Jee
-Route::get('/news', [GuestController::class, 'show']);
+
 
 
