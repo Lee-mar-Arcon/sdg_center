@@ -3,7 +3,7 @@ import {Head, Link} from "@inertiajs/vue3";
 import {ref, computed, onMounted, defineProps, watch} from "vue";
 import Footer from "@/Pages/Footer.vue";
 import Header from "../Components/Header.vue";
-import ColorThief from "colorthief";
+
 
 import {
     Menu as IconMenu,
@@ -38,6 +38,10 @@ const props = defineProps({
 const pdfLink = ref("")
 const viewingPDF = ref(false)
 
+
+const pdfLink = ref("")
+const viewingPDF = ref(false)
+
 // Selected SDG to display details
 const selectedSdg = ref(null);
 
@@ -47,23 +51,162 @@ function selectSdg(sdg) {
 }
 
 onMounted(() => {
-    // Check if there's a previously selected SDG in sessionStorage
-    const storedSdgId = sessionStorage.getItem('selectedSdgId');
-
-    if (storedSdgId) {
-        // If an SDG was previously selected, set it
-        selectedSdg.value = props.list.find(sdg => sdg.id === parseInt(storedSdgId));
-    } else if (props.list && props.list.length > 0) {
-        // If no SDG is stored, default to SDG 1 or the first SDG in the list
-        selectedSdg.value = props.list.find(sdg => sdg.id === 1) || props.list[0];
-        sessionStorage.setItem('selectedSdgId', selectedSdg.value.id); // Store the initial default selection
+    // Check if the list is not empty and if SDG 1 exists
+    if (props.list && props.list.length > 0) {
+        selectedSdg.value = props.list.find(sdg => sdg.id === 1) || props.list[0]; // Fallback to first SDG if SDG 1 is not found
     }
 });
 
-watch(selectedSdg, (newSdg) => {
-    // Update sessionStorage whenever the selected SDG changes
-    sessionStorage.setItem('selectedSdgId', newSdg.id);
+const images = ref([
+    "01.png",
+    "02.png",
+    "03.png",
+    "04.png",
+    "05.png",
+    "06.png",
+    "07.png",
+    "08.png",
+    "09.png",
+    "010.png",
+    "011.png",
+    "012.png",
+    "013.png",
+    "014.png",
+    "015.png",
+    "016.png",
+    "017.png",
+]);
+const sdgDescriptions = ref([
+    "No Poverty: End poverty in all its forms everywhere.",
+    "Zero Hunger: End hunger, achieve food security and improved nutrition, and promote sustainable agriculture.",
+    "Good Health and Well-being: Ensure healthy lives and promote well-being for all at all ages.",
+    "Quality Education: Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all.",
+    "Gender Equality: Achieve gender equality and empower all women and girls.",
+    "Clean Water and Sanitation: Ensure availability and sustainable management of water and sanitation for all.",
+    "Affordable and Clean Energy: Ensure access to affordable, reliable, sustainable, and modern energy for all.",
+    "Decent Work and Economic Growth: Promote sustained, inclusive, and sustainable economic growth, full and productive employment, and decent work for all.",
+    "Industry, Innovation and Infrastructure: Build resilient infrastructure, promote inclusive and sustainable industrialization, and foster innovation.",
+    "Reduced Inequality: Reduce inequality within and among countries.",
+    "Sustainable Cities and Communities: Make cities and human settlements inclusive, safe, resilient, and sustainable.",
+    "Responsible Consumption and Production: Ensure sustainable consumption and production patterns.",
+    "Climate Action: Take urgent action to combat climate change and its impacts.",
+    "Life Below Water: Conserve and sustainably use the oceans, seas, and marine resources for sustainable development.",
+    "Life on Land: Protect, restore and promote sustainable use of terrestrial ecosystems, sustainably manage forests, combat desertification, and halt and reverse land degradation and halt biodiversity loss.",
+    "Peace, Justice and Strong Institutions: Promote peaceful and inclusive societies for sustainable development, provide access to justice for all and build effective, accountable, and inclusive institutions at all levels.",
+    "Partnerships for the Goals: Strengthen the means of implementation and revitalize the Global Partnership for Sustainable Development.",
+    "Visit the SDG Website: Explore the Sustainable Development Goals at sdgs.un.org.",
+]);
+
+const items = [
+    {
+        id: 1,
+        image: "/article/image1.jpg",
+        title: "Unity in Diversity: MinSU Unites for its Annual Culture and Arts Festival",
+        category: "Student",
+        alt: "Image 1",
+        date: "October 29, 2024",
+        sdgNumbers: [4]
+    },
+    {
+        id: 2,
+        image: "/article/image2.jpg",
+        title: "PSA MIMAROPA recognizes MinSU as Most Responsive Agency",
+        category: "Administration",
+        alt: "Image 2",
+        date: "October 29, 2024",
+        sdgNumbers: [17]
+    },
+    {
+        id: 3,
+        image: "/article/image3.jpg",
+        title: "ABEL students win Best Paper and Abstract Awards at 2024 ASREI Conference",
+        category: "Academics",
+        alt: "Image 3",
+        date: "October 28, 2024",
+        sdgNumbers: [4, 9]
+    },
+    {
+        id: 4,
+        image: "/article/image4.jpg",
+        title: "MinSU Clinches 9th Place at 2024 STRASUC Olympics",
+        category: "Students",
+        alt: "Image 4",
+        date: "October 26, 2024",
+        sdgNumbers: [4]
+    },
+];
+
+const metrics = [
+    {
+        sdg_id: 1,
+        category: ["Proportion of students receiving financial aid to attend university", "University anti-poverty programmes", "Community anti-poverty programmes"],
+    },
+];
+
+const questions = [
+    {
+        sdg_id: 1,
+        question: "Bottom financial quintile admission target\n" +
+            "Targets to admit students who fall into the bottom 20% of household income group (or a more tightly defined target) in the country.",
+        answer: "Yes",
+        proof1: "/proof.pdf",
+        proof2: "",
+
+    },
+    {
+        sdg_id: 1,
+        question: "Bottom financial quintile student success\n" +
+            "Graduation/completion targets for students who fall into the bottom 20% of household income group (or a more tightly defined target) in the country.",
+        answer: "Yes",
+        proof1: "/proof.pdf",
+        proof2: "/proof.pdf",
+
+    },
+    {
+        sdg_id: 1,
+        question: "Low-income student support\n" +
+            "Provide support (e.g. food, housing, transportation, legal services) for students from low income families to enable them to complete university.",
+        answer: "Yes",
+        proof1: "/proof.pdf",
+        proof2: "/proof.pdf",
+
+    },
+];
+
+
+// State to track the selected image
+const selectedImage = ref(null);
+
+// Method to handle image selection
+const selectImage = (index) => {
+    selectedImage.value = index;
+};
+
+// Set default selected image to index 1 when component mounts
+onMounted(() => {
+    selectedImage.value = 0; // Set the default selected image to index 1
 });
+
+const currentPage = ref(1);
+const itemsPerPage = 3;
+const totalPages = computed(() => Math.ceil(images.value.length / itemsPerPage));
+const paginatedItems = computed(() => {
+    const start = (currentPage.value - 1) * itemsPerPage;
+    return images.value.slice(start, start + itemsPerPage);
+});
+const nextPage = () => {
+    if (currentPage.value < totalPages.value) {
+        currentPage.value++;
+    }
+};
+
+const prevPage = () => {
+    if (currentPage.value > 1) {
+        currentPage.value--;
+    }
+};
+
+// Computed property to filter articles by selected SDG number
 const filteredArticles = computed(() => {
     if (!selectedSdg.value) {
         return props.articles; // If no SDG is selected, return all articles
@@ -88,11 +231,25 @@ function goToArticle(id) {
     window.location.href = `/articles/${id}`;
 }
 
+function displayPDF(link) {
+    viewingPDF.value = true
+    pdfLink.value = `${route().t.url}/storage/${link}`
+}
+
+function hidePDF() {
+    viewingPDF.value = false
+}
+
+function goToArticle(id) {
+    window.location.href = `/articles/${id}`;
+}
+
 const scrollToSection = (id) => {
     const target = document.getElementById(id);
     if (target) {
         target.scrollIntoView({behavior: "smooth", block: "start"});
     }
+}
 }
 
 
@@ -108,8 +265,9 @@ const scrollToSection = (id) => {
 
         <!-- Sidebar for SDG Images -->
         <div
-            class="hidden md:block fixed md:w-[20vw] h-full ml-2 mr-3   top-0 left-0  p-2 overflow-y-auto pt-[200px]">
+            class="hidden md:block fixed md:w-[20vw] h-full ml-2 mr-3   border top-0 left-0  p-2p-2 overflow-y-auto pt-[200px]">
             <Link href="/">
+                <p class="text-lg cursor-pointer underline underline-offset-1"> Sdg Home</p>
                 <p class="text-lg cursor-pointer underline underline-offset-1"> Sdg Home</p>
             </Link>
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-1 items-center p-2">
@@ -141,7 +299,7 @@ const scrollToSection = (id) => {
                             >
                                 <h5 class="mb-2 text-lg md:text-xl">Programs and Innovations</h5>
                                 <el-menu-item v-for="question in metric.indicators"
-                                              @click="scrollToSection(question.id)"
+                                    @click="scrollToSection(question.id)"
                                 >
                                     <el-icon>
                                         <icon-menu/>
@@ -195,7 +353,7 @@ const scrollToSection = (id) => {
 
                         class="w-full md:max-w-[45%] lg:max-w-[30%] xl:max-w-[30%] rounded overflow-hidden shadow-lg"
                         style="max-width: 300px;"
-                        :key="index"
+                        :key="article.id"
                         @click="goToArticle(article.id)"
                     >
                         <img
@@ -261,40 +419,40 @@ const scrollToSection = (id) => {
             <div v-if="selectedSdg" class="flex-grow p-4 md:p-8 rounded-lg ">
                 <!-- Tables with Sections -->
                 <template v-for="metric in selectedSdg.metrics" :key="metric.id">
-                    <div class="justify-content-center mb-4 pt-[165px]">
-                        <div v-if="metric.indicators.length">
-                            <h5 class="mb-3 font-bold">{{ metric.sub_category }}</h5>
+                <div class="justify-content-center mb-4 pt-[165px]">
+                    <div v-if="metric.indicators.length">
+                        <h5 class="mb-3 font-bold">{{ metric.sub_category }}</h5>
 
-                            <table v-for="question in metric.indicators" :key="question.id" :id="question.id"
-                                   class="w-auto text-left table-auto">
-                                <thead>
-                                <tr class="border-b border-slate-300 bg-slate-50">
-                                    <th class="p-4 text-sm font-normal leading-none text-slate-500">Metric</th>
-                                    <th class="p-4 text-sm font-normal leading-none text-slate-500">Answer</th>
-                                    <th class="p-4 text-sm font-normal text-center w-48 leading-none text-slate-500">Proof
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr class="hover:bg-slate-50">
-                                    <td class="p-4 border-b border-slate-200 py-5 min-w-[17vw]">
-                                        <p class="block font-semibold text-sm text-slate-800">{{ question.indicator }}</p>
-                                    </td>
-                                    <td class="p-4 border-b border-slate-200 py-5 min-w-[17vw]">
-                                        <p class="block font-semibold text-sm text-slate-800">{{ question.applied }}</p>
-                                    </td>
-                                    <td class="p-4 border-b border-slate-200 py-5">
-                                        <button @click="e => displayPDF(question.evidence_1)" class="text-blue-600">
-                                            {{ question.evidence_1_name }}
-                                        </button>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
+                        <table v-for="question in metric.indicators" :key="question.id" :id="question.id"
+                               class="w-auto text-left table-auto">
+                            <thead>
+                            <tr class="border-b border-slate-300 bg-slate-50">
+                                <th class="p-4 text-sm font-normal leading-none text-slate-500">Metric</th>
+                                <th class="p-4 text-sm font-normal leading-none text-slate-500">Answer</th>
+                                <th class="p-4 text-sm font-normal text-center w-48 leading-none text-slate-500">Proof
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="hover:bg-slate-50">
+                                <td class="p-4 border-b border-slate-200 py-5 min-w-[17vw]">
+                                    <p class="block font-semibold text-sm text-slate-800">{{ question.indicator }}</p>
+                                </td>
+                                <td class="p-4 border-b border-slate-200 py-5 min-w-[17vw]">
+                                    <p class="block font-semibold text-sm text-slate-800">{{ question.applied }}</p>
+                                </td>
+                                <td class="p-4 border-b border-slate-200 py-5">
+                                    <button @click="e => displayPDF(question.evidence_1)" class="text-blue-600">
+                                        {{ question.evidence_1_name }}
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
 
 
-                        </div>
                     </div>
+                </div>
                 </template>
 
             </div>
