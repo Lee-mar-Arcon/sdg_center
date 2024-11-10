@@ -13,9 +13,6 @@ use App\Http\Controllers\IndicatorController;
 
 
 
-//Route::get('/admin', function () {
-//    return Inertia::render('Article');
-//});
 
 Route::get('/', function () {
     return Inertia::render('SDG_Home');
@@ -86,9 +83,9 @@ Route::middleware(['role:Admin', 'verified', 'auth:sanctum'])->prefix('admin')->
         'edit' => 'article.edit',
     ]);
     Route::post('/article/{article}', [ArticleController::class, 'update'])->name('article.update');
-
 });
 
 //Jee
 Route::get('/news', [GuestController::class, 'show']);
+
 
