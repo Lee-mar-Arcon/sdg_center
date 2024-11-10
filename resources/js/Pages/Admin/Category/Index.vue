@@ -71,7 +71,7 @@ function handleCancel() {
                     <div class="relative">
                         <button @click="toggleCanvas(true)" class="bg-blue-500 h-min text-white px-4 py-2 rounded mb-4">
                             Add New Category
-                        </button>  
+                        </button>
                     </div>
                 </div>
                 <div class="relative flex flex-col w-full h-full overflow-y-auto text-gray-700 bg-white shadow-md rounded-lg bg-clip-border">
@@ -124,6 +124,7 @@ function handleCancel() {
 <!-- <template>
     <AdminLayout>
         <div>
+>>>>>>> 25735b82ef05e3774cec880003840da163782e3a
             <div class="flex justify-between">
                 <p class="text-xl">List of Category</p>
                 <Link href="/admin/category/create" class="mr-5">
@@ -197,4 +198,8 @@ function deleteSdg(id) {
 
 <style scoped>
 /* Your styles here */
+<<<<<<< HEAD
+</style>
+=======
 </style> -->
+>>>>>>> 25735b82ef05e3774cec880003840da163782e3a

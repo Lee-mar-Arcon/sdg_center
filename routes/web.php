@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\GuestController;
+use App\Http\Controllers\ShowSdgController;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArticleController;
@@ -10,13 +12,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\IndicatorController;
 
 
-Route::get('/news', function () {
-    return Inertia::render('SDG_News');
-});
 
-//Route::get('/admin', function () {
-//    return Inertia::render('Article');
-//});
 
 Route::get('/', function () {
     return Inertia::render('SDG_Home');
@@ -40,6 +36,7 @@ Route::get('/sdg/article/', function () {
 Route::get('/SDG/article{articleId}', function ($articleId) {
     return Inertia::render('SDG/index', ['articleId' => $articleId]);
 });
+
 
 Route::middleware(['role:Admin', 'verified', 'auth:sanctum'])->prefix('admin')->name('admin.')->group(function () {
     // LEE-MAR
@@ -68,6 +65,7 @@ Route::middleware(['role:Admin', 'verified', 'auth:sanctum'])->prefix('admin')->
         'update' => 'metric.update',
     ]);
 
+
     // CATEGORY
     Route::resource('category', CategoryController::class)->only(['index', 'store', 'destroy', 'update'])->names([
         'index' => 'category.index',
@@ -86,3 +84,8 @@ Route::middleware(['role:Admin', 'verified', 'auth:sanctum'])->prefix('admin')->
     ]);
     Route::post('/article/{article}', [ArticleController::class, 'update'])->name('article.update');
 });
+
+//Jee
+Route::get('/news', [GuestController::class, 'show']);
+
+

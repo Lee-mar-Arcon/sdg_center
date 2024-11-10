@@ -1,9 +1,10 @@
 <script setup>
 import { Head, Link } from "@inertiajs/vue3";
-// import { Head } from "@inertiajs/vue3";
+import { Inertia } from '@inertiajs/inertia';
 import Footer from './Footer.vue';
 import Header from './Header.vue';
 import { ref, onMounted } from "vue";
+import { computed } from 'vue';
 import ColorThief from "colorthief";
 const images = ref([
     "01.png",
@@ -77,30 +78,22 @@ const items = [
         date: "October 26, 2024",
     },
 ];
-const cardBackColors = ref([]);
 
 onMounted(() => {
-    const colorThief = new ColorThief();
 
-    images.value.forEach((image, index) => {
-        const imgElement = new Image();
-        imgElement.src = `/sdg/${image}`;
-        imgElement.onload = () => {
-            const dominantColor = colorThief.getColor(imgElement);
-            cardBackColors.value[index] = `rgb(${dominantColor.join(",")})`;
-        };
-    });
 });
-import { defineProps } from 'vue';
-import { Inertia } from '@inertiajs/inertia';
+
+
+
 const props = defineProps({
-    items: Array,
-});
+    articles: Array,
+    sdgs: Array
+})
 
-const goToArticle = (articleId) => {
-    Inertia.visit(`/SDG/article${articleId}`);
-};
-
+function getLink(path) {
+    const domain = route().t.url;
+    return domain + `/storage/${path}`
+}
 </script>
 
 <template>
@@ -108,8 +101,8 @@ const goToArticle = (articleId) => {
     <Head title="MinSU SDG Center" />
     <div class="min-h-screen flex justify-center items-center bg-gray-100 pt-[150px]">
         <div class="hidden md:block w-[10vw]"></div>
-        <div class="w-[80vw] bg-white p-4 rounded-lg shadow-lg">
-            <h1 class="gradient mb-[-5]"> <b>MINDORO STATE UNIVERSITY </b></h1>
+        <div class="w-[80vw] max-w-screen bg-white p-4 rounded-lg shadow-lg">
+            <h2 class="gradient mb-[-5]"> <b>MINDORO STATE UNIVERSITY </b></h2>
             <a href="https://sdgs.un.org/" target="_blank">
                 <img
                     src="/sdg/mainLogo.png"
@@ -128,10 +121,10 @@ const goToArticle = (articleId) => {
                     This center embodies our commitment to ensure that no one is left behind, fostering collaborative efforts among students, faculty, staff, community, and other stakeholders to pave the way for a sustainable and equitable future for all.
                 </p>
             </div>
-            <div class="mr-[100px] ml-[100px] grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6  flex-wrap justify-center items-center mt-5">
+            <div class="mx-[100px] flex w-full flex-wrap mt-5">
                 <div
-                    v-for="(image, index) in images"
-                    :key="index"
+                    v-for="sdg in props.sdgs"
+                    :key="sdg.id"
                     class="card w-40  mb-6 ml-2 "
                 >
                     <div
@@ -141,25 +134,22 @@ const goToArticle = (articleId) => {
                             class="card__front absolute top-0 bottom-0 right-0 left-0 p-0 flex items-center justify-center"
                         >
                             <img
-                                :src="`/sdg/${image}`"
-                                :alt="`Image ${index + 1}`"
+                                :src="getLink(sdg.icon)"
+                                :alt="sdg.name"
                                 class="max-w-full"
                             />
                         </div>
                         <div
                             class="card__back absolute top-0 bottom-0 right-0 left-0 p-1 flex flex-col items-left justify-left text-left"
                             :style="{
-                                backgroundColor:
-                                    index === 17
-                                        ? 'gray'
-                                        : cardBackColors[index] || 'gray',
+                                backgroundColor: sdg.bg_color
                             }"
                         >
                             <h2 class="mb-2"  v-if="index < 17">SDG {{ index + 1 }}</h2>
                             <h2 style="font-family: 'Century Gothic'"v-else>Sustainable Development Goals (SDGs)</h2>
                             <p  style="font-family: 'Century Gothic'; font-size: 12px; line-height: 1.2; text-align: left;" class="text-sm ml-1 mr-1" v-if="index < 17">
                                 <a href="/news" style="font-weight: normal;">
-                                {{ sdgDescriptions[index] }}
+                                {{ sdg.name }}
 <!--                                <a href="/sdg/article/" class="text-blue-500 font-bold underline hover:text-blue-700 transition duration-300 ease-in-out">-->
 <!--                                    Click here for more info-->
                                 </a>
@@ -179,15 +169,14 @@ const goToArticle = (articleId) => {
             <h2 class="ml-[120]" style="font-size: 20px"> <strong> Latest Articles </strong></h2>
             <div class="ml-[120] flex justify-start items-start flex-wrap gap-2">
                 <div
-                    v-for="(item, index) in items"
+                    v-for="(item, index) in props.articles"
                     :key="index"
                     @click="goToArticle(index + 1)"
-                    class="ml-1 mr-1 max-w-[13vw] mt-2 rounded overflow-hidden shadow-lg"
+                    class="ml-1 mr-1 max-w-[13vw] mt-2 rounded overflow-hidden "
                 >
                     <img
                         class="w-full h-36 object-cover"
-                        :src="item.image"
-                        :alt="item.alt"
+                        :src="`aayusin pa`"
                     />
                     <div class="px-2 py-2 h-[60px]">
                         <div class="font-bold text-l mb-1 h-full overflow-hidden text-ellipsis">
@@ -200,8 +189,6 @@ const goToArticle = (articleId) => {
                         </div>
                         <div class="flex">
                             <img
-                                v-for="sdg in [1, 3, 5, 9]"
-                                :key="sdg"
                                 :src="'/sdg/0' + sdg + '.png'"
                                 class="object-cover mx-0.5 max-h-[20px] aspect-square"
                                 alt="SDG Icon"
@@ -222,7 +209,7 @@ const goToArticle = (articleId) => {
                             />
                         </svg>
                         <span class="text-gray-700 font-semibold text-sm mr-1">
-                {{ item.date }}
+                {{ item.event_date }}
             </span>
                     </div>
                 </div>
@@ -312,9 +299,7 @@ const goToArticle = (articleId) => {
 
 
 <style>
-@import url("https://fonts.googleapis.com/css?family=Oswald:400,700");
-@import url("https://fonts.googleapis.com/css2?family=Play&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
+
 
 @font-face {
     font-family: 'Austein Script';
@@ -328,6 +313,17 @@ const goToArticle = (articleId) => {
     font-weight: normal;
     font-style: normal;
 }
+<style scoped>
+
+
+
+.card, .card__content, .card__front, .card__back {
+    box-shadow: none;
+    border-radius: 0;
+    border: none;
+    background-color: transparent;
+}
+
 
 /* General Reset */
 *,
@@ -358,11 +354,13 @@ const goToArticle = (articleId) => {
     max-width: 180px; /* Controls the maximum size of the card */
     margin: 10px;
     transition: transform 0.6s ease-in-out;
+    box-shadow: none;
 }
 
 .card__content {
     transform-style: preserve-3d;
     transition: transform 0.6s;
+    box-shadow: none;
 }
 
 .card:hover .card__content {
@@ -372,6 +370,8 @@ const goToArticle = (articleId) => {
 /* Responsive styling for card content */
 .card__front,
 .card__back {
+    box-shadow: none;
+    background-color: transparent;
     backface-visibility: hidden;
     width: 100%;
     height: 100%;

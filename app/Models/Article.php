@@ -30,8 +30,9 @@ class Article extends Model
 
     public function sdgs()
     {
-        return $this->belongsToMany(SdgCategory::class, 'article_has_sdg');
+        return $this->belongsToMany(SDG::class, 'article_sdg', 'article_id', 'sdg_id');
     }
+
 
     public function logs()
     {
