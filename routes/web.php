@@ -14,9 +14,7 @@ use App\Http\Controllers\IndicatorController;
 
 
 
-Route::get('/', function () {
-    return Inertia::render('SDG_Home');
-});
+Route::get('/', [GuestController::class, 'sdgHomePage']);
 
 Route::get('/page', function () {
     return Inertia::render('SDG_Page');
@@ -33,9 +31,7 @@ Route::get('/sdg/article/', function () {
 
 //REAN
 
-Route::get('/SDG/article{articleId}', function ($articleId) {
-    return Inertia::render('SDG/index', ['articleId' => $articleId]);
-});
+Route::get('/articles/{id}', [GuestController::class, 'singleArticle']);
 
 
 Route::middleware(['role:Admin', 'verified', 'auth:sanctum'])->prefix('admin')->name('admin.')->group(function () {

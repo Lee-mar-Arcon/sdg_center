@@ -10,27 +10,24 @@ use App\Models\ArticleSDG;
 use Illuminate\Http\Request;
 use App\Models\ArticleCategory;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 
 class ArticleController extends Controller
 {
-    public function homePage()
+    public function index(Request $request)
     {
-        $articles = Article::with('categories')->orderBy('event_date', 'desc')->get();
-        $sdgs = SDG::all();
-        return Inertia::render('SDG_Home', [
-            'articles' => $articles,
-            'sdgs' => $sdgs,
-        ]);
-    }
+        $articles = DB::table('articles')->select(['articles.*'])->join('article_sdg', 'articles.id', '=', 'article_sdg.article_id')->where(function (Builder $q) use ($request) {
+            if ($request->sdg && $request->sdg !== "All") {
+                $q->where('article_sdg.sdg_id', $request->sdg);
+            }
+        })->get();
 
-    public function index()
-    {
-        $articles = Article::all()->sortBy('event_date');
         return Inertia::render('Admin/Article/Index', [
-            'articles' => $articles
+            'articles' => $articles,
+            'sdgs' => SDG::all(),
         ]);
     }
 
@@ -110,7 +107,8 @@ class ArticleController extends Controller
         $article->update($data);
     }
 
-    public function destroy(Article $article) {
+    public function destroy(Article $article)
+    {
         $this->deleteImages($article->images);
         $article->delete();
     }
