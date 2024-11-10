@@ -13,13 +13,8 @@ use App\Http\Controllers\IndicatorController;
 
 
 
-//Route::get('/admin', function () {
-//    return Inertia::render('Article');
-//});
 
-Route::get('/', function () {
-    return Inertia::render('SDG_Home');
-});
+Route::get('/', [GuestController::class, 'sdgHomePage']);
 
 Route::get('/page', function () {
     return Inertia::render('SDG_Page');
@@ -36,9 +31,7 @@ Route::get('/sdg/article/', function () {
 
 //REAN
 
-Route::get('/SDG/article{articleId}', function ($articleId) {
-    return Inertia::render('SDG/index', ['articleId' => $articleId]);
-});
+Route::get('/articles/{id}', [GuestController::class, 'singleArticle']);
 
 
 Route::middleware(['role:Admin', 'verified', 'auth:sanctum'])->prefix('admin')->name('admin.')->group(function () {
@@ -86,9 +79,9 @@ Route::middleware(['role:Admin', 'verified', 'auth:sanctum'])->prefix('admin')->
         'edit' => 'article.edit',
     ]);
     Route::post('/article/{article}', [ArticleController::class, 'update'])->name('article.update');
-
 });
 
 //Jee
 Route::get('/news', [GuestController::class, 'show']);
+
 

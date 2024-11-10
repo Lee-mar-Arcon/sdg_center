@@ -84,26 +84,16 @@ function hidePDF() {
     viewingPDF.value = false
 }
 
-import {Inertia} from '@inertiajs/inertia';
-
 function goToArticle(id) {
-    window.location.href = /articles/${id};
-};
+    window.location.href = `/articles/${id}`;
+}
 
-// Refs to table sections for scrolling
-const tableRefs = {
-    "Proportion of students receiving financial aid to attend university": ref(null),
-    "University anti-poverty programmes": ref(null),
-    "Community anti-poverty programmes": ref(null),
-};
-
-// Scroll function
 const scrollToSection = (id) => {
     const target = document.getElementById(id);
     if (target) {
         target.scrollIntoView({behavior: "smooth", block: "start"});
     }
-};
+}
 
 
 </script>
@@ -206,7 +196,7 @@ const scrollToSection = (id) => {
                         class="w-full md:max-w-[45%] lg:max-w-[30%] xl:max-w-[30%] rounded overflow-hidden shadow-lg"
                         style="max-width: 300px;"
                         :key="index"
-                        @click="goToArticle(item.id)"
+                        @click="goToArticle(article.id)"
                     >
                         <img
                             class="w-full h-36 object-cover"
