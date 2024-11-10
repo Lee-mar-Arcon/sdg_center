@@ -3,13 +3,18 @@
 
     <div class="max-w-screen min-h-screen p-10 pt-[180px]">
         <div class="grid grid-cols-12 grid-flow-row">
-            <!-- SDGs Icons for the Current Article -->
-            <div v-for="sdg in article.sdgs" :key="sdg.id" class="">
-                <img :src="getLink(sdg.icon)" class=" m " alt="">
+            <div class="fixed left-0 top-[180px] p-4 ml-[50px] max-h-[70vh] overflow-y-auto flex flex-col items-center gap-y-4">
+                <img
+                    v-for="sdg in article.sdgs"
+                    :key="sdg.id"
+                    :src="getLink(sdg.icon)"
+                    class="aspect-square max-w-[150px] max-h-[150] mb-4"
+                    alt="SDG Icon"
+                />
             </div>
 
             <!-- Main Article Content -->
-            <div v-if="article" class="col-span-8 p-10 mr-[50px]" style="border-width: thin">
+            <div v-if="article" class="col-span-8 p-10 ml-[300px] mr-[50px]" style="border-width: thin">
                 <!-- Close Button -->
                 <Link href="/news">
                     <div class="flex justify-end mb-5 mt-[-40px] mr-[-40px]">
