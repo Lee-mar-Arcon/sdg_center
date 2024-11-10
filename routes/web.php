@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\IndicatorController;
 
+//REAN
+Route::get('/', [ArticleController::class, 'homePage']);
 
 Route::get('/news', function () {
     return Inertia::render('SDG_News');
@@ -18,9 +20,9 @@ Route::get('/news', function () {
 //    return Inertia::render('Article');
 //});
 
-Route::get('/', function () {
-    return Inertia::render('SDG_Home');
-});
+//Route::get('/', function () {
+//    return Inertia::render('SDG_Home');
+//});
 
 Route::get('/page', function () {
     return Inertia::render('SDG_Page');
@@ -35,7 +37,7 @@ Route::get('/sdg/article/', function () {
     return Inertia::render('SDG/view');
 });
 
-//REAN
+
 
 Route::get('/SDG/article{articleId}', function ($articleId) {
     return Inertia::render('SDG/index', ['articleId' => $articleId]);
@@ -86,3 +88,4 @@ Route::middleware(['role:Admin', 'verified', 'auth:sanctum'])->prefix('admin')->
     ]);
     Route::post('/article/{article}', [ArticleController::class, 'update'])->name('article.update');
 });
+

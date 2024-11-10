@@ -16,9 +16,19 @@ use App\Http\Requests\UpdateArticleRequest;
 
 class ArticleController extends Controller
 {
+    public function homePage()
+    {
+        $articles = Article::with('categories')->orderBy('event_date', 'desc')->get();
+        $sdgs = SDG::all();
+        return Inertia::render('SDG_Home', [
+            'articles' => $articles,
+            'sdgs' => $sdgs,
+        ]);
+    }
+
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::all()->sortBy('event_date');
         return Inertia::render('Admin/Article/Index', [
             'articles' => $articles
         ]);

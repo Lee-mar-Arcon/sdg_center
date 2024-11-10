@@ -1,106 +1,46 @@
 <script setup>
 import { Head, Link } from "@inertiajs/vue3";
-// import { Head } from "@inertiajs/vue3";
+import { Inertia } from '@inertiajs/inertia';
 import Footer from './Footer.vue';
 import Header from './Header.vue';
 import { ref, onMounted } from "vue";
+import { computed } from 'vue';
 import ColorThief from "colorthief";
-const images = ref([
-    "01.png",
-    "02.png",
-    "03.png",
-    "04.png",
-    "05.png",
-    "06.png",
-    "07.png",
-    "08.png",
-    "09.png",
-    "010.png",
-    "011.png",
-    "012.png",
-    "013.png",
-    "014.png",
-    "015.png",
-    "016.png",
-    "017.png",
-    "mainLogo.png",
-]);
+import { usePage } from '@inertiajs/inertia-vue3';
 
-const sdgDescriptions = ref([
-    "No Poverty: End poverty in all its forms everywhere.",
-    "Zero Hunger: End hunger, achieve food security and improved nutrition, and promote sustainable agriculture.",
-    "Good Health and Well-being: Ensure healthy lives and promote well-being for all at all ages.",
-    "Quality Education: Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all.",
-    "Gender Equality: Achieve gender equality and empower all women and girls.",
-    "Clean Water and Sanitation: Ensure availability and sustainable management of water and sanitation for all.",
-    "Affordable and Clean Energy: Ensure access to affordable, reliable, sustainable, and modern energy for all.",
-    "Decent Work and Economic Growth: Promote sustained, inclusive, and sustainable economic growth, full and productive employment, and decent work for all.",
-    "Industry, Innovation and Infrastructure: Build resilient infrastructure, promote inclusive and sustainable industrialization, and foster innovation.",
-    "Reduced Inequality: Reduce inequality within and among countries.",
-    "Sustainable Cities and Communities: Make cities and human settlements inclusive, safe, resilient, and sustainable.",
-    "Responsible Consumption and Production: Ensure sustainable consumption and production patterns.",
-    "Climate Action: Take urgent action to combat climate change and its impacts.",
-    "Life Below Water: Conserve and sustainably use the oceans, seas, and marine resources for sustainable development.",
-    "Life on Land: Protect, restore and promote sustainable use of terrestrial ecosystems, sustainably manage forests, combat desertification, and halt and reverse land degradation and halt biodiversity loss.",
-    "Peace, Justice and Strong Institutions: Promote peaceful and inclusive societies for sustainable development, provide access to justice for all and build effective, accountable, and inclusive institutions at all levels.",
-    "Partnerships for the Goals: Strengthen the means of implementation and revitalize the Global Partnership for Sustainable Development.",
-    "Visit the SDG Website: Explore the Sustainable Development Goals at sdgs.un.org.",
-]);
-const items = [
-    {
-        image: "/article/image1.jpg",
-        title: "Unity in Diversity: MinSU Unites for its Annual Culture and Arts Festival",
-        category: "Student",
-        alt: "Image 1",
-        date: "October 29, 2024",
-
-    },
-    {
-        image: "/article/image2.jpg",
-        title: "PSA MIMAROPA recognizes MinSU as Most Responsive Agency",
-        category: "Administration",
-        alt: "Image 2",
-        date: "October 29, 2024",
-    },
-    {
-        image: "/article/image3.jpg",
-        title: "ABEL students win Best Paper and Abstract Awards at 2024 ASREI Conference",
-        category: "Academics",
-        alt: "Image 3",
-        date: "October 28, 2024",
-    },
-    {
-        image: "/article/image4.jpg",
-        title: "MinSU Clinches 9th Place at 2024 STRASUC Olympics",
-        category: "Students",
-        alt: "Image 3",
-        date: "October 26, 2024",
-    },
-];
 const cardBackColors = ref([]);
 
 onMounted(() => {
     const colorThief = new ColorThief();
 
-    images.value.forEach((image, index) => {
-        const imgElement = new Image();
-        imgElement.src = `/sdg/${image}`;
-        imgElement.onload = () => {
-            const dominantColor = colorThief.getColor(imgElement);
-            cardBackColors.value[index] = `rgb(${dominantColor.join(",")})`;
-        };
-    });
+    // images.value.forEach((image, index) => {
+    //     const imgElement = new Image();
+    //     imgElement.src = `/sdg/${image}`;
+    //     imgElement.onload = () => {
+    //         const dominantColor = colorThief.getColor(imgElement);
+    //         cardBackColors.value[index] = `rgb(${dominantColor.join(",")})`;
+    //     };
+    // });
+
+    console.log("Articles data on homepage:", props.sdgs);
+    console.log("Props data:", props); // Check if 'articles' is part of props
+
 });
-import { defineProps } from 'vue';
-import { Inertia } from '@inertiajs/inertia';
-const props = defineProps({
-    items: Array,
-});
+
 
 const goToArticle = (articleId) => {
     Inertia.visit(`/SDG/article${articleId}`);
 };
 
+const props = defineProps({
+    articles: Array,
+    sdgs: Array
+})
+
+function getLink(path) {
+    const domain = route().t.url;
+    return domain + `/storage/${path}`
+}
 </script>
 
 <template>
@@ -108,7 +48,7 @@ const goToArticle = (articleId) => {
     <Head title="MinSU SDG Center" />
     <div class="min-h-screen flex justify-center items-center bg-gray-100 pt-[150px]">
         <div class="hidden md:block w-[10vw]"></div>
-        <div class="w-[80vw] bg-white p-4 rounded-lg shadow-lg">
+        <div class="w-[80vw] max-w-screen bg-white p-4 rounded-lg shadow-lg">
             <h2 class="gradient mb-[-5]"> <b>MINDORO STATE UNIVERSITY </b></h2>
             <a href="https://sdgs.un.org/" target="_blank">
                 <img
@@ -128,10 +68,10 @@ const goToArticle = (articleId) => {
                     This center embodies our commitment to ensure that no one is left behind, fostering collaborative efforts among students, faculty, staff, community, and other stakeholders to pave the way for a sustainable and equitable future for all.
                 </p>
             </div>
-            <div class="mr-[100px] ml-[100px] grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6  flex-wrap justify-center items-center mt-5">
+            <div class="mx-[100px] flex w-full flex-wrap mt-5">
                 <div
-                    v-for="(image, index) in images"
-                    :key="index"
+                    v-for="sdg in props.sdgs"
+                    :key="sdg.id"
                     class="card w-40  mb-6 ml-2 "
                 >
                     <div
@@ -141,25 +81,22 @@ const goToArticle = (articleId) => {
                             class="card__front absolute top-0 bottom-0 right-0 left-0 p-0 flex items-center justify-center"
                         >
                             <img
-                                :src="`/sdg/${image}`"
-                                :alt="`Image ${index + 1}`"
+                                :src="getLink(sdg.icon)"
+                                :alt="sdg.name"
                                 class="max-w-full"
                             />
                         </div>
                         <div
                             class="card__back absolute top-0 bottom-0 right-0 left-0 p-1 flex flex-col items-left justify-left text-left"
                             :style="{
-                                backgroundColor:
-                                    index === 17
-                                        ? 'gray'
-                                        : cardBackColors[index] || 'gray',
+                                backgroundColor: sdg.bg_color
                             }"
                         >
                             <h2 class="mb-2"  v-if="index < 17">SDG {{ index + 1 }}</h2>
                             <h2 style="font-family: 'Century Gothic'"v-else>Sustainable Development Goals (SDGs)</h2>
                             <p  style="font-family: 'Century Gothic'; font-size: 12px; line-height: 1.2; text-align: left;" class="text-sm ml-1 mr-1" v-if="index < 17">
                                 <a href="/news" style="font-weight: normal;">
-                                {{ sdgDescriptions[index] }}
+                                {{ sdg.name }}
 <!--                                <a href="/sdg/article/" class="text-blue-500 font-bold underline hover:text-blue-700 transition duration-300 ease-in-out">-->
 <!--                                    Click here for more info-->
                                 </a>
@@ -179,15 +116,14 @@ const goToArticle = (articleId) => {
             <h2 class="ml-[120]" style="font-size: 20px"> <strong> Latest Articles </strong></h2>
             <div class="ml-[120] flex justify-start items-start flex-wrap gap-2">
                 <div
-                    v-for="(item, index) in items"
+                    v-for="(item, index) in props.articles"
                     :key="index"
                     @click="goToArticle(index + 1)"
                     class="ml-1 mr-1 max-w-[13vw] mt-2 rounded overflow-hidden "
                 >
                     <img
                         class="w-full h-36 object-cover"
-                        :src="item.image"
-                        :alt="item.alt"
+                        :src="`aayusin pa`"
                     />
                     <div class="px-2 py-2 h-[60px]">
                         <div class="font-bold text-l mb-1 h-full overflow-hidden text-ellipsis">
@@ -200,8 +136,6 @@ const goToArticle = (articleId) => {
                         </div>
                         <div class="flex">
                             <img
-                                v-for="sdg in [1, 3, 5, 9]"
-                                :key="sdg"
                                 :src="'/sdg/0' + sdg + '.png'"
                                 class="object-cover mx-0.5 max-h-[20px] aspect-square"
                                 alt="SDG Icon"
@@ -222,7 +156,7 @@ const goToArticle = (articleId) => {
                             />
                         </svg>
                         <span class="text-gray-700 font-semibold text-sm mr-1">
-                {{ item.date }}
+                {{ item.event_date }}
             </span>
                     </div>
                 </div>
