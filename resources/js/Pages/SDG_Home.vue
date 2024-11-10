@@ -5,86 +5,13 @@ import Footer from './Footer.vue';
 import Header from './Header.vue';
 import { ref, onMounted } from "vue";
 import { computed } from 'vue';
-import ColorThief from "colorthief";
-const images = ref([
-    "01.png",
-    "02.png",
-    "03.png",
-    "04.png",
-    "05.png",
-    "06.png",
-    "07.png",
-    "08.png",
-    "09.png",
-    "010.png",
-    "011.png",
-    "012.png",
-    "013.png",
-    "014.png",
-    "015.png",
-    "016.png",
-    "017.png",
-    "mainLogo.png",
-]);
-
-const sdgDescriptions = ref([
-    "No Poverty: End poverty in all its forms everywhere.",
-    "Zero Hunger: End hunger, achieve food security and improved nutrition, and promote sustainable agriculture.",
-    "Good Health and Well-being: Ensure healthy lives and promote well-being for all at all ages.",
-    "Quality Education: Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all.",
-    "Gender Equality: Achieve gender equality and empower all women and girls.",
-    "Clean Water and Sanitation: Ensure availability and sustainable management of water and sanitation for all.",
-    "Affordable and Clean Energy: Ensure access to affordable, reliable, sustainable, and modern energy for all.",
-    "Decent Work and Economic Growth: Promote sustained, inclusive, and sustainable economic growth, full and productive employment, and decent work for all.",
-    "Industry, Innovation and Infrastructure: Build resilient infrastructure, promote inclusive and sustainable industrialization, and foster innovation.",
-    "Reduced Inequality: Reduce inequality within and among countries.",
-    "Sustainable Cities and Communities: Make cities and human settlements inclusive, safe, resilient, and sustainable.",
-    "Responsible Consumption and Production: Ensure sustainable consumption and production patterns.",
-    "Climate Action: Take urgent action to combat climate change and its impacts.",
-    "Life Below Water: Conserve and sustainably use the oceans, seas, and marine resources for sustainable development.",
-    "Life on Land: Protect, restore and promote sustainable use of terrestrial ecosystems, sustainably manage forests, combat desertification, and halt and reverse land degradation and halt biodiversity loss.",
-    "Peace, Justice and Strong Institutions: Promote peaceful and inclusive societies for sustainable development, provide access to justice for all and build effective, accountable, and inclusive institutions at all levels.",
-    "Partnerships for the Goals: Strengthen the means of implementation and revitalize the Global Partnership for Sustainable Development.",
-    "Visit the SDG Website: Explore the Sustainable Development Goals at sdgs.un.org.",
-]);
-const items = [
-    {
-        image: "/article/image1.jpg",
-        title: "Unity in Diversity: MinSU Unites for its Annual Culture and Arts Festival",
-        category: "Student",
-        alt: "Image 1",
-        date: "October 29, 2024",
-
-    },
-    {
-        image: "/article/image2.jpg",
-        title: "PSA MIMAROPA recognizes MinSU as Most Responsive Agency",
-        category: "Administration",
-        alt: "Image 2",
-        date: "October 29, 2024",
-    },
-    {
-        image: "/article/image3.jpg",
-        title: "ABEL students win Best Paper and Abstract Awards at 2024 ASREI Conference",
-        category: "Academics",
-        alt: "Image 3",
-        date: "October 28, 2024",
-    },
-    {
-        image: "/article/image4.jpg",
-        title: "MinSU Clinches 9th Place at 2024 STRASUC Olympics",
-        category: "Students",
-        alt: "Image 3",
-        date: "October 26, 2024",
-    },
-];
-
 onMounted(() => {
-
+    console.log(props.articles)
 });
 
-
-
+function goToArticle(id) {
+    window.location.href = `/articles/${id}`;
+}
 const props = defineProps({
     articles: Array,
     sdgs: Array
@@ -121,7 +48,7 @@ function getLink(path) {
                     This center embodies our commitment to ensure that no one is left behind, fostering collaborative efforts among students, faculty, staff, community, and other stakeholders to pave the way for a sustainable and equitable future for all.
                 </p>
             </div>
-            <div class="mx-[100px] flex w-full flex-wrap mt-5">
+            <div class="mr-[100px] ml-[100px] grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6  flex-wrap justify-center items-center mt-5">
                 <div
                     v-for="sdg in props.sdgs"
                     :key="sdg.id"
@@ -142,21 +69,24 @@ function getLink(path) {
                         <div
                             class="card__back absolute top-0 bottom-0 right-0 left-0 p-1 flex flex-col items-left justify-left text-left"
                             :style="{
-                                backgroundColor: sdg.bg_color
+                                backgroundColor:
+                                    sdg.id === 18
+                                        ? 'gray'
+                                        : sdg.bg_color || 'gray',
                             }"
                         >
-                            <h2 class="mb-2"  v-if="index < 17">SDG {{ index + 1 }}</h2>
-                            <h2 style="font-family: 'Century Gothic'"v-else>Sustainable Development Goals (SDGs)</h2>
-                            <p  style="font-family: 'Century Gothic'; font-size: 12px; line-height: 1.2; text-align: left;" class="text-sm ml-1 mr-1" v-if="index < 17">
+                            <h2 class="mb-2"  v-if="sdg.id < 18">SDG {{ sdg.id }}</h2>
+                            <h3 v-else>Sustainable Development Goals (SDGs)</h3>
+                            <p  style="font-family: 'Century Gothic'; font-size: 12px; line-height: 1.2; text-align: left;" class="text-sm ml-1 mr-1" v-if="sdg.id < 18">
                                 <a href="/news" style="font-weight: normal;">
-                                {{ sdg.name }}
+                                {{ sdg.description }}
 <!--                                <a href="/sdg/article/" class="text-blue-500 font-bold underline hover:text-blue-700 transition duration-300 ease-in-out">-->
 <!--                                    Click here for more info-->
                                 </a>
                             </p>
 
                             <p class="mt-2" v-else>
-                                <a style="font-family: 'Century Gothic'"
+                                <a
                                     href="https://sdgs.un.org/"
                                     class="text-white underline"
                                 >Visit the SDG Website</a
@@ -171,25 +101,25 @@ function getLink(path) {
                 <div
                     v-for="(item, index) in props.articles"
                     :key="index"
-                    @click="goToArticle(index + 1)"
+                    @click="goToArticle(item.id)"
                     class="ml-1 mr-1 max-w-[13vw] mt-2 rounded overflow-hidden "
                 >
                     <img
                         class="w-full h-36 object-cover"
-                        :src="`aayusin pa`"
+                        :src="getLink(item.images)"
                     />
                     <div class="px-2 py-2 h-[60px]">
                         <div class="font-bold text-l mb-1 h-full overflow-hidden text-ellipsis">
                             {{ item.title }}
                         </div>
                     </div>
-                    <div class="px-2 py-1 flex items-center justify-between">
+                    <div class="px-2 py-1 flex items-center justify-between" v-for="categories in item.categories">
                         <div class="font-bold text-s mb-1">
-                            {{ item.category }}
+                            {{ categories.category }}
                         </div>
-                        <div class="flex">
+                        <div class="flex" v-for="sdg in item.sdgs">
                             <img
-                                :src="'/sdg/0' + sdg + '.png'"
+                                :src="getLink(sdg.icon)"
                                 class="object-cover mx-0.5 max-h-[20px] aspect-square"
                                 alt="SDG Icon"
                             />
@@ -209,8 +139,8 @@ function getLink(path) {
                             />
                         </svg>
                         <span class="text-gray-700 font-semibold text-sm mr-1">
-                {{ item.event_date }}
-            </span>
+                            {{ item.event_date }}
+                        </span>
                     </div>
                 </div>
                 <div

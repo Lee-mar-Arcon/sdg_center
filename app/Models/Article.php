@@ -33,6 +33,10 @@ class Article extends Model
         return $this->belongsToMany(SDG::class, 'article_sdg', 'article_id', 'sdg_id');
     }
 
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'article_category', 'article_id', 'category_id');
+    }
 
     public function logs()
     {
