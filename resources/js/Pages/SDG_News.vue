@@ -192,10 +192,9 @@ const scrollToSection = (id) => {
                 <div class="flex flex-wrap overflow-x-auto space-x-5 py-3 w-full justify-center">
                     <div
                         v-for="article in filteredArticles"
-
                         class="w-full md:max-w-[45%] lg:max-w-[30%] xl:max-w-[30%] rounded overflow-hidden shadow-lg"
                         style="max-width: 300px;"
-                        :key="index"
+                        :key="article.id"
                         @click="goToArticle(article.id)"
                     >
                         <img
