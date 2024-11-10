@@ -11,8 +11,5 @@ class sdgCategory extends Model
 
     protected $fillable = ['name'];
 
-    public function articles()
-    {
-        return $this->belongsToMany(Article::class, 'article_has_sdg');
-    }
+
 }

@@ -1,15 +1,17 @@
 <script setup>
-import { Head, Link } from "@inertiajs/vue3";
-import {ref, computed, onMounted} from "vue";
+import {Head, Link} from "@inertiajs/vue3";
+import {ref, computed, onMounted, defineProps} from "vue";
 import Footer from "@/Pages/Footer.vue";
 import Header from "@/Pages/Header.vue";
 import ColorThief from "colorthief";
+
 import {
     Menu as IconMenu,
 } from '@element-plus/icons-vue';
-import { ElTable, ElTableColumn, ElMenu, ElMenuItem, ElPagination } from 'element-plus';
+import {ElTable, ElTableColumn, ElMenu, ElMenuItem, ElPagination} from 'element-plus';
 import 'element-plus/es/components/table/style/css'; // Import necessary styles
 import 'element-plus/es/components/table-column/style/css';
+
 const handleOpen = (key, keyPath) => {
     console.log(key, keyPath);
 };
@@ -19,8 +21,29 @@ const handleClose = (key, keyPath) => {
 };
 
 
+const props = defineProps({
+    list: {
+        type: Array,
+        required: true,
+        items: Array,
+    }
+});
 
+// Selected SDG to display details
+const selectedSdg = ref(null);
 
+// Function to handle SDG selection
+function selectSdg(sdg) {
+    selectedSdg.value = sdg;
+}
+
+// Set default SDG (e.g., SDG 1) when the component is mounted
+onMounted(() => {
+    // Check if the list is not empty and if SDG 1 exists
+    if (props.list && props.list.length > 0) {
+        selectedSdg.value = props.list.find(sdg => sdg.id === 1) || props.list[0]; // Fallback to first SDG if SDG 1 is not found
+    }
+});
 
 const images = ref([
     "01.png",
@@ -63,16 +86,48 @@ const sdgDescriptions = ref([
 ]);
 
 const items = [
-    { id: 1, image: "/article/image1.jpg", title: "Unity in Diversity: MinSU Unites for its Annual Culture and Arts Festival", category: "Student", alt: "Image 1", date: "October 29, 2024", sdgNumbers: [4] },
-    { id: 2, image: "/article/image2.jpg", title: "PSA MIMAROPA recognizes MinSU as Most Responsive Agency", category: "Administration", alt: "Image 2", date: "October 29, 2024", sdgNumbers: [17] },
-    { id: 3, image: "/article/image3.jpg", title: "ABEL students win Best Paper and Abstract Awards at 2024 ASREI Conference", category: "Academics", alt: "Image 3", date: "October 28, 2024", sdgNumbers: [4, 9] },
-    { id: 4, image: "/article/image4.jpg", title: "MinSU Clinches 9th Place at 2024 STRASUC Olympics", category: "Students", alt: "Image 4", date: "October 26, 2024", sdgNumbers: [4] },
+    {
+        id: 1,
+        image: "/article/image1.jpg",
+        title: "Unity in Diversity: MinSU Unites for its Annual Culture and Arts Festival",
+        category: "Student",
+        alt: "Image 1",
+        date: "October 29, 2024",
+        sdgNumbers: [4]
+    },
+    {
+        id: 2,
+        image: "/article/image2.jpg",
+        title: "PSA MIMAROPA recognizes MinSU as Most Responsive Agency",
+        category: "Administration",
+        alt: "Image 2",
+        date: "October 29, 2024",
+        sdgNumbers: [17]
+    },
+    {
+        id: 3,
+        image: "/article/image3.jpg",
+        title: "ABEL students win Best Paper and Abstract Awards at 2024 ASREI Conference",
+        category: "Academics",
+        alt: "Image 3",
+        date: "October 28, 2024",
+        sdgNumbers: [4, 9]
+    },
+    {
+        id: 4,
+        image: "/article/image4.jpg",
+        title: "MinSU Clinches 9th Place at 2024 STRASUC Olympics",
+        category: "Students",
+        alt: "Image 4",
+        date: "October 26, 2024",
+        sdgNumbers: [4]
+    },
 ];
 
 const metrics = [
     {
         sdg_id: 1,
-        category: ["Proportion of students receiving financial aid to attend university","University anti-poverty programmes","Community anti-poverty programmes"],
+        category: ["Proportion of students receiving financial aid to attend university", "University anti-poverty programmes", "Community anti-poverty programmes"],
     },
 ];
 
@@ -151,11 +206,8 @@ const getRandomIcons = () => {
     const numberOfIcons = Math.floor(Math.random() * 5) + 1;
     return shuffledImages.slice(0, numberOfIcons);
 };
-import { defineProps } from 'vue';
-import { Inertia } from '@inertiajs/inertia';
-const props = defineProps({
-    items: Array,
-});
+
+import {Inertia} from '@inertiajs/inertia';
 
 const goToArticle = (articleId) => {
     Inertia.visit(`/SDG/article${articleId}`);
@@ -172,7 +224,7 @@ const tableRefs = {
 const scrollToSection = (id) => {
     const target = document.getElementById(id);
     if (target) {
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
+        target.scrollIntoView({behavior: "smooth", block: "start"});
     }
 };
 
@@ -181,33 +233,33 @@ const scrollToSection = (id) => {
 
 <template>
     <Header></Header>
-    <Head title="Per SDG" />
+    <Head title="Per SDG"/>
     <div class="flex flex-col md:flex-row min-h-screen pt-[200px] px-4 md:px-0">
 
         <!-- Sidebar for SDG Images -->
-        <div class="hidden md:block fixed md:w-[20vw] h-full m-4 top-0 left-0 bg-white shadow-lg overflow-y-auto pt-[150px]">
+        <div
+            class="hidden md:block fixed md:w-[20vw] h-full ml-2 mr-3  top-0 left-0 bg-white  overflow-y-auto pt-[200px]">
             <Link href="/">
                 <button class="bg-blue-500 hover:bg-blue-700 mb-2 text-white font-bold py-2 px-4">
                     SDG HOME
                 </button>
             </Link>
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-1 items-center">
-                <div v-for="(image, index) in images" :key="index" class="relative p-0">
+                <div v-for="sdg in list" :key="sdg.id" class="relative p-0">
                     <img
-                        :src="`/sdg/${image}`"
-                        :alt="`Image ${index + 1}`"
+                        :src="`/storage/${sdg.icon}`"
+                        :alt="sdg.name"
                         class="w-full max-w-[15vw] md:max-w-[8vw] lg:max-w-[5vw] cursor-pointer"
-                        @click="selectImage(index)"
-                        :class="{ 'opacity-50': selectedImage === index }"
+                        @click="selectSdg(sdg)"
+
                     />
                 </div>
             </div>
 
-<!--   Metrics-->
-            <div class="px-4 md:px-8">
-                <el-row class="tac pt-12 md:pt-16">
+            <div v-if="selectedSdg" class=" ">
+                <el-row v-if="selectedSdg.metrics.length" class="tac pt-12 md:pt-16">
                     <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
-                        <h5 class="mb-4 text-lg md:text-xl">Programs and Innovations</h5>
+                        <h5 class="mb-2 text-lg md:text-xl">Programs and Innovations</h5>
                         <el-menu
                             active-text-color="#083cff"
                             default-active="1"
@@ -217,13 +269,15 @@ const scrollToSection = (id) => {
                             class="program-menu"
                         >
                             <el-menu-item
-                                v-for="(category, index) in metrics[0].category"
-                                :key="index"
-                                :index="String(index + 1)"
-                                @click="scrollToSection(category)"
+                                v-for="metric in selectedSdg.metrics"
+                                :key="metric.id"
+
+                                @click="scrollToSection(metric.id)"
                             >
-                                <el-icon><icon-menu /></el-icon>
-                                <span class="ml-2 truncate-text">{{ category }}</span>
+                                <el-icon>
+                                    <icon-menu/>
+                                </el-icon>
+                                <span class="ml-2 truncate-text">{{ metric.sub_category }}</span>
                             </el-menu-item>
                         </el-menu>
                     </el-col>
@@ -233,16 +287,16 @@ const scrollToSection = (id) => {
 
 
         <!-- Main Content -->
-        <div class="flex-grow p-4 md:p-8 rounded-lg ml-[350px]">
+        <div class="flex-grow p-4 md:p-8 rounded-lg ml-[400px]">
             <div class="flex flex-col md:flex-row items-center mb-4">
                 <img
-                    v-if="selectedImage !== null"
-                    :src="`/sdg/${images[selectedImage]}`"
+                    v-if="selectedSdg !== null"
+                    :src="`/storage/${selectedSdg.icon}`"
                     alt="Selected Image"
                     class="w-40 h-40 md:w-60 md:h-60 object-cover mb-4 md:mb-0 md:mr-10"
                 />
-                <p v-if="selectedImage !== null" class="text-lg text-left w-full md:max-w-md">
-                    {{ sdgDescriptions[selectedImage] }}
+                <p v-if="selectedSdg !== null" class="text-lg text-left w-full md:max-w-md">
+                    {{ selectedSdg.description }}
                 </p>
             </div>
 
@@ -254,15 +308,15 @@ const scrollToSection = (id) => {
 
             <!-- Article List -->
             <div class="flex flex-wrap gap-4 mb-4">
-<!--                <button-->
-<!--                    @click="prevPage"-->
-<!--                    :disabled="currentPage === 1"-->
-<!--                    class="bg-gray-500 text-white px-4 py-2 rounded disabled:bg-gray-300"-->
-<!--                >-->
-<!--                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
-<!--                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />-->
-<!--                    </svg>-->
-<!--                </button>-->
+                <!--                <button-->
+                <!--                    @click="prevPage"-->
+                <!--                    :disabled="currentPage === 1"-->
+                <!--                    class="bg-gray-500 text-white px-4 py-2 rounded disabled:bg-gray-300"-->
+                <!--                >-->
+                <!--                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+                <!--                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />-->
+                <!--                    </svg>-->
+                <!--                </button>-->
 
                 <div class="flex flex-wrap overflow-x-auto space-x-5 py-3 w-full justify-center">
                     <div
@@ -308,52 +362,34 @@ const scrollToSection = (id) => {
                         </div>
                     </div>
                     <div class="w-full flex justify-center mt-5">
-                        <el-pagination background layout="prev, pager, next" :total="100" />
+                        <el-pagination background layout="prev, pager, next" :total="100"/>
                     </div>
 
                 </div>
 
-
-
-
                 <!--                <button-->
-<!--                    @click="nextPage"-->
-<!--                    :disabled="currentPage === totalPages"-->
-<!--                    class="bg-gray-500 text-white px-4 py-2 rounded disabled:bg-gray-300"-->
-<!--                >-->
-<!--                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
-<!--                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />-->
-<!--                    </svg>-->
-<!--                </button>-->
+                <!--                    @click="nextPage"-->
+                <!--                    :disabled="currentPage === totalPages"-->
+                <!--                    class="bg-gray-500 text-white px-4 py-2 rounded disabled:bg-gray-300"-->
+                <!--                >-->
+                <!--                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">-->
+                <!--                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />-->
+                <!--                    </svg>-->
+                <!--                </button>-->
             </div>
-            <div class="flex-grow p-4 md:p-8 rounded-lg ">
-                <!-- Tables with Sections -->
-                <div v-for="(category, index) in metrics[0].category" :key="index" :id="category" class="justify-content-center mb-4 pt-[200px]">
 
-                    <h5 class="mb-3 font-bold">{{ category }}</h5>
-                    <el-table :data="questions" border style="width: 100%">
-                        <el-table-column prop="question" label="Metric/Indicator" width="500" />
-                        <el-table-column prop="answer" label="Answer" width="100" />
-                        <el-table-column label="Proof1">
-                            <template #default="{ row }">
-                                <a v-if="row.proof1" :href="row.proof1" target="_blank" class="text-blue-500 underline">
-                                    {{ row.proof1 }}
-                                </a>
-                                <span v-else>No proof available</span>
-                            </template>
-                        </el-table-column>
-                        <el-table-column label="Proof2">
-                            <template #default="{ row }">
-                                <a v-if="row.proof2" :href="row.proof2" target="_blank" class="text-blue-500 underline">
-                                    {{ row.proof2 }}
-                                </a>
-                                <span v-else>No proof available</span>
-                            </template>
-                        </el-table-column>
-                    </el-table>
+            <div v-if="selectedSdg" class="sdg-detail">
+                <div v-if="selectedSdg.metrics.length" class="flex-grow p-4 md:p-8 rounded-lg ">
+                    <!-- Tables with Sections -->
+                    <div v-for="metric in selectedSdg.metrics" :key="metric.id"
+                         class="justify-content-center mb-4 pt-[200px]">
+                        <h4 class="text-lg font-semibold">{{ metric.sub_category }}</h4>
+                        <div v-for="indicator in metric.indicators" :key="indicator.id" class="indicator">
+                            <p>{{ indicator.question }}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-
         </div>
 
     </div>
@@ -366,6 +402,7 @@ const scrollToSection = (id) => {
     margin: 0 auto; /* Center the menu */
     border-right: none; /* Remove right border if necessary */
 }
+
 .body_news {
     font-family: "Oswald", sans-serif;
     height: 100vh;
@@ -391,6 +428,7 @@ const scrollToSection = (id) => {
     text-overflow: ellipsis;
     display: inline-block;
 }
+
 /* Large screen and up */
 @media (min-width: 1024px) {
     .truncate-text-lg {

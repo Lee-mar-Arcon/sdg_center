@@ -116,8 +116,6 @@ const viewingPDF = ref(false)
 
 function displayPDF(link) {
     viewingPDF.value = true
-    console.log(route().t.url);
-    
     pdfLink.value = `${route().t.url}/storage/${link}`
 }
 

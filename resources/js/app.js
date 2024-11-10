@@ -5,6 +5,10 @@ import 'element-plus/dist/index.css';
 import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 import '../css/app.css';
 
+import jQuery from 'jquery';
+window.jQuery = jQuery;
+window.$ = jQuery;
+
 createInertiaApp({
     resolve: (name) => {
         const pages = import.meta.glob("./Pages/**/*.vue", { eager: true });
@@ -13,15 +17,12 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         const app = createApp({ render: () => h(App, props) });
 
-        // Use Element Plus
+        // Use Element Plus and its icons
         app.use(ElementPlus);
-
-        // Register Element Plus Icons
         for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
             app.component(key, component);
         }
 
-        app.use(plugin).mount(el);
+        app.use(plugin).mount(el); // Mount the app
     },
 });
-

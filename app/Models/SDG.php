@@ -26,4 +26,10 @@ class SDG extends Model
     {
         return $this->hasMany(Metric::class, 'sdg_id');
     }
+
+    public function articles()
+    {
+        return $this->belongsToMany(Article::class, 'article_sdg', 'sdg_id', 'article_id');
+    }
+
 }

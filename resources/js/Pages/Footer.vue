@@ -72,7 +72,7 @@
     </footer>
 </template>
 
-<style>
+<style scoped>
 footer.about-style2 {
     padding: 30px 0;
     background-color: #0f3d1c;

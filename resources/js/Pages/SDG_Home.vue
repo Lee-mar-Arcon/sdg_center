@@ -311,23 +311,7 @@ const goToArticle = (articleId) => {
 </template>
 
 
-<style>
-@import url("https://fonts.googleapis.com/css?family=Oswald:400,700");
-@import url("https://fonts.googleapis.com/css2?family=Play&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Pacifico&display=swap");
-
-@font-face {
-    font-family: 'Austein Script';
-    src: url('/fonts/Austein.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'Roboto Bold';
-    src: url('/fonts/Roboto-Bold.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
+<style scoped>
 
 /* General Reset */
 *,
@@ -343,13 +327,7 @@ const goToArticle = (articleId) => {
     padding: 20px;
 }
 
-.body_home {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: "Oswald", sans-serif;
-}
+
 
 /* Ensure card flip is dynamic and adapts to various screen sizes */
 .card {

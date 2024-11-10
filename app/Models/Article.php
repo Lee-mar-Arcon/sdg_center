@@ -15,23 +15,24 @@ class Article extends Model
         'author',
         'short_description',
         'content',
-        'event_date'
+        'event_date',
+        'images',
+    ];
+
+    protected $casts = [
+        'images' => 'array',
     ];
 
     public function category()
     {
-        return $this->belongsTo(ArticleCategory::class);
-    }
-
-    public function attachments()
-    {
-        return $this->hasMany(ArticleAttachment::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function sdgs()
     {
-        return $this->belongsToMany(SdgCategory::class, 'article_has_sdg');
+        return $this->belongsToMany(SDG::class, 'article_sdg', 'article_id', 'sdg_id');
     }
+
 
     public function logs()
     {
