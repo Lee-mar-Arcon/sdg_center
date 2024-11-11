@@ -19,7 +19,7 @@ Route::get('/', [GuestController::class, 'sdgHomePage']);
 Route::get('/articles/{id}', [GuestController::class, 'singleArticle']);
 
 //route for viewing per SDG
-Route::get('/news', [GuestController::class, 'show']);
+Route::get('/news', [GuestController::class, 'show'])->name('guest.news');
 
 
 Route::middleware(['role:Admin', 'verified', 'auth:sanctum'])->prefix('admin')->name('admin.')->group(function () {

@@ -78,10 +78,10 @@ function getLink(path) {
                             <h2 class="mb-2"  v-if="sdg.id < 18">SDG {{ sdg.id }}</h2>
                             <h3 v-else>Sustainable Development Goals (SDGs)</h3>
                             <p  style="font-family: 'Century Gothic'; font-size: 12px; line-height: 1.2; text-align: left;" class="text-sm ml-1 mr-1" v-if="sdg.id < 18">
-                                <a href="/news" style="font-weight: normal;">
-                                {{ sdg.description }}
-<!--                                <a href="/sdg/article/" class="text-blue-500 font-bold underline hover:text-blue-700 transition duration-300 ease-in-out">-->
-<!--                                    Click here for more info-->
+                                <a :href="`news/?sdg=${sdg.id}`" style="font-weight: normal">
+                                    {{ sdg.description }}
+                                    <!--                                <a href="/sdg/article/" class="text-blue-500 font-bold underline hover:text-blue-700 transition duration-300 ease-in-out">-->
+                                    <!--                                    Click here for more info-->
                                 </a>
                             </p>
 
