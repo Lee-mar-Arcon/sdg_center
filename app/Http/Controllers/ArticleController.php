@@ -90,6 +90,7 @@ class ArticleController extends Controller
         $article = Article::create($data);
         $this->storeArticleCategories($data['categories'], $article->id);
         $this->storeArticleSDGs($data['sdgs'], $article->id);
+        return redirect()->route('admin.article.index');
     }
 
     public function update(UpdateArticleRequest $request, Article $article)
@@ -105,6 +106,7 @@ class ArticleController extends Controller
         $this->storeArticleCategories($data['categories'], $article->id);
         $this->storeArticleSDGs($data['sdgs'], $article->id);
         $article->update($data);
+        return redirect()->route('admin.article.index');
     }
 
     public function destroy(Article $article)

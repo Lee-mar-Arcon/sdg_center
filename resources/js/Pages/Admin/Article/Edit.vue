@@ -131,8 +131,9 @@ function submitForm() {
     form.images = imageFiles;
 
     form.clearErrors()
-    
+
     form.post(route('admin.article.update', {article: props.article.id}), {
+        _method: "put",
     })
 }
 
@@ -145,13 +146,13 @@ onMounted(async () => {
     const { default: fontfamilyPlugin } = await import('trumbowyg/plugins/fontfamily/trumbowyg.fontfamily.js');
     trumbowygConfig.value = {
         btns: [
-            ['undo', 'redo'], 
-            ['superscript', 'subscript'], 
-            ['formatting'], 
+            ['undo', 'redo'],
+            ['superscript', 'subscript'],
+            ['formatting'],
             ['bold', 'italic', 'underline', 'em', 'fontsize', 'fontfamily'],
             ['emoji'],
             ['link'],
-            ['foreColor', 'backColor'], 
+            ['foreColor', 'backColor'],
             ['indent', 'outdent'],
             ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull']
         ],

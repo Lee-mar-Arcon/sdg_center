@@ -11,7 +11,7 @@ class GuestController extends Controller
 {
     public function show() {
         $list = SDG::with('metrics.indicators')->get();
-        $articles = Article::with('sdgs')->get();
+        $articles = Article::with('sdgs')->orderBy('event_date', 'desc')->get();
 
         return Inertia::render('SDG_News', [
             'list' => $list,
@@ -29,7 +29,7 @@ class GuestController extends Controller
     }
 
     public function singleArticle($id) {
-        $articles = Article::with('categories','sdgs')->orderBy('event_date', 'desc')->take(5)->get();
+        $articles = Article::with('categories','sdgs')->orderBy('event_date', 'desc')->get();
         $article = Article::with('categories','sdgs')->findOrFail($id);
         $sdgs = SDG::all();
         return Inertia::render('SDG/view', [

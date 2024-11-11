@@ -1,5 +1,5 @@
 <template>
-<AdminLayout> 
+<AdminLayout>
     <div>
         <div class="flex justify-between pb-3">
             <p class="text-xl">List of Articles</p>
@@ -85,7 +85,7 @@ const deleteForm = useForm({
 })
 
 function handleDelete(id) {
-    deleteForm.delete(route('admin.article.destroy', {article: id}),{
+    deleteForm.post(route('admin.article.destroy', {article: id}),{
         onSuccess: e => {
             deleteForm.reset()
             confirmationIsOpen.value = false

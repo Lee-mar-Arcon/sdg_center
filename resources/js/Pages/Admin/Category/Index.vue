@@ -36,18 +36,21 @@ function toggleCanvas(isAdding, category = null) {
 function handleSubmit() {
     const routeName = route(addingCategory.value ? 'admin.category.store' : 'admin.category.update', {category: form.id})
     const options = {
-        _method: addingCategory.value ? "post" : "patch",
+        forceFormData: false,
+        _method: addingCategory.value ? "post" : "put",
         onSuccess: () => {
             toggleCanvas(false);
             form.reset();
         },
         preserveScroll: true
     }
-    addingCategory.value ? form.post(routeName, options) : form.put(routeName, options)
+    form.post(routeName, options)
 }
 
 function handleDelete(id) {
-    deleteForm.delete(route('admin.category.destroy', {category: id}), {
+    deleteForm.post(route('admin.category.destroy', {category: id}), {
+        forceFormData: false,
+        _method: "delete",
         onSuccess: () => {
             deleteForm.reset();
             confirmationIsOpen.value = false

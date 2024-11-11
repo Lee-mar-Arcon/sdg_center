@@ -50,7 +50,7 @@ function handleSubmit() {
             preserveScroll: true
         });
     else {
-        form.put(route('admin.metric.update', {metric: form.id}), {
+        form.post(route('admin.metric.update', {metric: form.id}), {
             _method: 'put',
             onSuccess: () => {
                 toggleCanvas(false);
@@ -61,7 +61,8 @@ function handleSubmit() {
     }
 }
 function handleDelete(id) {
-    deleteForm.delete(route('admin.metric.destroy', {metric: id}), {
+    deleteForm.post(route('admin.metric.destroy', {metric: id}), {
+        _method: "delete",
         onSuccess: () => {
             deleteForm.reset();
             confirmationIsOpen.value = false

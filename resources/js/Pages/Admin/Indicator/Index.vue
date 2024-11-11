@@ -76,7 +76,8 @@ function handleSubmit() {
     }
 }
 function handleDelete(id) {
-    deleteForm.delete(route('admin.indicator.destroy', {indicator: id}), {
+    deleteForm.post(route('admin.indicator.destroy', {indicator: id}), {
+        _method: "delete",
         onSuccess: () => {
             deleteForm.reset();
             confirmationIsOpen.value = false
@@ -130,20 +131,20 @@ function hidePDF() {
         <div class="w-full p-4">
             <Head title="SDGs" />
             <div class="mx-auto w-full">
-                <IndicatorForm 
+                <IndicatorForm
                     @updateMetrics="updateMetrics"
-                    :isOpen="isOpen" 
+                    :isOpen="isOpen"
                     :sdgs="props.sdgs"
-                    :form="form" 
+                    :form="form"
                     :metrics="props.metrics"
-                    :addingIndicator="addingIndicator" 
-                    @submit="handleSubmit" 
-                    @cancel="handleCancel" 
+                    :addingIndicator="addingIndicator"
+                    @submit="handleSubmit"
+                    @cancel="handleCancel"
                 />
             </div>
         </div>
         <div class="w-full p-4">
-            
+
             <Head title="SDGs" />
             <div class="mx-auto w-full">
                 <div class="w-full flex justify-between items-center mb-3 mt-12 pl-3">
@@ -161,12 +162,12 @@ function hidePDF() {
                         </div>
                         <h3 class="text-lg font-semibold text-slate-800">Sustainable Development Goal Indicators</h3>
                     </div>
-                    <div class="w-full max-w-sm min-w-[200px]">      
+                    <div class="w-full max-w-sm min-w-[200px]">
                     </div>
                     <div class="relative">
                         <button @click="toggleCanvas(true)" class="bg-blue-500 h-min text-white px-4 py-2 rounded mb-4">
                             Add new indicator
-                        </button>  
+                        </button>
                     </div>
                 </div>
                 <div class="relative flex flex-col w-full h-full overflow-y-auto text-gray-700 bg-white shadow-md rounded-lg bg-clip-border">

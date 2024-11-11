@@ -63,7 +63,8 @@ function handleSubmit() {
     }
 }
 function handleDelete(id) {
-    deleteForm.delete(route('admin.sdg.destroy', {sdg: id}), {
+    deleteForm.post(route('admin.sdg.destroy', {sdg: id}), {
+        _method: 'delete',
         onSuccess: () => {
             deleteForm.reset();
             confirmationIsOpen.value = false
