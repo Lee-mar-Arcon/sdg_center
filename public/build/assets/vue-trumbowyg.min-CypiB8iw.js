@@ -1,4 +1,4 @@
-import{g as $,a as B,j as E,r as R,c as O}from"./app-CavuPpU5.js";var P={exports:{}};const S="/build/assets/icons-RHKppekq.svg",A=Object.freeze(Object.defineProperty({__proto__:null,default:S},Symbol.toStringTag,{value:"Module"})),D=$(A);var k={};/**
+import{g as $,a as B,j as E,r as R,c as O}from"./app-Bkw5VNSX.js";var P={exports:{}};const S="/build/assets/icons-RHKppekq.svg",A=Object.freeze(Object.defineProperty({__proto__:null,default:S},Symbol.toStringTag,{value:"Module"})),D=$(A);var k={};/**
  * Trumbowyg v2.28.0 - A lightweight WYSIWYG editor
  * Trumbowyg core file
  * ------------------------

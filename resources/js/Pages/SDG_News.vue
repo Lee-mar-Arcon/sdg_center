@@ -18,11 +18,11 @@ import "element-plus/es/components/table-column/style/css";
 import pdfComponent from "../Components/pdfComponent.vue";
 
 const handleOpen = (key, keyPath) => {
-    console.log(key, keyPath);
+    // console.log(key, keyPath);
 };
 
 const handleClose = (key, keyPath) => {
-    console.log(key, keyPath);
+    // console.log(key, keyPath);
 };
 
 const props = defineProps({
@@ -45,7 +45,6 @@ const selectedSdg = ref(null);
 // Function to handle SDG selection
 function selectSdg(sdg) {
     selectedSdg.value = sdg;
-    console.log();
     
     router.visit(route('guest.news', {sdg: sdg.id}), {
         only: ["articles"],
@@ -54,9 +53,10 @@ function selectSdg(sdg) {
 
 onMounted(() => {
     // Check if the list is not empty and if SDG 1 exists
+    
     if (props.list && props.list.length > 0) {
         selectedSdg.value =
-            props.list.find((sdg) => sdg.id === 1) || props.list[0]; // Fallback to first SDG if SDG 1 is not found
+            props.list.find((sdg) => sdg.id == route().params.sdg) || props.list[0]; // Fallback to first SDG if 
     }
 });
 
@@ -69,9 +69,9 @@ const selectImage = (index) => {
 };
 
 // Set default selected image to index 1 when component mounts
-onMounted(() => {
-    selectedImage.value = 0; // Set the default selected image to index 1
-});
+// onMounted(() => {
+//     selectedImage.value = 0; // Set the default selected image to index 1
+// });
 
 const currentPage = ref(1);
 const itemsPerPage = 3;
