@@ -18,11 +18,11 @@ import "element-plus/es/components/table-column/style/css";
 import pdfComponent from "../Components/pdfComponent.vue";
 
 const handleOpen = (key, keyPath) => {
-    console.log(key, keyPath);
+    // console.log(key, keyPath);
 };
 
 const handleClose = (key, keyPath) => {
-    console.log(key, keyPath);
+    // console.log(key, keyPath);
 };
 
 const props = defineProps({
@@ -45,8 +45,7 @@ const selectedSdg = ref(null);
 // Function to handle SDG selection
 function selectSdg(sdg) {
     selectedSdg.value = sdg;
-    console.log();
-    
+
     router.visit(route('guest.news', {sdg: sdg.id}), {
         only: ["articles"],
     });
@@ -54,9 +53,10 @@ function selectSdg(sdg) {
 
 onMounted(() => {
     // Check if the list is not empty and if SDG 1 exists
+
     if (props.list && props.list.length > 0) {
         selectedSdg.value =
-            props.list.find((sdg) => sdg.id === 1) || props.list[0]; // Fallback to first SDG if SDG 1 is not found
+            props.list.find((sdg) => sdg.id == route().params.sdg) || props.list[0]; // Fallback to first SDG if
     }
 });
 
@@ -69,9 +69,9 @@ const selectImage = (index) => {
 };
 
 // Set default selected image to index 1 when component mounts
-onMounted(() => {
-    selectedImage.value = 0; // Set the default selected image to index 1
-});
+// onMounted(() => {
+//     selectedImage.value = 0; // Set the default selected image to index 1
+// });
 
 const currentPage = ref(1);
 const itemsPerPage = 3;
@@ -197,8 +197,8 @@ const scrollToSection = (id) => {
                                             <icon-menu />
                                         </el-icon>
                                         <span class="ml-2 truncate-text">{{
-                                            metric.sub_category
-                                        }}</span>
+                                                metric.sub_category
+                                            }}</span>
                                     </el-menu-item>
                                 </el-menu>
                             </template>
@@ -283,7 +283,7 @@ const scrollToSection = (id) => {
                                     </svg>
                                     <span
                                         class="text-gray-700 font-semibold text-sm"
-                                        >{{ article.event_date }}</span
+                                    >{{ article.event_date }}</span
                                     >
                                 </div>
                             </div>
@@ -309,64 +309,64 @@ const scrollToSection = (id) => {
                                     class="w-auto text-left table-auto"
                                 >
                                     <thead>
-                                        <tr
-                                            class="border-b border-slate-300 bg-slate-50"
+                                    <tr
+                                        class="border-b border-slate-300 bg-slate-50"
+                                    >
+                                        <th
+                                            class="p-4 text-sm font-normal leading-none text-slate-500"
                                         >
-                                            <th
-                                                class="p-4 text-sm font-normal leading-none text-slate-500"
-                                            >
-                                                Metric
-                                            </th>
-                                            <th
-                                                class="p-4 text-sm font-normal leading-none text-slate-500"
-                                            >
-                                                Answer
-                                            </th>
-                                            <th
-                                                class="p-4 text-sm font-normal text-center w-48 leading-none text-slate-500"
-                                            >
-                                                Proof
-                                            </th>
-                                        </tr>
+                                            Metric
+                                        </th>
+                                        <th
+                                            class="p-4 text-sm font-normal leading-none text-slate-500"
+                                        >
+                                            Answer
+                                        </th>
+                                        <th
+                                            class="p-4 text-sm font-normal text-center w-48 leading-none text-slate-500"
+                                        >
+                                            Proof
+                                        </th>
+                                    </tr>
                                     </thead>
                                     <tbody>
-                                        <tr class="hover:bg-slate-50">
-                                            <td
-                                                class="p-4 border-b border-slate-200 py-5 min-w-[17vw]"
+                                    <tr class="hover:bg-slate-50">
+                                        <td
+                                            class="p-4 border-b border-slate-200 py-5 min-w-[17vw]"
+                                        >
+                                            <p
+                                                class="block font-semibold text-sm text-slate-800"
                                             >
-                                                <p
-                                                    class="block font-semibold text-sm text-slate-800"
-                                                >
-                                                    {{ question.indicator }}
-                                                </p>
-                                            </td>
-                                            <td
-                                                class="p-4 border-b border-slate-200 py-5 min-w-[17vw]"
+                                                {{ question.indicator }}
+                                            </p>
+                                        </td>
+                                        <td
+                                            class="p-4 border-b border-slate-200 py-5 min-w-[17vw]"
+                                        >
+                                            <p
+                                                class="block font-semibold text-sm text-slate-800"
                                             >
-                                                <p
-                                                    class="block font-semibold text-sm text-slate-800"
-                                                >
-                                                    {{ question.applied }}
-                                                </p>
-                                            </td>
-                                            <td
-                                                class="p-4 border-b border-slate-200 py-5"
-                                            >
-                                                <button
-                                                    @click="
+                                                {{ question.applied }}
+                                            </p>
+                                        </td>
+                                        <td
+                                            class="p-4 border-b border-slate-200 py-5"
+                                        >
+                                            <button
+                                                @click="
                                                         (e) =>
                                                             displayPDF(
                                                                 question.evidence_1
                                                             )
                                                     "
-                                                    class="text-blue-600"
-                                                >
-                                                    {{
-                                                        question.evidence_1_name
-                                                    }}
-                                                </button>
-                                            </td>
-                                        </tr>
+                                                class="text-blue-600"
+                                            >
+                                                {{
+                                                    question.evidence_1_name
+                                                }}
+                                            </button>
+                                        </td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>

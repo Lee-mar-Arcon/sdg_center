@@ -16,7 +16,6 @@ class GuestController extends Controller
             ->whereHas('sdgs', function (Builder $q) use ($request) {
                 $q->where('sdg_id', $request->sdg ? $request->sdg : 1);
             })
-            ->orderBy('event_date', 'desc')
             ->get();
         return Inertia::render('SDG_News', [
             'list' => $list,

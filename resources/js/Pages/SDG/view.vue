@@ -50,7 +50,7 @@
                 <p class="italic pt-2" style="font-family:Times New Roman; font-size:large;">{{ article.event_date }}</p>
 
                 <!-- Article Content -->
-                <article style="font-family:Times New Roman; font-size:large;" class="text-justify indent-10 pt-5"  v-html="sanitizedContent(article.content)">
+                <article style="font-family:Times New Roman; font-size:larger;" class="text-justify indent-10 pt-5"  v-html="sanitizedContent(article.content)">
                 </article>
 
                 <!-- Social Share Icons -->
@@ -86,7 +86,7 @@
                 >
 
                     <div class="px-2 py-2 h-[60px]">
-                        <div class="font-bold text-l overflow-hidden text-ellipsis" >
+                        <div class="custom-clamp" >
                             {{ item.title }}
                         </div>
                     </div>
@@ -116,6 +116,7 @@ const props = defineProps({
     articles: Array,
     sdgs: Array,
 });
+console.log(props.articles);
 
 // Computed property for "Other Stories"
 const otherStories = computed(() => {
@@ -142,3 +143,12 @@ function goToArticle(id) {
     window.location.href = `/articles/${id}`;
 }
 </script>
+<style>
+.custom-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+</style>
