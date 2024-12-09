@@ -78,19 +78,27 @@
 
                 <!-- Filtered "Other Stories" -->
                 <div
-                    v-for="(item) in otherStories"
+                    v-for="(item, index) in otherStories"
                     :key="item.id"
-                    @click="goToArticle(item.id)"
-                    class="ml-1 mr-1 max-w-[13vw] mt-2 rounded overflow-hidden flex flex-col justify-between h-full cursor-pointer"
                 >
-
-                    <div class="px-2 py-2 h-[60px]">
-                        <div class="font-bold text-l overflow-hidden text-ellipsis" style="font-family: 'Times New Roman'; font-size: large">
-                            {{ item.title }}
+                    <div
+                        @click="goToArticle(item.id)"
+                        class="   mt-2 rounded overflow-hidden flex flex-col justify-between h-full cursor-pointer"
+                    >
+                        <div class="px-2 py-2 h-[60px]">
+                            <div
+                                class="text-l overflow-hidden text-ellipsis"
+                                style="font-family: 'Times New Roman'; font-size: large; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;"
+                            >
+                                {{ item.title }}
+                            </div>
                         </div>
                     </div>
 
+                    <!-- Add a divider unless it's the last article -->
+                    <hr v-if="index !== otherStories.length - 1" class="my-2 border-gray-300">
                 </div>
+
             </div>
         </div>
     </div>

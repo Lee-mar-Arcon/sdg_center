@@ -1,6 +1,6 @@
 {
-  "_vue-trumbowyg.min-DU8TWq4O.js": {
-    "file": "assets/vue-trumbowyg.min-DU8TWq4O.js",
+  "_vue-trumbowyg.min-DzJyiKaV.js": {
+    "file": "assets/vue-trumbowyg.min-DzJyiKaV.js",
     "name": "vue-trumbowyg.min",
     "isDynamicEntry": true,
     "imports": [
@@ -67,23 +67,23 @@
     "src": "public/sdg/09.png"
   },
   "resources/css/app.css": {
-    "file": "assets/app-C2H6-muf.css",
+    "file": "assets/app-DIuV8l5w.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-BSN2QCuI.js",
+    "file": "assets/app-BB6BbC9r.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
     "dynamicImports": [
-      "_vue-trumbowyg.min-DU8TWq4O.js",
+      "_vue-trumbowyg.min-DzJyiKaV.js",
       "node_modules/trumbowyg/plugins/indent/trumbowyg.indent.js",
       "node_modules/trumbowyg/plugins/colors/trumbowyg.colors.js",
       "node_modules/trumbowyg/plugins/emoji/trumbowyg.emoji.js",
       "node_modules/trumbowyg/plugins/fontsize/trumbowyg.fontsize.js",
       "node_modules/trumbowyg/plugins/fontfamily/trumbowyg.fontfamily.js",
-      "_vue-trumbowyg.min-DU8TWq4O.js",
+      "_vue-trumbowyg.min-DzJyiKaV.js",
       "node_modules/trumbowyg/plugins/indent/trumbowyg.indent.js",
       "node_modules/trumbowyg/plugins/colors/trumbowyg.colors.js",
       "node_modules/trumbowyg/plugins/emoji/trumbowyg.emoji.js",
@@ -92,7 +92,7 @@
       "node_modules/pdf-vue3/dist/pdf.min-f72cfa08.js"
     ],
     "css": [
-      "assets/app-x43uSunD.css"
+      "assets/app-EhrpbgQV.css"
     ],
     "assets": [
       "assets/04-CLpmEH_u.png",
