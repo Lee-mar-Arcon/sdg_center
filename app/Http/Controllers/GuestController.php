@@ -33,7 +33,7 @@ class GuestController extends Controller
     }
 
     public function singleArticle($id) {
-        $articles = Article::with('categories','sdgs')->orderBy('event_date', 'desc')->get();
+        $articles = Article::with('categories','sdgs')->orderBy('event_date', 'desc')->take(5)->get();
         $article = Article::with('categories','sdgs')->findOrFail($id);
         $sdgs = SDG::all();
         return Inertia::render('SDG/view', [
