@@ -34,7 +34,7 @@
                 </div>
 
                 <!-- Article Title and Details -->
-                <h1 class="font-bold text-3xl pt-5 text-justify" style="font-family:Times New Roman; font-size:x-large;">{{ article.title }}</h1>
+                <h1 class="text-3xl pt-5 text-justify">{{ article.title }}</h1>
                 <div class="font-bold text-l mt-2" v-if="article.category">
                     {{ article.category.name }}
                 </div>
@@ -47,14 +47,14 @@
                         alt="SDG Icon"
                     />
                 </div>
-                <p class="italic pt-2" style="font-family:Times New Roman; font-size:large;">{{ article.event_date }}</p>
+                <p class="italic pt-2">{{ article.event_date }}</p>
 
                 <!-- Article Content -->
-                <article style="font-family:Times New Roman; font-size:larger;" class="text-justify indent-10 pt-5"  v-html="sanitizedContent(article.content)">
+                <article class="text-justify indent-10 pt-5" v-html="sanitizedContent(article.content)">
                 </article>
 
                 <!-- Social Share Icons -->
-                <div class="pt-8 flex items-end gap-x-3" style="font-family:Times New Roman; font-size:large;">
+                <div class="pt-8 flex items-end gap-x-3">
                     <span class="pe-2">Share:</span>
                     <!-- Facebook Icon -->
                     <svg @click="shareOnFacebook" xmlns="http://www.w3.org/2000/svg" class="h-8 cursor-pointer" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 509 509">
@@ -74,19 +74,18 @@
 
             <!-- Other Stories Section -->
             <div class="col-span-2 p-1 flex flex-col max-h-[500px] overflow-y-auto pt-[50px] ml-[-30px]">
-                <h1 class="mb-5 font-bold" style="font-family:Times New Roman; font-size:large;">OTHER STORIES</h1>
+                <h1 class="mb-5 font-bold">OTHER STORIES</h1>
 
                 <!-- Filtered "Other Stories" -->
                 <div
                     v-for="(item, index) in otherStories"
                     :key="item.id"
                     @click="goToArticle(item.id)"
-                    class="ml-1 mr-1 max-w-[20vw] mt-2 rounded overflow-hidden flex flex-col justify-between h-full cursor-pointer"
-                    style="font-family:Times New Roman; font-size:large;"
+                    class="ml-1 mr-1 max-w-[13vw] mt-2 rounded overflow-hidden flex flex-col justify-between h-full cursor-pointer"
                 >
 
                     <div class="px-2 py-2 h-[60px]">
-                        <div class="custom-clamp" >
+                        <div class="font-bold text-l overflow-hidden text-ellipsis">
                             {{ item.title }}
                         </div>
                     </div>
@@ -116,7 +115,6 @@ const props = defineProps({
     articles: Array,
     sdgs: Array,
 });
-console.log(props.articles);
 
 // Computed property for "Other Stories"
 const otherStories = computed(() => {
@@ -143,12 +141,3 @@ function goToArticle(id) {
     window.location.href = `/articles/${id}`;
 }
 </script>
-<style>
-.custom-clamp {
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
-
-</style>
